@@ -31,7 +31,7 @@ public class ShoppingListController {
     }
 
     @GetMapping("{id}")
-    public ShoppingList getById(@PathVariable long id) {
+    public ShoppingListDTO getById(@PathVariable long id) {
 
         Optional<ShoppingList> shoppingListDTOOptional = shoppingListService.findBy(id);
         if (shoppingListDTOOptional.isEmpty()) {
@@ -39,7 +39,7 @@ public class ShoppingListController {
 
         }
 
-        return shoppingListDTOOptional.get();
+        return shoppingListDTOConverter.toDTO(shoppingListDTOOptional.get());
     }
 
 
