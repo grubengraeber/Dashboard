@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ShoppingListService {
     private final ShoppingListRepository shoppingListRepository;
 
-    public List<ShoppingList> getAll() {
+    public List<ShoppingList> getListOfShoppingLists() {
         return shoppingListRepository.findAll();
     }
 
