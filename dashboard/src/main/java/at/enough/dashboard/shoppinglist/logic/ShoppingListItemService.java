@@ -11,7 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ShoppingListItemService {
 
-    private ShoppingListPositionRepository shoppingListItemRepository;
+    private final ShoppingListPositionRepository shoppingListItemRepository;
 
     public Optional<ShoppingListPosition> edit(long id, ShoppingListPosition shoppingListPosition) {
 

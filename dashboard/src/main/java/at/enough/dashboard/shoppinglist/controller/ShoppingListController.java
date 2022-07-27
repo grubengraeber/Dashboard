@@ -24,7 +24,7 @@ public class ShoppingListController {
 
     @GetMapping
     public List<ShoppingListDTO> getShoppingLists() {
-        return shoppingListService.getAll().stream()
+        return shoppingListService.getListOfShoppingLists().stream()
                 .map(shoppingListDTOConverter::toDTO)
                 .collect(Collectors.toList());
 
