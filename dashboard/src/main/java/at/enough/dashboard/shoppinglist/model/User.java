@@ -1,5 +1,8 @@
 package at.enough.dashboard.shoppinglist.model;
 
+import lombok.Data;
+
+@Data
 public class User {
 
     private long id;

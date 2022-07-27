@@ -1,4 +1,4 @@
-package at.enough.dashboard.shoppinglist.dto;
+package at.enough.dashboard.shoppinglist.controller.dto;
 
 
 import at.enough.dashboard.shoppinglist.model.ShoppingListPosition;
