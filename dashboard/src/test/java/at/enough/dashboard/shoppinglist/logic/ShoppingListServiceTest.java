@@ -2,15 +2,14 @@ package at.enough.dashboard.shoppinglist.logic;
 
 import at.enough.dashboard.shoppinglist.model.ShoppingList;
 import at.enough.dashboard.shoppinglist.model.repository.ShoppingListRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,11 +26,6 @@ class ShoppingListServiceTest {
     @Mock
     ShoppingListRepository shoppingListRepository;
 
-
-    @BeforeEach
-    void init() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     //TODO HELP EL! how to set up mocks with spring boot?
     @Test
@@ -55,7 +49,20 @@ class ShoppingListServiceTest {
         //test
         List<ShoppingList> resultList = shoppingListService.getListOfShoppingLists();
 
-//        Assertions.assertEquals(3, resultList.size());
+        assertEquals(3, resultList.size());
+        verify(shoppingListRepository, times(1)).findAll();
+
+    }
+
+    @Test
+    void getAllShoppingListsReturnsEmptyListTest() {
+
+        when(shoppingListRepository.findAll()).thenReturn(Collections.emptyList());
+
+        //test
+        List<ShoppingList> resultList = shoppingListService.getListOfShoppingLists();
+
+        assertEquals(0, resultList.size());
         verify(shoppingListRepository, times(1)).findAll();
 
     }
@@ -74,4 +81,18 @@ class ShoppingListServiceTest {
         assertTrue(shoppingListOptional.isPresent());
         assertEquals(testShoppingListOne, shoppingListOptional.get());
     }
+
+    @Test
+    void notFoundByIdReturnsEmptyTest() {
+
+        when(shoppingListRepository.findBy(1)).thenReturn(Optional.empty());
+
+        //test
+        Optional<ShoppingList> shoppingListOptional = shoppingListService.findBy(1);
+
+        verify(shoppingListRepository, times(1)).findBy(1);
+        assertTrue(shoppingListOptional.isEmpty());
+    }
+
+
 }
