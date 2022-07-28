@@ -1,6 +1,6 @@
 package at.enough.dashboard.shoppinglist.controller;
 
-import at.enough.dashboard.shoppinglist.logic.ShoppingListItemService;
+import at.enough.dashboard.shoppinglist.logic.ShoppingListEntryService;
 import at.enough.dashboard.shoppinglist.model.ShoppingListEntry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("api/shopping-list")
 public class ShoppingListItemController {
 
-    private final ShoppingListItemService shoppingListItemService;
+    private final ShoppingListEntryService shoppingListItemService;
 
     @PutMapping("{list-id}/items/{item-id}")
     public ShoppingListEntry editShoppingListPosition(@PathVariable("list-id") long listId,
