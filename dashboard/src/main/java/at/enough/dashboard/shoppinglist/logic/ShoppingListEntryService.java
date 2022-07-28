@@ -25,8 +25,13 @@ public class ShoppingListEntryService {
     }
 
 
-    public void delete(ShoppingListEntry entry) {
-        shoppingListItemRepository.delete(entry);
+    public void delete(Long entryId) {
+        Optional<ShoppingListEntry> shoppingListEntryOptional = shoppingListItemRepository.findById(entryId);
+        if (shoppingListEntryOptional.isEmpty()) {
+            return;
+        }
+
+        shoppingListItemRepository.delete(shoppingListEntryOptional.get());
     }
 
 }
