@@ -2,6 +2,7 @@ import {FooterStyle} from "./footerStyle";
 import {Card, Container, Row} from "react-bootstrap";
 import {TextCenter} from "../Style/TextCenter";
 
+
 export const Footer = props => {
     return (
         <>
