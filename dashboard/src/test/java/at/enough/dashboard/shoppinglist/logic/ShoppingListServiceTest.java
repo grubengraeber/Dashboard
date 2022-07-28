@@ -1,7 +1,7 @@
 package at.enough.dashboard.shoppinglist.logic;
 
 import at.enough.dashboard.shoppinglist.model.ShoppingList;
-import at.enough.dashboard.shoppinglist.model.repository.ShoppingListRepository;
+import at.enough.dashboard.shoppinglist.dao.repository.ShoppingListRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,6 @@ class ShoppingListServiceTest {
     ShoppingListRepository shoppingListRepository;
 
 
-    //TODO HELP EL! how to set up mocks with spring boot?
     @Test
     void getAllShoppingListsTest() {
         ShoppingList testShoppingListOne = ShoppingList.builder()
@@ -72,12 +71,12 @@ class ShoppingListServiceTest {
         ShoppingList testShoppingListOne = ShoppingList.builder()
                 .name("list one")
                 .build();
-        when(shoppingListRepository.findBy(1)).thenReturn(Optional.of(testShoppingListOne));
+        when(shoppingListRepository.findById(1L)).thenReturn(Optional.of(testShoppingListOne));
 
         //test
         Optional<ShoppingList> shoppingListOptional = shoppingListService.findBy(1);
 
-        verify(shoppingListRepository, times(1)).findBy(1);
+        verify(shoppingListRepository, times(1)).findById(1L);
         assertTrue(shoppingListOptional.isPresent());
         assertEquals(testShoppingListOne, shoppingListOptional.get());
     }
@@ -85,12 +84,12 @@ class ShoppingListServiceTest {
     @Test
     void notFoundByIdReturnsEmptyTest() {
 
-        when(shoppingListRepository.findBy(1)).thenReturn(Optional.empty());
+        when(shoppingListRepository.findById(1L)).thenReturn(Optional.empty());
 
         //test
         Optional<ShoppingList> shoppingListOptional = shoppingListService.findBy(1);
 
-        verify(shoppingListRepository, times(1)).findBy(1);
+        verify(shoppingListRepository, times(1)).findById(1L);
         assertTrue(shoppingListOptional.isEmpty());
     }
 

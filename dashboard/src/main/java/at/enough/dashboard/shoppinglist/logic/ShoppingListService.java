@@ -1,7 +1,7 @@
 package at.enough.dashboard.shoppinglist.logic;
 
 import at.enough.dashboard.shoppinglist.model.ShoppingList;
-import at.enough.dashboard.shoppinglist.model.repository.ShoppingListRepository;
+import at.enough.dashboard.shoppinglist.dao.repository.ShoppingListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +18,7 @@ public class ShoppingListService {
     }
 
     public Optional<ShoppingList> findBy(long id) {
-        Optional<ShoppingList> shoppingListOptional = shoppingListRepository.findBy(id);
-        if (shoppingListOptional.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return shoppingListOptional;
+        return shoppingListRepository.findById(id);
 
 
     }

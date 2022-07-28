@@ -14,7 +14,7 @@ public class ShoppingListDTOConverter implements DtoConverter<ShoppingList, Shop
         return new ShoppingListDTO(
                 shoppingList.getId(),
                 shoppingList.getName(),
-                shoppingList.getShoppingListPositions(),
+                shoppingList.getEntries(),
                 LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault())
         );
     }
