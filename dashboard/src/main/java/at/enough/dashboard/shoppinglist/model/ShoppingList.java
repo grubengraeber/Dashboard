@@ -3,14 +3,22 @@ package at.enough.dashboard.shoppinglist.model;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
-@Builder
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table
 public class ShoppingList {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
-    List<ShoppingListPosition> shoppingListPositions;
+    @OneToMany
+    private List<ShoppingListEntry> entries;
 
 
 

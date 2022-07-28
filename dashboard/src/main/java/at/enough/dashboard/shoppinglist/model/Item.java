@@ -1,11 +1,19 @@
 package at.enough.dashboard.shoppinglist.model;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
-@Builder
+import javax.persistence.*;
+
 @Getter
+@Setter
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table
 public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
     //ToDo add Supplier Object later?

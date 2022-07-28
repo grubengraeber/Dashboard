@@ -1,7 +1,7 @@
 package at.enough.dashboard.shoppinglist.logic;
 
-import at.enough.dashboard.shoppinglist.model.ShoppingListPosition;
-import at.enough.dashboard.shoppinglist.model.repository.ShoppingListPositionRepository;
+import at.enough.dashboard.shoppinglist.model.ShoppingListEntry;
+import at.enough.dashboard.shoppinglist.dao.repository.ShoppingListEntryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ShoppingListItemService {
 
-    private final ShoppingListPositionRepository shoppingListItemRepository;
+    private final ShoppingListEntryRepository shoppingListItemRepository;
 
-    public Optional<ShoppingListPosition> edit(long id, ShoppingListPosition shoppingListPosition) {
+    public Optional<ShoppingListEntry> edit(long id, ShoppingListEntry shoppingListPosition) {
 
 //        Optional<ShoppingListPosition> persistedShoppingListPosition = shoppingListItemRepository.findBy(id);
         return Optional.empty();
