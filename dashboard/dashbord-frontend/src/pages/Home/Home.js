@@ -1,25 +1,31 @@
-import {Card, Container, Row} from "react-bootstrap";
-import {TextCenter} from "../../components/Style/TextCenter";
-import {BorderManagement} from "../PageStyle/BorderManagement";
+import {Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import React from "react";
+
 
 export const Home = props => {
+    let dataFetched = false;
     return (
         <>
-            <Container>
-                <Row>
-                    <Card style={BorderManagement}>
-                        <Card.Body>
-                            <Card.Title style={TextCenter}>HOME</Card.Title>
-                            <Card.Subtitle>This is the Homepage</Card.Subtitle>
-                            <Card.Text>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Aliquid animi autem harum iure qui quis quos reiciendis sequi voluptate voluptatem.
-                                Alias aspernatur aut enim fugiat inventore libero sint suscipit. At.
-                            </Card.Text>
-                        </Card.Body>
+            <Grid container spacing={2}>
+                <Grid item xs={2}>
+                    <Card sx={{maxWidth: 200, maxHeight: 200, margin: "20px"}}
+                          variant={"outlined"}>
+                        <CardActionArea href={"/ShoppingList"}>
+                            <CardMedia
+                                component={"img"}
+                                height={100}
+                                image={"https://thumbs.dreamstime.com/z/woods-14670422.jpg"}
+                                alt={"woods"}
+                            />
+                            <CardContent>
+                                <Typography>
+                                Shopping List: {dataFetched ? dataFetched : 0} open
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
                     </Card>
-                </Row>
-            </Container>
+                </Grid>
+            </Grid>
         </>
     );
 };
