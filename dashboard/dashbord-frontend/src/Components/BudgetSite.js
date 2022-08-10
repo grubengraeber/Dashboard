@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { endpoints } from '../Fetch/endpoints';
+import ExpensesChart from './ExpensesChart';
 
 const expensesEndpoint = "http://localhost:8080/api/v1/budget/expenses";
 
@@ -24,9 +25,11 @@ const BudgetSite = () => {
     
   } {
     return (
-      <div>
+      <>
+        <ExpensesChart/>
+
         { data.map((expense) => <p key={expense.id}>{expense.name}</p> )}
-      </div>
+      </>
     )
   }
 
