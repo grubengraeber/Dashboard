@@ -1,15 +1,16 @@
 import './App.css';
-import {FetchData} from './fetch.js';
+import BudgetSite from './Components/BudgetSite';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 
 function App() {
-    let Hello = FetchData();
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1> {Hello} </h1>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App"> 
+          <BudgetSite/>
+      </div>
+    </QueryClientProvider>
   );
 }
 

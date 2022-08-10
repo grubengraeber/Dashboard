@@ -1,11 +1,9 @@
 package at.enough.dashboard.budget.persistence.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -14,14 +12,16 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    LocalDateTime date;
-    @ManyToMany
-    private Set<ExpenseCategory> category;
+    private double cost;
+    LocalDate date;
+    @ManyToOne
+    private ExpenseCategory category;
     @ManyToOne
     private Member member;
 
