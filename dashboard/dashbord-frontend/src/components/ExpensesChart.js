@@ -1,15 +1,16 @@
 import React from 'react'
-import { Doughnut } from 'react-chartjs-2'
-import { useQuery } from '@tanstack/react-query'
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../Fetch/endpoints';
-import {Chart, ArcElement} from 'chart.js'
-Chart.register(ArcElement);
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const labels = ['section 1', 'section 2', 'section 3', 'section 4', 'section 5', 'section 6'];
 const data = {
- labels: labels,
- datasets: [{
- label: 'Doughnut chart',
+       labels: labels,
+       datasets: [{
+       label: 'Doughnut chart',
  data: [65, 59, 83, 89, 76, 55, 40],
  backgroundColor: [
  'rgba(255, 99, 132, 0.2)',
@@ -52,8 +53,9 @@ const ExpensesChart = () => {
   if (isError) return (<h1>error on loading</h1>)
     return (
         <div style={{width: "20%", margin: "auto"}}>
-        <Doughnut data={data} options={{
- maintainAspectRatio: true,
+        <Doughnut data={data} 
+                     options={{
+                            maintainAspectRatio: true,
                     }}/>
         </div>
   )

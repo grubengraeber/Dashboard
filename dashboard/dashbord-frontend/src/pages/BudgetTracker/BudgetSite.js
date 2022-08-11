@@ -1,15 +1,8 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { endpoints } from '../Fetch/endpoints';
-import ExpensesChart from './ExpensesChart';
+import { endpoints } from '../../Fetch/endpoints';
+import ExpensesChart from '../../components/ExpensesChart';
 
-const expensesEndpoint = "http://localhost:8080/api/v1/budget/expenses";
-
-async function fetchExpenses()
-{ 
-  const response = await fetch(expensesEndpoint)
-  return response.json();
-}
 
 
 const BudgetSite = () => {
@@ -23,12 +16,11 @@ const BudgetSite = () => {
     return (<h1>an error happened</h1>)
   } else {
     
-  } {
+  
     return (
       <>
-        <ExpensesChart/>
-
-        { data.map((expense) => <p key={expense.id}>{expense.name}</p> )}
+          <ExpensesChart/>
+            { data.map((expense) => <p key={expense.id}>{expense.name}</p> )}
       </>
     )
   }
