@@ -1,9 +1,9 @@
 import React from "react";
 
-export const ShoppingList = props => {
+export const BudgetTracker = props => {
     return (
         <>
-            Shoppinglist
+            BudgetHarmony
         </>
     );
 };
