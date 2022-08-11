@@ -14,7 +14,7 @@ export const CustomBudgetTracker = (props) => {
 
   return (
     <>
-    <BasicListItem text={'Budget Harmony'} onClick={navigateToBudgetTracker} icon={<BalanceSharpIcon />}/>
+    <BasicListItem text={'Budget Tracker'} onClick={navigateToBudgetTracker} icon={<BalanceSharpIcon />}/>
     </>
   )
 }
