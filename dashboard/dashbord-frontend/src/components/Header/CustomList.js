@@ -6,7 +6,7 @@ import StarPurple500SharpIcon from '@mui/icons-material/StarPurple500Sharp';
 import { CustomLogin } from './ListItems/CustomLogin';
 import { CustomRegister } from './ListItems/CustomRegister';
 import { CustomShoppingList } from './ListItems/CustomShoppingList';
-import { CustomBudgetHarmony } from './ListItems/CustomBudgetHarmony';
+import { CustomBudgetTracker } from './ListItems/CustomBudgetTracker';
 import { CustomClose } from './ListItems/CustomClose';
 import { CustomLogout } from './ListItems/CustomLogout';
 
@@ -29,7 +29,7 @@ export const CustomList = (props) => {
           Favorites
         </ListSubheader>
         <CustomShoppingList />
-        <CustomBudgetHarmony />
+        <CustomBudgetTracker />
       </List>
       <Divider sx={{border: "solid"}}/>
       <List>
