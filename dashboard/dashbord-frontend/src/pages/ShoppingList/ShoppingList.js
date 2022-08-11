@@ -1,5 +1,4 @@
 import React from "react";
-import React from "react";
 import BasicShoppingListItem from "./itemTemplate/BasicShoppingListItem"
 
 const shoppingListItems = [];
