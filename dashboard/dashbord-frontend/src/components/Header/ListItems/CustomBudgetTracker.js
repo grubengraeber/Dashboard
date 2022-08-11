@@ -7,14 +7,14 @@ import {useNavigate} from 'react-router-dom'
 export const CustomBudgetTracker = (props) => {
   const navigate = useNavigate();
 
-  const navigateToBudgetHarmony = () => {
+  const navigateToBudgetTracker = () => {
     // 👇️ navigate to /
     navigate('/BudgetTracker');
   };
 
   return (
     <>
-    <BasicListItem text={'Budget Harmony'} onClick={navigateToBudgetHarmony} icon={<BalanceSharpIcon />}/>
+    <BasicListItem text={'Budget Harmony'} onClick={navigateToBudgetTracker} icon={<BalanceSharpIcon />}/>
     </>
   )
 }

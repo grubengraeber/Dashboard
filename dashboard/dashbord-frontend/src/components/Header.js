@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { CustomList } from './Header/CustomList';
 import { CustomLogo } from './Header/CustomLogo';
+import { Grid } from '@mui/material';
 
 
 export const Header = props => {
@@ -36,7 +37,14 @@ export const Header = props => {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
           <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
+          </Grid>
+          <Grid item xs={5}>
+          <CustomLogo />
+          </Grid>
+          </Grid>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
@@ -44,10 +52,10 @@ export const Header = props => {
           >
             {list(anchor)}
           </Drawer>
-          <CustomLogo />
+          
         </React.Fragment>
       ))}
-      
+
     </div>
   );
 }
