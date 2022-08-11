@@ -2,7 +2,7 @@ import React from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
-import { endpoints } from '../Fetch/endpoints';
+import { endpoints } from '../../Fetch/endpoints';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const labels = ['section 1', 'section 2', 'section 3', 'section 4', 'section 5', 'section 6'];

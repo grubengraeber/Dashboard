@@ -1,15 +1,12 @@
 import React from 'react'
-import { useQuery } from '@tanstack/react-query'
+import ExpensesChart from '../../components/Budget/ExpensesChart';
+import { Card, Grid } from '@mui/material';
+import ExpenseNav from '../../components/Budget/ExpenseNav';
+import ExpensesList from '../../components/Budget/ExpensesList';
+import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../../Fetch/endpoints';
-import ExpensesChart from '../../components/ExpensesChart';
-import { Grid } from '@mui/material';
-import ExpensesListItem from '../../components/ExpensesListItem';
-import { List } from '@mui/material';
-import { CenterFocusStrong } from '@mui/icons-material';
-
 
 const BudgetSite = () => {
-
   const { data, isLoading, error, isError } = useQuery(["expenses"], endpoints.getExpenses);
 
   if (isLoading) {
@@ -19,7 +16,6 @@ const BudgetSite = () => {
     return (<h1>an error happened</h1>)
   } else {
 
-
     return (
       <Grid
         container
@@ -27,26 +23,33 @@ const BudgetSite = () => {
         direction="column"
         alignItems="center"
         justifyContent="center"
+        margin={5}
       >
         <Grid item xs={12}>
-          <ExpensesChart />
+          <Card >
+            <ExpensesChart />
+          </Card>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} margin={2} alignItems={"flex-start"}>
+          <Card>
+            <ExpenseNav />
+          </Card>
+        </Grid>
+        <Grid item xs={12} margin={2}>
+          <Card>
+            <ExpensesList data={data} />
 
-        </Grid>
-        <Grid item xs={12} border={0.5} direction={'column'} margin={7}>
-          <List dense>
-            {data.map((expense) => <ExpensesListItem key={expense.id} data={expense} />)}
-          </List>
+          </Card>
         </Grid>
       </Grid >
 
 
     )
   }
-
-
 }
+
+
+
 
 
 export default BudgetSite
