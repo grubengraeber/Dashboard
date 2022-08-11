@@ -1,7 +1,7 @@
 import React from 'react';
-import {BasicListItem} from './BasicListItem'
+import { BasicListItem } from './BasicListItem'
 import LoginSharpIcon from '@mui/icons-material/LoginSharp';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 export const CustomLogin = (props) => {
@@ -15,7 +15,7 @@ export const CustomLogin = (props) => {
 
   return (
     <>
-    <BasicListItem text={'Login'} onClick={navigateToLogin} icon={<LoginSharpIcon />}/>
+      <BasicListItem text={'Login'} onClick={navigateToLogin} icon={<LoginSharpIcon />} />
     </>
   )
 }
