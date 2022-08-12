@@ -1,7 +1,7 @@
 import React from 'react';
-import {BasicListItem} from './BasicListItem'
+import { BasicListItem } from './BasicListItem'
 import BalanceSharpIcon from '@mui/icons-material/BalanceSharp';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 export const CustomBudgetTracker = (props) => {
@@ -9,12 +9,12 @@ export const CustomBudgetTracker = (props) => {
 
   const navigateToBudgetTracker = () => {
     // 👇️ navigate to /
-    navigate('/Budget');
+    navigate('/BudgetTracker');
   };
 
   return (
     <>
-    <BasicListItem text={'Budget Tracker'} onClick={navigateToBudgetTracker} icon={<BalanceSharpIcon />}/>
+      <BasicListItem text={'Budget Tracker'} onClick={navigateToBudgetTracker} icon={<BalanceSharpIcon />} />
     </>
   )
 }
