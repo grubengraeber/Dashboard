@@ -1,11 +1,10 @@
 package at.enough.dashboard.budget.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -19,6 +18,7 @@ public class Expense {
     private long id;
     private String name;
     private double cost;
+    @JsonFormat(pattern = "dd.MM.yyyy")
     LocalDate date;
     @ManyToOne
     private ExpenseCategory category;

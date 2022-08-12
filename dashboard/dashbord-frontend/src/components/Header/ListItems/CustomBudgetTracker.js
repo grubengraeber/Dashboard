@@ -9,7 +9,7 @@ export const CustomBudgetTracker = (props) => {
 
   const navigateToBudgetTracker = () => {
     // 👇️ navigate to /
-    navigate('/BudgetTracker');
+    navigate('/Budget');
   };
 
   return (
