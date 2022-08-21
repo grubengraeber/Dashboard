@@ -1,7 +1,8 @@
-import { Card, CardContent, Grid, CircularProgress } from "@mui/material";
+import { Card, CardContent, Grid, CircularProgress, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {BasicShoppingListItem} from "./itemTemplate/BasicShoppingListItem";
 import axios from "axios";
+import { AddForm } from "./addItem/AddForm";
 
 
 export const ShoppingList = props => {
@@ -9,6 +10,7 @@ export const ShoppingList = props => {
     const [listName, setListName] = useState("")
     const [loading, setLoading] = useState(true)
     const [listId, setListId] = useState(0)
+    const [newItemFormOn, setNewItemFormOn] = useState(false)
 
     const SHOPPING_LIST_ENDPOINT = "http://localhost:8080/api/shopping-list";
     const getShoppingList = () => {
@@ -29,6 +31,14 @@ export const ShoppingList = props => {
         getShoppingList();
     }, []);
 
+    function toggleNewItem(clickEvent) {
+        newItemFormOn ? setNewItemFormOn(false) : setNewItemFormOn(true);
+    }
+
+    function handleChange(newValue) {
+        setNewItemFormOn(newValue)
+    }
+
     return (
         <>  
             <Grid   container
@@ -36,10 +46,15 @@ export const ShoppingList = props => {
                     direction="column"
                     alignItems="center"
                     justifyContent="center"
-                    style={{ margin: "10px"}}>
+                    style={{ margin: "10px" }}>
                 <Grid item>
                     <Card sx={{ padding: "10px" }}>
-                    <h3>{loading ? <CircularProgress/> : listName}</h3>
+                        <h3>{loading ? <CircularProgress/> : listName}</h3>
+                    </Card>
+                </Grid>
+                <Grid item sx={{ alignment: "right" }}>
+                    <Card >
+                        { newItemFormOn ? <AddForm listId={listId} newItemFormOn={newItemFormOn} onChange={handleChange} /> : <Button onClick={toggleNewItem}>New Item</Button> }
                     </Card>
                 </Grid>
                 <Grid   container
