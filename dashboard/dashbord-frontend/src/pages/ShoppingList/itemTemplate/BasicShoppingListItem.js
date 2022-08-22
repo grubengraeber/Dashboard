@@ -8,6 +8,7 @@ import DeleteButton from "../deleteItem/DeleteButton"
 
 export const BasicShoppingListItem = (props) => {
     return (
+        
         <>
             <Grid container spacing={25}
                 alignItems="center"
