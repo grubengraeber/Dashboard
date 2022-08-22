@@ -1,6 +1,7 @@
 import { ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } from '@mui/material'
 import React from 'react'
 
+
 const ExpensesListItem = ({ data }) => {
     return (
         <ListItem dense divider style={{ width: '600px', height: '3em' }}>
