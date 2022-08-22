@@ -26,7 +26,7 @@ export const AddForm = (props) => {
             "amount": itemAmount
         }
 
-        axios.post("http://localhost:8080/api/shopping-list/" + props.listId + "/new-entry", requestBody)
+        axios.post("http://localhost:8080/api/shopping-list/" + props.listId + "/entries", requestBody)
         .then(() => alert('Item: "' + itemName + '" added.'))
         
     }
