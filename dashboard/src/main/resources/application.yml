@@ -1,0 +1,13 @@
+server-port: 8080
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+data:
+  budget-entries:
+    count: 100
+    time-span: 100

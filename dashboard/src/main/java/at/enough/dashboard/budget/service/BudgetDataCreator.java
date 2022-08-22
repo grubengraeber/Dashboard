@@ -6,6 +6,7 @@ import at.enough.dashboard.budget.persistence.model.Member;
 import at.enough.dashboard.budget.persistence.repository.ExpenseCategoryRepository;
 import at.enough.dashboard.budget.persistence.repository.ExpenseRepository;
 import at.enough.dashboard.budget.persistence.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -15,7 +16,9 @@ import java.util.List;
 @Component
 public class BudgetDataCreator {
 
-    private final int DATA_COUNT = 50;
+    private final int DATA_COUNT;
+    private final int TIME_SPAN;
+
     private final ExpenseCategoryRepository expenseCategoryRepository;
     private final ExpenseRepository expenseRepository;
     private final MemberRepository memberRepository;
@@ -34,14 +37,18 @@ public class BudgetDataCreator {
     );
 
 
-    public BudgetDataCreator(ExpenseCategoryRepository expenseCategoryRepository,
+    public BudgetDataCreator(@Value("${data.budget-entries.count}") int data_count,
+                             @Value("${data.budget-entries.time-span}") int time_span,
+                             ExpenseCategoryRepository expenseCategoryRepository,
                              ExpenseRepository expenseRepository,
                              MemberRepository memberRepository) {
+        DATA_COUNT = data_count;
+        TIME_SPAN = time_span;
         this.expenseCategoryRepository = expenseCategoryRepository;
         this.expenseRepository = expenseRepository;
         this.memberRepository = memberRepository;
         createData();
-        createRandomData(DATA_COUNT, LocalDate.now(), 100);
+        createRandomData(DATA_COUNT, LocalDate.now(), TIME_SPAN);
     }
 
     private void createData() {
