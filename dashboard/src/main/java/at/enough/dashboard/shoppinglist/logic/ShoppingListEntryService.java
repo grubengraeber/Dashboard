@@ -1,7 +1,7 @@
 package at.enough.dashboard.shoppinglist.logic;
 
-import at.enough.dashboard.shoppinglist.model.ShoppingListEntry;
 import at.enough.dashboard.shoppinglist.dao.repository.ShoppingListEntryRepository;
+import at.enough.dashboard.shoppinglist.model.ShoppingListEntry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
