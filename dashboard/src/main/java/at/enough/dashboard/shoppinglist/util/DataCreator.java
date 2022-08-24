@@ -37,42 +37,44 @@ public class DataCreator {
         List<User> users = createUsers();
         List<Item> items = createItems();
 
+        ShoppingList testShoppingList = ShoppingList.builder()
+                .name("test list")
+                .build();
 
         List<ShoppingListEntry> entries = new ArrayList<>(List.of(
                 ShoppingListEntry.builder()
                         .item(items.get(0))
                         .amount(2)
                         .user(users.get(0))
+                        .shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(1))
-                        .amount(4)
+                        .amount(4).shoppingList(testShoppingList)
+
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(2))
-                        .amount(1)
+                        .amount(1).shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(3))
-                        .amount(1)
+                        .amount(1).shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(4))
-                        .amount(2)
+                        .amount(2).shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(5))
-                        .amount(2)
+                        .amount(2).shoppingList(testShoppingList)
                         .build()));
-        shoppingListEntryRepository.saveAll(entries);
 
+        testShoppingList.setEntries(entries);
 
-        ShoppingList testShoppingList = ShoppingList.builder()
-                .entries(entries)
-                .name("test list")
-                .build();
 
         shoppingListRepository.save(testShoppingList);
+
     }
 
     private List<User> createUsers() {

@@ -20,14 +20,5 @@ public class Item {
     private String name;
     //ToDo add Supplier Object later?
     private String supplier;
-    @OneToMany
-    private List<ShoppingListEntry> shoppingListEntries;
 
-    public Collection<ShoppingListEntry> getShoppingListEntries() {
-        return shoppingListEntries;
-    }
-
-    public void setShoppingListEntries(List<ShoppingListEntry> shoppingListEntries) {
-        this.shoppingListEntries = shoppingListEntries;
-    }
 }
