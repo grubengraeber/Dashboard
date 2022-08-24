@@ -29,7 +29,7 @@ export const ShoppingList = props => {
 
     useEffect(() => {
         getShoppingList();
-    }, []);
+    }, [items]);
 
     function toggleNewItem(clickEvent) {
         newItemFormOn ? setNewItemFormOn(false) : setNewItemFormOn(true);

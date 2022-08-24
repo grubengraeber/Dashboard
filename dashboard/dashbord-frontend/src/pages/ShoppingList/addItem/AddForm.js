@@ -1,34 +1,38 @@
 import { FormControl, TextField, Button, Grid } from '@mui/material'
 import React, { useState } from 'react'
 import { DeleteForever } from '@mui/icons-material'
-import { TimePicker } from '@mui/x-date-pickers'
 import axios from 'axios'
+import { ErrorMessage } from '../../../components/Error/ErrorMessage'
+import { SuccessMessage } from '../../../components/Success/SuccessMessage'
 
 
 export const AddForm = (props) => {
     const [itemName, setItemName] = useState("")
     const [itemAmount, setItemAmount] = useState(0)
+    const [isError, setIsError] = useState(false)
+    const [errorText, setErrorText] = useState("An Error occured!")
+    const [isSuccess, setIsSuccess] = useState(false)
+    const [successText, setSuccessText] = useState("Success!")
 
     function addItem(clickEvent) {
-        console.log("Add Item to List with id: " + props.listId + 
-                    ", and the amount of the item '" + itemName + "' is: " + itemAmount)
-
-        // send Post request with JSON: { amount: amount ....}
         const requestBody = 
         {
-            "id": null,
-            "addedTime": TimePicker,
-            "item": 
-            {
-                "id": null,
-                "name": itemName
-            },
+            "name": itemName,
             "amount": itemAmount
         }
 
-        axios.post("http://localhost:8080/api/shopping-list/" + props.listId + "/entries", requestBody)
-        .then(() => alert('Item: "' + itemName + '" added.'))
-        
+        const headers = {"Access-Control-Allow-Origin": "*"}
+            
+
+        axios.post("http://localhost:8080/api/shopping-list/" + props.listId + "/entries", requestBody, headers)
+        .then(() => {
+            setIsSuccess(true)
+            setSuccessText("Adding item: '" + itemName + "' was successful!")
+        })
+        .catch((error) => {
+            setIsError(true)
+            setErrorText(error.message)
+        })
     }
 
     function disregardForm(clickEvent) {
@@ -44,6 +48,7 @@ export const AddForm = (props) => {
     }
 
   return (
+    <>
     <FormControl>
         <Grid container sx={{ padding: "5px"}} alignItems="center" >
             <Grid item xs={4}>
@@ -73,5 +78,8 @@ export const AddForm = (props) => {
             </Grid>
         </Grid>
     </FormControl>
+    <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorText} />
+    <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successText} />
+    </>
   )
 }
