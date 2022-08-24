@@ -1,7 +1,7 @@
 package at.enough.dashboard.shoppinglist.logic;
 
-import at.enough.dashboard.shoppinglist.model.ShoppingList;
 import at.enough.dashboard.shoppinglist.dao.repository.ShoppingListRepository;
+import at.enough.dashboard.shoppinglist.model.ShoppingList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +23,11 @@ public class ShoppingListService {
 
     }
 
+    public void deleteListBy(long id) {
+        Optional<ShoppingList> shoppingList = shoppingListRepository.findById(id);
+        if (shoppingList.isEmpty()) {
+            return;
+        }
+        shoppingListRepository.delete(shoppingList.get());
+    }
 }

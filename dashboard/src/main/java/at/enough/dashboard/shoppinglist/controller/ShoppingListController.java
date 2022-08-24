@@ -6,10 +6,7 @@ import at.enough.dashboard.shoppinglist.controller.dto.ShoppingListDTOConverter;
 import at.enough.dashboard.shoppinglist.logic.ShoppingListService;
 import at.enough.dashboard.shoppinglist.model.ShoppingList;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +27,7 @@ public class ShoppingListController {
 
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ShoppingListDTO getById(@PathVariable long id) {
 
         Optional<ShoppingList> shoppingListDTOOptional = shoppingListService.findBy(id);
@@ -42,5 +39,10 @@ public class ShoppingListController {
         return shoppingListDTOConverter.toDTO(shoppingListDTOOptional.get());
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id) {
 
+        shoppingListService.deleteListBy(id);
+
+    }
 }
