@@ -22,6 +22,11 @@ public class BudgetController {
         return budgetService.getAll();
     }
 
+    @GetMapping("/expenses/categories")
+    public List<String> getCategories() {
+        return budgetService.getExpenseCategoryNames();
+    }
+
 
     @GetMapping("/expenses/chart")
     public Map<String, Double> getChartData() {

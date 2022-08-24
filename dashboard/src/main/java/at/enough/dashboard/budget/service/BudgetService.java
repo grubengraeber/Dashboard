@@ -1,6 +1,8 @@
 package at.enough.dashboard.budget.service;
 
 import at.enough.dashboard.budget.persistence.model.Expense;
+import at.enough.dashboard.budget.persistence.model.ExpenseCategory;
+import at.enough.dashboard.budget.persistence.repository.ExpenseCategoryRepository;
 import at.enough.dashboard.budget.persistence.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 public class BudgetService {
 
     private final ExpenseRepository expenseRepository;
+    private final ExpenseCategoryRepository expenseCategoryRepository;
 
 
     public List<Expense> getAll() {
@@ -46,5 +49,9 @@ public class BudgetService {
         persistedExpense.setId(expenseId);
         expenseRepository.save(persistedExpense);
 
+    }
+
+    public List<String> getExpenseCategoryNames() {
+        return expenseCategoryRepository.getExpenseCategoryNames();
     }
 }

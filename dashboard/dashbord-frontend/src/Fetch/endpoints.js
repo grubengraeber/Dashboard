@@ -1,24 +1,32 @@
 // Budget Endpoints
-const EXPENSES_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses"; 
+const EXPENSES_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses";
 const CHARTDATA_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses/chart";
+
+
+// Expense Enpoints
+const EXPENSE_CATEGORIES_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses/categories";
 
 // ShoppingList Endpoints
 const SHOPPING_LIST_ENDPOINT = "http://localhost:8080/api/shopping-list";
 
 export const endpoints = {
 
-    getExpenses: async function() {
+    getExpenses: async function () {
         const respone = await fetch(EXPENSES_ENDPOINT);
         return respone.json();
-    }, 
-    getChartData: async function() {
+    },
+    getChartData: async function () {
         const respone = await fetch(CHARTDATA_ENDPOINT);
         return respone.json();
     },
-    getShoppingList: async function() {
+    getShoppingList: async function () {
         const respone = await fetch(SHOPPING_LIST_ENDPOINT);
         return respone.json();
+    },
+    getExpenseCategories: async function () {
+        const response = await fetch(EXPENSE_CATEGORIES_ENDPOINT)
     }
+
 
 }
 
