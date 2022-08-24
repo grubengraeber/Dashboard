@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -35,10 +36,8 @@ public class ShoppingListItemController {
 
     @DeleteMapping("{list-id}/entries/{entry-id}")
     public void delete(@PathVariable("entry-id") Long entryId) {
-        logger.info("deleteted entry with id "+ entryId);
+        logger.info("deleted entry with id "+ entryId);
         shoppingListEntryService.delete(entryId);
-
-
     }
 
 }

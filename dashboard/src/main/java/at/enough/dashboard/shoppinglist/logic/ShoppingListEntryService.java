@@ -25,13 +25,13 @@ public class ShoppingListEntryService {
     }
 
 
-    public void delete(Long entryId) {
+    public void delete(long entryId) {
         Optional<ShoppingListEntry> shoppingListEntryOptional = shoppingListItemRepository.findById(entryId);
         if (shoppingListEntryOptional.isEmpty()) {
             return;
         }
-
-        shoppingListItemRepository.delete(shoppingListEntryOptional.get());
+        ShoppingListEntry shoppingListEntry = shoppingListEntryOptional.get();
+        shoppingListItemRepository.delete(shoppingListEntry);
     }
 
 }

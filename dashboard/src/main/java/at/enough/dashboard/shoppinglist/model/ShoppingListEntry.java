@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 public class ShoppingListEntry {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
@@ -20,7 +22,9 @@ public class ShoppingListEntry {
     private boolean active;
     private LocalDateTime addedTime;
     private boolean optional;
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne
     private User user;
     private int amount;
+
 }
+

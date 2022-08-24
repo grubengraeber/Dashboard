@@ -20,6 +20,4 @@ public class ShoppingList {
     @OneToMany
     private List<ShoppingListEntry> entries;
 
-
-
 }

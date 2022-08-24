@@ -57,7 +57,8 @@ export const ShoppingList = props => {
                         { newItemFormOn ? <AddForm listId={listId} newItemFormOn={newItemFormOn} onChange={handleChange} /> : <Button onClick={toggleNewItem}>New Item</Button> }
                     </Card>
                 </Grid>
-                <Grid   container
+                <Grid   
+                    container
                     spacing={0}
                     alignItems="center"
                     justifyContent="center"></Grid>
