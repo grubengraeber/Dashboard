@@ -34,6 +34,8 @@ public class ShoppingListEntry {
     @ManyToOne
     private User user;
     private int amount;
+    @ManyToOne
+    private ShoppingList shoppingList;
 
 }
 
