@@ -25,6 +25,7 @@ export const endpoints = {
     },
     getExpenseCategories: async function () {
         const response = await fetch(EXPENSE_CATEGORIES_ENDPOINT)
+        return response.json();
     }
 
 

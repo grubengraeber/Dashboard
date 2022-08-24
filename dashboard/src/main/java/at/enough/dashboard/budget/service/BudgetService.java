@@ -54,4 +54,10 @@ public class BudgetService {
     public List<String> getExpenseCategoryNames() {
         return expenseCategoryRepository.getExpenseCategoryNames();
     }
+
+    public void deleteExpense(long expenseId) {
+        Expense expense = findExpenseById(expenseId);
+        expenseRepository.delete(expense);
+
+    }
 }

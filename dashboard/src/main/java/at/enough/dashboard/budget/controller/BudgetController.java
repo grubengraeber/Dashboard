@@ -3,6 +3,8 @@ package at.enough.dashboard.budget.controller;
 import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.service.BudgetService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 public class BudgetController {
-
+     Logger logger = LoggerFactory.getLogger(BudgetController.class);
 
     private final BudgetService budgetService;
 
@@ -43,6 +45,15 @@ public class BudgetController {
     @PutMapping("/expenses/{expenseId}")
     public void edit(@PathVariable long expenseId, @RequestBody Expense expense) {
         budgetService.edit(expenseId, expense);
+
+    }
+
+    @DeleteMapping("/expenses/{expenseId}")
+    public void delete(@PathVariable long expenseId) {
+        logger.info("Deleting for expense Id" + expenseId + " Works");
+        budgetService.deleteExpense(expenseId);
+
+
 
     }
 

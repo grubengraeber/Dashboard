@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dialog, Select, TextField } from '@mui/material'
+import { Dialog, MenuItem, Select, TextField } from '@mui/material'
 import { endpoints } from '../../Fetch/endpoints';
 import { useQuery } from '@tanstack/react-query';
 
@@ -11,6 +11,7 @@ const AddExpenseForm = ({ show, onClose }) => {
     const [categories, setCategories] = useState();
 
     if (isLoading) {
+
         return (<h2>loading...</h2>)
     } else {
 
@@ -22,6 +23,9 @@ const AddExpenseForm = ({ show, onClose }) => {
                 <TextField label="expenses" />
                 <TextField label="value" />
                 <Select label="category" >
+                    {data.map((dataSet) => (<MenuItem value={dataSet}>{dataSet}</MenuItem>))}
+
+
                 </Select>
 
 

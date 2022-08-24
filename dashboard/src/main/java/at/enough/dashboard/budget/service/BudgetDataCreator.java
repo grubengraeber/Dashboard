@@ -69,7 +69,7 @@ public class BudgetDataCreator {
                 .build();
 
         ExpenseCategory luxury = ExpenseCategory.builder()
-                .name("Living")
+                .name("Luxury")
                 .build();
 
         expenseCategoryRepository.saveAll(
