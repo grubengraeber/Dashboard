@@ -19,6 +19,15 @@ public class ShoppingListEntry {
     private long id;
     @ManyToOne
     private Item item;
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     private boolean active;
     private LocalDateTime addedTime;
     private boolean optional;

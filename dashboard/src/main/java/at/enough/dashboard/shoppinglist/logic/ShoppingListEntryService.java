@@ -5,6 +5,7 @@ import at.enough.dashboard.shoppinglist.dao.repository.ShoppingListEntryReposito
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,7 @@ public class ShoppingListEntryService {
     public void delete(long entryId) {
         Optional<ShoppingListEntry> shoppingListEntryOptional = shoppingListItemRepository.findById(entryId);
         if (shoppingListEntryOptional.isEmpty()) {
-            return;
+            throw new EntityNotFoundException("ShoppingListEntry with id = " + entryId + " not found ");
         }
         ShoppingListEntry shoppingListEntry = shoppingListEntryOptional.get();
         shoppingListItemRepository.delete(shoppingListEntry);

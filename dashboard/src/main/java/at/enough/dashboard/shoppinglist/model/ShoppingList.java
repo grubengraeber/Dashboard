@@ -17,7 +17,7 @@ public class ShoppingList {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "item")
     private List<ShoppingListEntry> entries;
 
 }

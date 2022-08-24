@@ -3,7 +3,8 @@ package at.enough.dashboard.shoppinglist.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,5 +20,14 @@ public class Item {
     private String name;
     //ToDo add Supplier Object later?
     private String supplier;
+    @OneToMany
+    private List<ShoppingListEntry> shoppingListEntries;
 
+    public Collection<ShoppingListEntry> getShoppingListEntries() {
+        return shoppingListEntries;
+    }
+
+    public void setShoppingListEntries(List<ShoppingListEntry> shoppingListEntries) {
+        this.shoppingListEntries = shoppingListEntries;
+    }
 }
