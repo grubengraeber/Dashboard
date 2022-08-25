@@ -15,6 +15,11 @@ export const Home = props => {
     .then((response) => {
         setShoppingListEntryCount(response.data)
     })
+
+    axios.get("http://127.0.0.1:8080/api/v1/budget/expenses/sum")
+    .then((response) => {
+        setBudgetTrackerCount(response.data.toFixed(2))
+    })
     
     return (
         <>
