@@ -3,8 +3,6 @@ package at.enough.dashboard.shoppinglist.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Setter
