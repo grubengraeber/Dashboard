@@ -62,7 +62,7 @@ export const TitleWithOnclickTextfield = (props) => {
     const textFieldAndHeader = [
         <TextField id="outlined-basic" key={props.itemName} value={newItemName} onBlur={toggleTextField} onKeyDown={keyDownHandler} onChange={updateItemName} 
         label="New Item Name" variant="outlined" />, 
-        <h5 key={props.itemName} onClick={toggleTextField}>{props.itemName}</h5>
+        <h5 key={props.itemName} onClick={toggleTextField} style={{ textDecoration : props.itemUnchecked ? 'none' : 'line-through'}}>{props.itemName}</h5>
     ]
 
   return (
