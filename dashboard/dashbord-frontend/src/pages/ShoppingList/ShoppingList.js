@@ -54,7 +54,7 @@ export const ShoppingList = props => {
                 </Grid>
                 <Grid item sx={{ alignment: "right" }}>
                     <Card >
-                        { newItemFormOn ? <AddForm listId={listId} newItemFormOn={newItemFormOn} onChange={handleChange} /> : <Button onClick={toggleNewItem}>New Item</Button> }
+                        { newItemFormOn ? <AddForm items={items} listId={listId} newItemFormOn={newItemFormOn} onChange={handleChange} /> : <Button onClick={toggleNewItem}>New Item</Button> }
                     </Card>
                 </Grid>
                 <Grid   

@@ -1,4 +1,4 @@
-import { FormControl, TextField, Button, Grid } from '@mui/material'
+import { FormControl, TextField, Button, Grid, Autocomplete } from '@mui/material'
 import React, { useState } from 'react'
 import { DeleteForever } from '@mui/icons-material'
 import axios from 'axios'
@@ -13,6 +13,19 @@ export const AddForm = (props) => {
     const [errorText, setErrorText] = useState("An Error occured!")
     const [isSuccess, setIsSuccess] = useState(false)
     const [successText, setSuccessText] = useState("Success!")
+    const [items, setItems] = useState([])
+
+
+    axios.get("http://localhost:8080/api/shopping-list/items")
+    .then((response) => {
+        setItems(response.data)
+    })
+    .catch((error) => {
+        if (error.response)  {
+            setIsError(true)
+            setErrorText(error.message)
+        }
+    })
 
     function addItem(clickEvent) {
         const requestBody = 
@@ -52,12 +65,16 @@ export const AddForm = (props) => {
     <FormControl>
         <Grid container sx={{ padding: "5px"}} alignItems="center" >
             <Grid item xs={4}>
-                <TextField 
-                id="outlined-basic" 
-                value={itemName}
-                onChange={handleItemNameChange}
-                label="Item Name" 
-                variant="outlined" />
+                <Autocomplete
+                    freeSolo
+                    options={items.map((option) => option.name)}
+                    renderInput={(params) => <TextField {...params} 
+                                                label="Item Name" 
+                                                variant='outlined'
+                                                onChange={handleItemNameChange}
+                                                value={itemName}
+                                                />}
+                />
             </Grid>
             <Grid item xs={4}>
                 <TextField
