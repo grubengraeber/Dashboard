@@ -26,6 +26,7 @@ public class AddExpenseRequestDTOConverter {
         return Expense.builder()
                 .name(addExpenseRequestDTO.name())
                 .date(LocalDate.parse(addExpenseRequestDTO.date()))
+                .cost(addExpenseRequestDTO.value())
                 .category(category)
                 .build();
 

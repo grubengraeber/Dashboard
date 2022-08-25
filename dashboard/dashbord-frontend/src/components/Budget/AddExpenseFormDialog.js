@@ -1,31 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Dialog, DialogContent, DialogTitle, Grid, MenuItem, Select, TextField } from '@mui/material'
 import { endpoints } from '../../Fetch/endpoints';
-import { useQuery } from '@tanstack/react-query';
-import useAddExpense from '../../hooks/useAddExpense';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from '@mui/x-date-pickers';
 
-const AddExpenseForm = ({ show, onClose }) => {
+
+const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
 
     const { data, isLoading, isError } = useQuery(["categories"], endpoints.getExpenseCategories);
-    const [categories, setCategories] = useState();
     const [expenseValue, setExpenseValue] = useState("");
     const [expenseName, setExpenseName] = useState("");
     const [expenseCategory, setExpenseCategory] = useState();
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [showError, setShowError] = useState(false);
-    const [showLoading, setShowLoading] = useState(false);
+    const [dateValue, setDateValue] = useState(new Date());
 
-    const handleAdd = function (e) {
+
+    const mutation = useMutation(payload => {
+        return endpoints.postExpense(payload)
+    })
+
+
+    const handleAdd = (e) => {
+        console.log(dateValue);
+
         const payload = {
             name: expenseName,
-            value: expenseValue,
-            date: "25.08.2022",
-            category: expenseCategory
-        }
-        const { isLoading, isError, isSuccess } = useAddExpense(payload)
-        setShowError(isError);
-        setShowLoading(isLoading);
-        setShowSuccess(isSuccess);
+            value: parseFloat(expenseValue),
+            date: dateValue.toISOString().split("", 10).join(""),
+            categoryName: expenseCategory
+        };
+        console.log(payload);
+        mutation.mutate(payload);
+        onNewExpense();
+
     }
 
     const handleExpenseTextChange = (e) => {
@@ -46,23 +54,48 @@ const AddExpenseForm = ({ show, onClose }) => {
         return (<h2>loading...</h2>)
     } else {
 
-        console.log(data);
-
         return (
 
-            <Dialog open={show} onClose={onClose} title="Add expense">
+            <Dialog open={show} onClose={onClose} title="Add expense" >
                 <DialogTitle>Add expense</DialogTitle>
-                <DialogContent style={{ margin: "auto" }}>
-                    <TextField label="expenses" onChange={handleExpenseTextChange} error={expenseName === ""} />
-                    <TextField type="number" label="€" onChange={handleValueTextChange} />
-                    <Select label="category" placeholder='Category' onChange={handleCategorySelectChange}>
-                        {data.map((categoryName) => (<MenuItem key={categoryName} value={categoryName}>{categoryName}</MenuItem>))}
-                    </Select>
-                    <Button onClick={handleAdd} variant='contained'>add</Button>
+                <DialogContent
+                    sx={{
+                        padding: 1
 
+                    }}>
+                    <Grid container xs={5}>
+                        <Grid item margin={1}>
+                            <TextField label="expenses" onChange={handleExpenseTextChange} error={expenseName === ""} />
+                        </Grid>
+                        <Grid item margin={1}>
+                            <TextField type="number" label="€" onChange={handleValueTextChange} />
+                        </Grid>
+                        <Grid item margin={1}>
+                            <Select label="category" fullWidth onChange={handleCategorySelectChange}>
+                                {data.map((categoryName) => (<MenuItem key={categoryName} value={categoryName}>{categoryName}</MenuItem>))}
+                            </Select>
+                        </Grid>
+
+                        <Grid item margin={1}>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DatePicker
+                                    label="Date"
+                                    value={dateValue}
+                                    onChange={(newValue) => {
+                                        console.log(typeof newValue);
+                                        setDateValue(newValue);
+                                    }}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        </Grid>
+
+
+                        <Button onClick={handleAdd} variant='contained'>add</Button>
+                    </Grid>
 
                 </DialogContent>
-            </Dialog>
+            </Dialog >
 
 
         )
@@ -71,3 +104,4 @@ const AddExpenseForm = ({ show, onClose }) => {
 
 
 export default AddExpenseForm
+

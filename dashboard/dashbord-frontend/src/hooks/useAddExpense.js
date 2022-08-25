@@ -1,8 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import React from 'react'
 import { endpoints } from '../Fetch/endpoints'
 
-const useAddExpense = (expenseData) => {
+function useAddExpense(expenseData) {
 
 
     const { isSuccess, isLoading, isError } = useMutation(() => addExpense(expenseData))

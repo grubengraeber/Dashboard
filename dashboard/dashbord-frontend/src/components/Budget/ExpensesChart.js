@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
@@ -40,11 +40,24 @@ const backgroundColors = [
 
 const ExpensesChart = () => {
 
-       const { data, isLoading, isError } = useQuery(["chartData"], endpoints.getChartData);
+       const { data, isLoading, isError, refetch } = useQuery(["chartData"], endpoints.getChartData, { refetchOnMount: "always" });
+
+       useEffect(() => {
+              async function refetchData() {
+                     refetch();
+              }
+              refetchData();
+              console.log("refetched on remount exepnsechart")
+       })
+
+
        if (isLoading) return (<h1>loading...</h1>)
        if (isError) return (<h1>error on loading</h1>)
 
-       console.log(data);
+
+
+       console.log("remount expensesChart")
+
        const chartData = {
               labels: Object.keys(data),
               datasets: [{

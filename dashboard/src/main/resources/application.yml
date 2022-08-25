@@ -14,3 +14,4 @@ data:
   budget-entries:
     count: 100
     time-span: 100
+    creation: false

@@ -10,7 +10,7 @@ const flexContainer = {
 };
 
 
-const ExpenseNav = () => {
+const ExpenseNav = ({ forceUpdate }) => {
     const TIMESPAN_MONTH = 30;
     const TIMESPAN_WEEK = 7;
     const [selectedDate, handleDateChange] = useState(new Date());
@@ -38,7 +38,7 @@ const ExpenseNav = () => {
                 <ListItemButton onClick={onMonth}>7 days</ListItemButton>
                 <ListItemButton onClick={onAddExpense}><AddBoxIcon /></ListItemButton>
             </List>
-            <AddExpenseForm show={showAddDialog} onClose={onCloseExpense} />
+            <AddExpenseForm onNewExpense={forceUpdate} show={showAddDialog} onClose={onCloseExpense} />
 
         </>
     )

@@ -39,6 +39,7 @@ public class BudgetDataCreator {
 
     public BudgetDataCreator(@Value("${data.budget-entries.count}") int data_count,
                              @Value("${data.budget-entries.time-span}") int time_span,
+                             @Value("${data.budget-entries.creation}") boolean creation,
                              ExpenseCategoryRepository expenseCategoryRepository,
                              ExpenseRepository expenseRepository,
                              MemberRepository memberRepository) {
@@ -48,7 +49,10 @@ public class BudgetDataCreator {
         this.expenseRepository = expenseRepository;
         this.memberRepository = memberRepository;
         createData();
-        createRandomData(DATA_COUNT, LocalDate.now(), TIME_SPAN);
+
+        if (creation) {
+            createRandomData(DATA_COUNT, LocalDate.now(), TIME_SPAN);
+        }
     }
 
     private void createData() {
@@ -81,48 +85,6 @@ public class BudgetDataCreator {
 
         memberRepository.saveAll(List.of(patrick, fabio));
 
-        Expense expense1 = Expense.builder()
-                .name("Toilettpaper")
-                .cost(4.90)
-                .member(patrick)
-                .category(living)
-                .date(LocalDate.now())
-                .build();
-
-        Expense expense2 = Expense.builder()
-                .name("cigarettes")
-                .cost(7.00)
-                .member(patrick)
-                .category(hobby)
-                .date(LocalDate.now())
-                .build();
-
-
-        Expense expense3 = Expense.builder()
-                .name("rent")
-                .cost(250.00)
-                .member(fabio)
-                .category(household)
-                .date(LocalDate.now())
-                .build();
-
-        Expense expense4 = Expense.builder()
-                .name("groceries")
-                .cost(59.15)
-                .member(fabio)
-                .category(household)
-                .date(LocalDate.now().minusDays(1))
-                .build();
-
-        Expense expense5 = Expense.builder()
-                .name("groceries")
-                .cost(59.15)
-                .member(fabio)
-                .category(household)
-                .date(LocalDate.now().minusDays(1))
-                .build();
-
-        expenseRepository.saveAll(List.of(expense1, expense2, expense3, expense4, expense5));
 
 
     }
