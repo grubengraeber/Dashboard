@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequestMapping("api/v1/budget")
 @RestController
@@ -55,6 +56,13 @@ public class BudgetController {
 
 
 
+    }
+
+    @GetMapping("/expenses/sum")
+    double getSumOfExpenses() {
+        return budgetService.getAll().stream()
+                .mapToDouble(Expense::getCost)
+                .sum();
     }
 
 
