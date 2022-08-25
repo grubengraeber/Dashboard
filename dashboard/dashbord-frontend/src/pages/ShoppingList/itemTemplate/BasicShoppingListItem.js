@@ -6,6 +6,8 @@ import { Checkmark } from "../checkmark/Checkmark"
 import DeleteButton from "../deleteItem/DeleteButton";
 
 export const BasicShoppingListItem = (props) => {
+
+
     return (
 
         <>
@@ -14,12 +16,13 @@ export const BasicShoppingListItem = (props) => {
                 justifyContent="left"
             >
                 <Grid item mx={2}>
-                    <Checkmark itemId={props.item.id} listId={props.listId} />
+                    <Checkmark item={props.item} itemId={props.item.id} listId={props.listId} />
                 </Grid>
                 <Grid item mx={2}>
                     <TitleWithOnclickTextfield item={props.item} itemName={props.item.item.name}
                         itemId={props.item.id}
-                        listId={props.listId} />
+                        listId={props.listId} 
+                        itemUnchecked={props.itemUnchecked} />
                 </Grid>
                 <Grid item mx={2} alignItems="right">
                     <AmountTextField itemId={props.item.id} item={props.item} amount={props.item.amount} listId={props.listId} />

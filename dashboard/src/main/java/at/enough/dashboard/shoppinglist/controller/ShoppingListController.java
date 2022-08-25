@@ -53,7 +53,7 @@ public class ShoppingListController {
             return 0;
         }
         return optionalShoppingList.get().getEntries().stream()
-                .filter(shoppingListEntry -> !shoppingListEntry.isActive())
+                .filter(ShoppingListEntry::isActive)
                 .count();
     }
 

@@ -74,6 +74,7 @@ public class ShoppingListEntryService {
         ShoppingListEntry shoppingListEntry = ShoppingListEntry.builder()
                 .shoppingList(shoppingList)
                 .item(item)
+                .active(true)
                 .amount(addItem.getAmount())
                 .addedTime(LocalDateTime.now())
                 .build();
