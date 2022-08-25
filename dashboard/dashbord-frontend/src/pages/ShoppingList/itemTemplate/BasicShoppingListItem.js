@@ -17,12 +17,12 @@ export const BasicShoppingListItem = (props) => {
                     <Checkmark itemId={props.item.id} listId={props.listId} />
                 </Grid>
                 <Grid item mx={2}>
-                    <TitleWithOnclickTextfield itemName={props.item.item.name}
+                    <TitleWithOnclickTextfield item={props.item} itemName={props.item.item.name}
                         itemId={props.item.id}
                         listId={props.listId} />
                 </Grid>
                 <Grid item mx={2} alignItems="right">
-                    <AmountTextField itemId={props.item.id} amount={props.item.amount} listId={props.listId} />
+                    <AmountTextField itemId={props.item.id} item={props.item} amount={props.item.amount} listId={props.listId} />
                 </Grid>
                 < Grid item mx={2}>
                     <DeleteButton itemId={props.item.id} listId={props.listId} itemTitle={props.item.item.name} />
