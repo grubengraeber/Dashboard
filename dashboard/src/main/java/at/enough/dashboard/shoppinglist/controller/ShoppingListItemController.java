@@ -1,12 +1,12 @@
 package at.enough.dashboard.shoppinglist.controller;
 
 import at.enough.dashboard.shoppinglist.logic.ShoppingListEntryService;
+import at.enough.dashboard.shoppinglist.model.AddItem;
 import at.enough.dashboard.shoppinglist.model.ShoppingListEntry;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,6 +19,14 @@ public class ShoppingListItemController {
 
     private final ShoppingListEntryService shoppingListEntryService;
     private final Logger logger = LoggerFactory.getLogger(ShoppingListItemController.class);
+
+
+    @PostMapping("/{list-id}/entries")
+    public void add(@PathVariable("list-id") Long listId,
+                    @RequestBody AddItem addItem) {
+        logger.info("Added item: " + addItem.toString());
+        shoppingListEntryService.add(addItem, listId);
+    }
 
     @PutMapping("/{list-id}/entries/{entry-id}")
     public ShoppingListEntry edit(@PathVariable("list-id") long listId,
@@ -36,7 +44,7 @@ public class ShoppingListItemController {
 
     @DeleteMapping("{list-id}/entries/{entry-id}")
     public void delete(@PathVariable("entry-id") Long entryId) {
-        logger.info("deleted entry with id "+ entryId);
+        logger.info("deleted entry with id " + entryId);
         shoppingListEntryService.delete(entryId);
     }
 

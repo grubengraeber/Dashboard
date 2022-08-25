@@ -13,14 +13,12 @@ export const DeleteButton = (props) => {
   const [successMessage, setSuccessMessage] = useState("Deleting worked!")
 
     function deleteItem(clickEvent) {
-        console.log("Pressed Delete-Button with id: " + props.itemId + " and the listId is: " + props.listId)
         const configuration = {
           headers: {"Access-Control-Allow-Origin": "*"}
         }
         // Delete HHTP REQUEST WITH ID: props.listId
         axios.delete("http://localhost:8080/api/shopping-list/" + props.listId + "/entries/" + props.itemId, configuration)
         .then(() => {
-          alert('Item: "' + props.itemTitle + '" deleted.')
           setSuccessOpen(true)
           setSuccessMessage("Deleting item '" + props.itemTitle + "' was successful!")
     })
