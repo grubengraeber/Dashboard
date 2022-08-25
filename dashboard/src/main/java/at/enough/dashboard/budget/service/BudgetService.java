@@ -1,7 +1,7 @@
 package at.enough.dashboard.budget.service;
 
+import at.enough.dashboard.budget.controller.dto.AddExpenseRequestDTO;
 import at.enough.dashboard.budget.persistence.model.Expense;
-import at.enough.dashboard.budget.persistence.model.ExpenseCategory;
 import at.enough.dashboard.budget.persistence.repository.ExpenseCategoryRepository;
 import at.enough.dashboard.budget.persistence.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
@@ -58,6 +58,12 @@ public class BudgetService {
     public void deleteExpense(long expenseId) {
         Expense expense = findExpenseById(expenseId);
         expenseRepository.delete(expense);
+
+    }
+
+    public Expense add(AddExpenseRequestDTO addExpenseRequestDTO) {
+        return null;
+
 
     }
 }

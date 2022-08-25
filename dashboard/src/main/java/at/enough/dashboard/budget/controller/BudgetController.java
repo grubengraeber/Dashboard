@@ -1,5 +1,6 @@
 package at.enough.dashboard.budget.controller;
 
+import at.enough.dashboard.budget.controller.dto.AddExpenseRequestDTO;
 import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.service.BudgetService;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +38,9 @@ public class BudgetController {
 
 
     @PostMapping("/expenses")
-    public Expense add(@RequestBody Expense expense) {
-        return budgetService.add(expense);
+    public Expense add(@RequestBody AddExpenseRequestDTO addExpenseRequestDTO) {
+
+        return budgetService.add(addExpenseRequestDTO);
     }
 
     //todo add filter/interceptor for state check
