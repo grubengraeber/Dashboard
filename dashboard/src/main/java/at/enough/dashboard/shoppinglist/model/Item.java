@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table
+@ToString
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

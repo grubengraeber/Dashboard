@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table
+@ToString
 public class ShoppingListEntry {
 
     @Id
@@ -29,9 +30,6 @@ public class ShoppingListEntry {
     @ManyToOne
     @JsonIgnore
     private ShoppingList shoppingList;
-
-
-
 
 }
 
