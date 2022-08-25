@@ -6,7 +6,7 @@ import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 export const CustomClose = (props) => {
   return (
     <>
-    <BasicListItem text={'Close'} onClick={() => {console.log("onClick Close")}} icon={<CloseSharpIcon />}/>
+    <BasicListItem text={'Close'} onClick={() => {}} icon={<CloseSharpIcon />}/>
     </>
   )
 }
