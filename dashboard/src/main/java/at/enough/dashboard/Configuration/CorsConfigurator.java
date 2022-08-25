@@ -1,4 +1,4 @@
-package at.enough.dashboard.shoppinglist.util;
+package at.enough.dashboard.Configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -12,7 +12,7 @@ export const InformationMessage = (props) => {
       return (
         <>
             <Snackbar open={props.open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="information" sx={{ width: '100%' }}>
+                <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
                     {props.informationMessage}
                 </Alert>
             </Snackbar>

@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table
+@ToString
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

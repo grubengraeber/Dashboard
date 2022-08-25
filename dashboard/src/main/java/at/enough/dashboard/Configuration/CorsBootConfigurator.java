@@ -1,4 +1,4 @@
-package at.enough.dashboard.shoppinglist.util;
+package at.enough.dashboard.Configuration;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

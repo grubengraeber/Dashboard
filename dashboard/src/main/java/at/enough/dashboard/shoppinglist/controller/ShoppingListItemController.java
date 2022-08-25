@@ -32,12 +32,10 @@ public class ShoppingListItemController {
     public ShoppingListEntry edit(@PathVariable("list-id") long listId,
                                   @PathVariable("entry-id") long entryId,
                                   @RequestBody ShoppingListEntry shoppingListEntry) {
-
-        Optional<ShoppingListEntry> entryOptional = shoppingListEntryService.edit(entryId, shoppingListEntry);
+        Optional<ShoppingListEntry> entryOptional = shoppingListEntryService.edit(entryId, shoppingListEntry, listId);
         if (entryOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entry not found by id = " + entryId);
         }
-
         return entryOptional.get();
     }
 
