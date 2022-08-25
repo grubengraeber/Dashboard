@@ -26,7 +26,7 @@ function App() {
                             <Header />
                             <Routes>
                                 <Route path={"/"} element={<Home />}></Route>
-                                <Route path={"/ShoppingList"} element={<ShoppingList />}></Route>
+                                <Route path={"/ShoppingList"} element={<ShoppingList  />}></Route>
                                 <Route path={"/BudgetTracker"} element={<BudgetSite />}></Route>
                             </Routes>
                         </Box>
