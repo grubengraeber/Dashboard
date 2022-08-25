@@ -9,13 +9,14 @@ export const Checkmark = (props) => {
         if (changeEvent.target.checked) {
             console.log("Checked Item: " + props.itemId)
             props.item.active = false;
-            axios.put("http://localhost:8080/api/shopping-list/" + props.listId + "/entries/" + props.itemId, props.item)
         } else {
             console.log("Unchecked Item: " + props.itemId)
+            props.item.active = true;
         }
+        axios.put("http://localhost:8080/api/shopping-list/" + props.listId + "/entries/" + props.itemId, props.item)
     }
 
   return (
-    <Checkbox onChange={handleChange} />
+    <Checkbox checked={!props.item.active} onChange={handleChange} />
   )
 }
