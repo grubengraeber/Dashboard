@@ -44,6 +44,7 @@ public class BudgetService {
         return expenseRepository.save(expense);
     }
 
+
     public void edit(long expenseId, Expense expense) {
         Expense persistedExpense = findExpenseById(expenseId);
         persistedExpense.setId(expenseId);
