@@ -62,12 +62,12 @@ export const ShoppingList = props => {
                     spacing={0}
                     alignItems="center"
                     justifyContent="center"></Grid>
-                {items.map((item) => (
+                {items.filter(item => {return item.active === true}).map((item) => (
                 
                     <Grid item  key={item.id}>
                         <Card>
                             <CardContent sx={{ display: "flex", width: "1200px"}}>
-                                <BasicShoppingListItem key={item.id} item={item} listId={listId} />
+                                <BasicShoppingListItem key={item.id} item={item} listId={listId} itemUnchecked={item.active}/>
                             </CardContent>
                         </Card>
                     </Grid>

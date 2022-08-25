@@ -39,6 +39,7 @@ export const AddForm = (props) => {
 
         axios.post("http://localhost:8080/api/shopping-list/" + props.listId + "/entries", requestBody, headers)
         .then(() => {
+            disregardForm()
             setIsSuccess(true)
             setSuccessText("Adding item: '" + itemName + "' was successful!")
         })
