@@ -10,13 +10,16 @@ export const Home = props => {
 
     const badgeContentShoppingList = <h3>{shoppingListEntryCount}</h3>;
     const badgeContentBudgetTracker = <h3>{budgetTrackerCount}</h3>;
-
-    axios.get("http://127.0.0.1:8080/api/shopping-list/" + 121 + "/count")
+    const requestBody = {}
+    const header = {
+        headers: {"Access-Control-Allow-Origin": "*"}
+      }
+    axios.get("http://127.0.0.1:8080/api/shopping-list/" + 121 + "/count", requestBody, header)
     .then((response) => {
         setShoppingListEntryCount(response.data)
     })
 
-    axios.get("http://127.0.0.1:8080/api/v1/budget/expenses/sum")
+    axios.get("http://127.0.0.1:8080/api/v1/budget/expenses/sum", requestBody, header)
     .then((response) => {
         setBudgetTrackerCount(response.data.toFixed(2))
     })
