@@ -46,23 +46,28 @@ public class DataCreator {
                         .item(items.get(0))
                         .amount(2)
                         .user(users.get(0))
+                        .active(true)
                         .shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(1))
+                        .active(true)
                         .amount(4).shoppingList(testShoppingList)
 
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(2))
+                        .active(true)
                         .amount(1).shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(3))
+                        .active(true)
                         .amount(1).shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
                         .item(items.get(4))
+                        .active(true)
                         .amount(2).shoppingList(testShoppingList)
                         .build(),
                 ShoppingListEntry.builder()
