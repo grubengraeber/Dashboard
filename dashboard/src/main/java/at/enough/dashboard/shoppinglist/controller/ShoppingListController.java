@@ -28,6 +28,11 @@ public class ShoppingListController {
 
     }
 
+    @GetMapping("/user")
+    public long getShoppingListIdByUser() {
+        return shoppingListService.getListOfShoppingLists().get(0).getId();
+    }
+
     @GetMapping("/{id}")
     public ShoppingListDTO getById(@PathVariable long id) {
 
