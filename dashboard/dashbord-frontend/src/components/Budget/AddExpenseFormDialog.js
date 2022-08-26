@@ -33,7 +33,7 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
         console.log(payload);
         mutation.mutate(payload);
         onNewExpense();
-
+        onClose()
     }
 
     const handleExpenseTextChange = (e) => {

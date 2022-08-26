@@ -17,14 +17,15 @@ const StatePlayingAround = () => {
 
 
   }
-
+/*
   return (
     <>
-      <h3>{appState.state.dateFilter}</h3>
+       <h3>{appState.state.dateFilter}</h3>
       <div>StatePlayingAround</div>
-      <Button onClick={handleOnClickButton}>Year</Button>
+      <Button onClick={handleOnClickButton}>Year</Button> 
     </>
   )
+  */
 }
 
 

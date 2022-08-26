@@ -33,7 +33,7 @@ export const endpoints = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
-        return response.json();
+        return await response.json();
     }
 
 
