@@ -82,7 +82,6 @@ export const ShoppingList = props => {
                     alignItems="center"
                     justifyContent="center"></Grid>
                 {activeOnly ? items.filter(item => {return item.active === true}).map((item) => (
-                
                     <Grid item  key={item.id}>
                         <Card>
                             <CardContent sx={{ display: "flex", width: "1200px"}}>
