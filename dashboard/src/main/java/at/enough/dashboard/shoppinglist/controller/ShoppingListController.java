@@ -41,7 +41,6 @@ public class ShoppingListController {
         return shoppingListDTOConverter.toDTO(shoppingListDTOOptional.get());
     }
 
-    @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
         shoppingListService.deleteListBy(id);
     }
