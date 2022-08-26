@@ -1,7 +1,9 @@
 package at.enough.dashboard.budget.controller;
 
+import at.enough.dashboard.budget.controller.dto.AddExpenseRequestDTO;
 import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.service.BudgetService;
+import at.enough.dashboard.budget.util.AddExpenseRequestDTOConverter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RequestMapping("api/v1/budget")
 @RestController
@@ -18,6 +19,7 @@ public class BudgetController {
      Logger logger = LoggerFactory.getLogger(BudgetController.class);
 
     private final BudgetService budgetService;
+    private final AddExpenseRequestDTOConverter addExpenseRequestDTOConverter;
 
 
     @GetMapping("/expenses")
@@ -38,7 +40,8 @@ public class BudgetController {
 
 
     @PostMapping("/expenses")
-    public Expense add(@RequestBody Expense expense) {
+    public Expense add(@RequestBody AddExpenseRequestDTO addExpenseRequestDTO) {
+        Expense expense = addExpenseRequestDTOConverter.convert(addExpenseRequestDTO);
         return budgetService.add(expense);
     }
 
@@ -57,7 +60,7 @@ public class BudgetController {
 
 
     }
-
+//todo move to service (sum)
     @GetMapping("/expenses/sum")
     double getSumOfExpenses() {
         return budgetService.getAll().stream()

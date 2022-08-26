@@ -24,7 +24,15 @@ export const endpoints = {
         return respone.json();
     },
     getExpenseCategories: async function () {
-        const response = await fetch(EXPENSE_CATEGORIES_ENDPOINT)
+        const response = await fetch(EXPENSE_CATEGORIES_ENDPOINT);
+        return response.json();
+    },
+    postExpense: async function (payload) {
+        const response = await fetch(EXPENSES_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
         return response.json();
     }
 
