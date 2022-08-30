@@ -6,7 +6,6 @@ export const CustomLogo = (props) => {
     const navigate = useNavigate();
 
   const navigateToHome = () => {
-    // 👇️ navigate to /
     navigate('/');
   };
   return (
