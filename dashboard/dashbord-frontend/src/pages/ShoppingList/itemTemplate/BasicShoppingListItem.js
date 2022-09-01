@@ -13,18 +13,17 @@ export const BasicShoppingListItem = (props) => {
         <>
             <Grid container spacing={25}
                 alignItems="center"
-                justifyContent="left"
             >
                 <Grid item mx={2}>
                     <Checkmark item={props.item} itemId={props.item.id} listId={props.listId} />
                 </Grid>
-                <Grid item mx={2}>
+                <Grid item  style={{width: "400px"}}>
                     <TitleWithOnclickTextfield item={props.item} itemName={props.item.item.name}
                         itemId={props.item.id}
                         listId={props.listId} 
                         itemUnchecked={props.itemUnchecked} />
                 </Grid>
-                <Grid item mx={2} alignItems="right">
+                <Grid item mx={2}>
                     <AmountTextField itemId={props.item.id} item={props.item} amount={props.item.amount} listId={props.listId} />
                 </Grid>
                 < Grid item mx={2}>
