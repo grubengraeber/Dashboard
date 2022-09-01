@@ -70,7 +70,7 @@ export const ShoppingList = props => {
                             </Card>
                         </Grid>
                         <Grid item>
-                            <Card>
+                            <Card sx={"padding-left: 5px"}>
                                 <FormControlLabel control={<Switch checked={!activeOnly} onChange={handleChecked} />} label="show checked items" />
                             </Card>
                         </Grid>
