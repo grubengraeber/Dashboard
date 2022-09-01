@@ -13,6 +13,7 @@ import { StateProvider } from "./state/appState";
 import Login from "./pages/Login/Login";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Registration from "./pages/Registration/Registration";
 
 
 
@@ -42,6 +43,15 @@ function App() {
                             light: '#757575',
                             dark: '#bdbdbd',
                         },
+                        background: darkMode ? 
+                        {
+                            default: '#303030',
+                            paper: '#424242',
+                        } : 
+                        {
+                            default: '#FAFAFA',
+                            paper: '#FFFFFF',
+                        },
                         },
                 }
             ), [darkMode],
@@ -62,6 +72,7 @@ function App() {
                                         <Route path={"/ShoppingList"} element={<ShoppingList  />}></Route>
                                         <Route path={"/BudgetTracker"} element={<BudgetSite />}></Route>
                                         <Route path={"/login"} element={<Login />}></Route>
+                                        <Route path={"/register"} element={<Registration />}></Route> 
                                     </Routes>
                                 </CssBaseline>
                             </Box>
