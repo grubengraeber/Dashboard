@@ -12,7 +12,7 @@
 	<artifactId>dashboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dashboard</name>
-	<description>A tracking application for multiple usecases</description>
+	<description>A tracking application for multiple use cases</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.9</version>
+            <version>1.6.11</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

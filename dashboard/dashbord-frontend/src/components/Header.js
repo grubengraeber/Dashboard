@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import { CustomList } from './Header/CustomList';
 import { CustomLogo } from './Header/CustomLogo';
 import { Grid } from '@mui/material';
+import ThemeSwitch from '../UI/Themes/ThemeSwitch';
 
 
 export const Header = props => {
@@ -39,11 +39,14 @@ export const Header = props => {
         <React.Fragment key={anchor}>
           <Grid container spacing={2}>
             <Grid item xs={5}>
-          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
-          </Grid>
-          <Grid item xs={5}>
-          <CustomLogo />
-          </Grid>
+              <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
+            </Grid>
+            <Grid item xs={5}>
+              <CustomLogo />
+            </Grid>
+            <Grid item xs={1}>
+              <ThemeSwitch darkMode={props.darkMode} setDarkMode={props.setDarkMode} />
+            </Grid>
           </Grid>
           <Drawer
             anchor={anchor}
