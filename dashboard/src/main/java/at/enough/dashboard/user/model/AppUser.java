@@ -1,9 +1,6 @@
 package at.enough.dashboard.user.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,12 +16,13 @@ import java.util.Collection;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
+    private String appUserName;
     private String email;
     private String firstName;
     private String lastName;
@@ -43,7 +41,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override
