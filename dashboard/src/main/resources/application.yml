@@ -15,6 +15,7 @@ data:
     count: 100
     time-span: 100
     creation: false
-logging:
-  level:
-    web: debug
+security:
+  jwt:
+    expiration-time: 1000
+    secret: "changeThisTokenInProduction"
