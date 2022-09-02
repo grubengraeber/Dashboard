@@ -72,15 +72,11 @@ public class JWTConverter {
     }
 
     @SneakyThrows
-    public AppUserCredentialDTO decodeAuthorizationToken(String authToken) {
+    public JWTClaimsSet decodeAuthorizationToken(String authToken) {
         SignedJWT signedJWT = SignedJWT.parse(authToken);
         JWSVerifier verifier = new MACVerifier(secret);
         signedJWT.verify(verifier);
-        JWTClaimsSet claimsSet =  signedJWT.getJWTClaimsSet();
-
-        return new AppUserCredentialDTO(claimsSet.getSubject(),
-                Arrays.stream(claimsSet.getStringArrayClaim("authorities")).toList());
-
+        return signedJWT.getJWTClaimsSet();
 
     }
 
