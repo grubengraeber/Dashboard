@@ -1,0 +1,1 @@
+const SHOPPING_LIST_ENDPOINT = "http://localhost:8080/api/shopping-list";

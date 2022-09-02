@@ -25,7 +25,8 @@ const queryClient = new QueryClient();
 function App() {
     // useMediaQuery('(prefers-color-scheme: dark)') CHECKS FOR OS SET UP THEME SETTINGS
     const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'))
-    
+    // dynamic way of updating page header title
+ // error because updating two components
 
     const theme = React.useMemo(
         () =>
@@ -69,7 +70,7 @@ function App() {
                                     <Header darkMode={darkMode} setDarkMode={setDarkMode} />
                                     <Routes>
                                         <Route path={"/"} element={<Home />}></Route>
-                                        <Route path={"/ShoppingList"} element={<ShoppingList  />}></Route>
+                                        <Route path={"/ShoppingList"} element={<ShoppingList />}></Route>
                                         <Route path={"/BudgetTracker"} element={<BudgetSite />}></Route>
                                         <Route path={"/login"} element={<Login />}></Route>
                                         <Route path={"/register"} element={<Registration />}></Route> 

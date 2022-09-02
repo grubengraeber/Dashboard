@@ -3,17 +3,17 @@ import { Snackbar, Alert } from '@mui/material'
 
 
 
-export const ErrorMessage = (props) => {
+export const ErrorMessage = ({ errorMessage, open, setOpen }) => {
 
   function handleClose(closeEvent) {
-    props.setOpen(false)
+    setOpen(false)
   }
 
   return (
     <>
-        <Snackbar open={props.open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                {props.errorMessage}
+                {errorMessage}
             </Alert>
         </Snackbar>
     </>
