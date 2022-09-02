@@ -30,7 +30,9 @@ export const TitleWithOnclickTextfield = (props) => {
             axios.put("http://localhost:8080/api/shopping-list/" + props.listId + "/entries/" + props.itemId, props.item, headers)
             .then(textField ? setTextField(false) : setTextField(true))
             .then(
-                setIsSuccess(true)
+                setIsSuccess(true),
+                // ADDED FOLLOWING LINE BECAUSE OF WARNING THAT 'setStartName' VARIABLE WAS NOT USED
+                setStartName(newItemName)
             )
             .then(setSuccessMessage("Changing name to: '" + newItemName + "' was successful!" ))
             .catch((error) => {

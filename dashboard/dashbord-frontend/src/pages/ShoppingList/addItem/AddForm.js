@@ -1,6 +1,7 @@
 import { FormControl, TextField, Button, Grid, Autocomplete } from '@mui/material'
 import React, { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios'
 import { ErrorMessage } from '../../../components/Error/ErrorMessage'
 import { SuccessMessage } from '../../../components/Success/SuccessMessage'
@@ -89,10 +90,14 @@ export const AddForm = (props) => {
                 />
             </Grid>
                 <Grid item xs={2} alignItems="center" >
-                <Button onClick={addItem} >Add</Button>
+                <Button onClick={addItem} >
+                    <AddIcon />
+                </Button>
             </Grid>
             <Grid item xs={2}>
-                <CloseIcon onClick={disregardForm} />
+                <Button onClick={disregardForm}>
+                    <CloseIcon  />
+                </Button>
             </Grid>
         </Grid>
     </FormControl>

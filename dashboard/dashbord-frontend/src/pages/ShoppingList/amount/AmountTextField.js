@@ -38,7 +38,9 @@ export const AmountTextField = (props) => {
             axios.put("http://localhost:8080/api/shopping-list/" + props.listId + "/entries/" + props.itemId, props.item, headers)
             .then(
                 setIsSuccess(true),
-                setSuccessMessage("Changing the amount of item: '" + props.item.item.name + "' to: " + changeEvent.target.value + ", worked!")
+                setSuccessMessage("Changing the amount of item: '" + props.item.item.name + "' to: " + changeEvent.target.value + ", worked!"),
+                // ADDED FOLLOWING LINE BECAUSE OF WARNING THAT 'setStartAmount' VARIABLE WAS NOT USED
+                setStartAmount(changeEvent.target.value)
             )
             .catch((error) => {
                 if(error.response) {
