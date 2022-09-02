@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -71,16 +72,15 @@ public class JWTConverter {
     }
 
     @SneakyThrows
-    public UserDetails decodeAuthorizationToken(String authToken) {
+    public AppUserCredentialDTO decodeAuthorizationToken(String authToken) {
         SignedJWT signedJWT = SignedJWT.parse(authToken);
         JWSVerifier verifier = new MACVerifier(secret);
         signedJWT.verify(verifier);
         JWTClaimsSet claimsSet =  signedJWT.getJWTClaimsSet();
 
-        return User.builder()
-                .username(claimsSet.getSubject())
-                .authorities(claimsSet.getStringArrayClaim("authorities"))
-                .build();
+        return new AppUserCredentialDTO(claimsSet.getSubject(),
+                Arrays.stream(claimsSet.getStringArrayClaim("authorities")).toList());
+
 
     }
 
