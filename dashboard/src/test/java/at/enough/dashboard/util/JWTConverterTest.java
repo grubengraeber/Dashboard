@@ -4,7 +4,6 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.TestComponent;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ class JWTConverterTest {
                 expectedUsername,
                 expectedAuthorities);
 
-        JWTClaimsSet result = jwtConverter.decodeAuthorizationToken(token);
+        JWTClaimsSet result = jwtConverter.decodeToken(token);
         Assertions.assertEquals(expectedUsername, result.getSubject());
         Assertions.assertEquals(expectedAuthorities, result.getStringListClaim("authorities"));
 

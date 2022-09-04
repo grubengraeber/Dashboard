@@ -4,7 +4,6 @@ import at.enough.dashboard.user.model.AppUser;
 import at.enough.dashboard.user.repository.AppUserRepository;
 import at.enough.dashboard.user.service.AppUserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/api/auth")
 @Slf4j
 public class AppUserController {
 

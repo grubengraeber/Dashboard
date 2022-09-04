@@ -10,14 +10,8 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.security.Principal;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +23,6 @@ import java.util.List;
 public class JWTConverter {
 
     private final String secret;
-    private final JWSAlgorithm algorithm = JWSAlgorithm.HS256;
     private final JWSHeader jwsHeader;
     private final int expirationTime;
     private final JWSSigner jwsSigner;
@@ -37,9 +30,10 @@ public class JWTConverter {
 
     @SneakyThrows
     public JWTConverter(@Value("${security.jwt.secret}") String secret,
-                        @Value("${security.jwt.expiration-time") int expirationTime) {
+                        @Value("${security.jwt.expiration-time}") int expirationTime) {
         this.secret = secret;
         this.expirationTime = expirationTime;
+        JWSAlgorithm algorithm = JWSAlgorithm.HS256;
         jwsHeader = new JWSHeader(algorithm);
         jwsSigner = new MACSigner(secret);
     }
@@ -60,6 +54,9 @@ public class JWTConverter {
         return signedJWT.serialize();
     }
 
+    //todo refactor for refresh token -> generateToken
+
+
     private JWTClaimsSet buildClaimSet(String userIdentifier,
                                        List<String> authorities,
                                        Date issueTime) {
@@ -72,7 +69,7 @@ public class JWTConverter {
     }
 
     @SneakyThrows
-    public JWTClaimsSet decodeAuthorizationToken(String authToken) {
+    public JWTClaimsSet decodeToken(String authToken) {
         SignedJWT signedJWT = SignedJWT.parse(authToken);
         JWSVerifier verifier = new MACVerifier(secret);
         signedJWT.verify(verifier);
