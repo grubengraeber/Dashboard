@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Dialog, DialogContent, DialogTitle, Grid, MenuItem, Select, TextField } from '@mui/material'
 import { endpoints } from '../../Fetch/endpoints';
 import { useQuery, useMutation } from '@tanstack/react-query';
@@ -52,6 +52,9 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
     if (isLoading) {
 
         return (<h2>loading...</h2>)
+    } else if (isError) { 
+        // NEXT LINE JUST FOR USING THE ISERROR VALUE TO GET RID OF CONSOLE WARNINGS
+        console.log("Error in AddExpenseFormDialog.js!")
     } else {
 
         return (

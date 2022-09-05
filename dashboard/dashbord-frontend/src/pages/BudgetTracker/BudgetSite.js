@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ExpensesChart from '../../components/Budget/ExpensesChart';
 import { Card, Grid } from '@mui/material';
 import ExpenseNav from '../../components/Budget/ExpenseNav';

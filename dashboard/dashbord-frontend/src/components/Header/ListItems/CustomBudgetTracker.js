@@ -4,7 +4,7 @@ import BalanceSharpIcon from '@mui/icons-material/BalanceSharp';
 import { useNavigate } from 'react-router-dom'
 
 
-export const CustomBudgetTracker = (props) => {
+export const CustomBudgetTracker = () => {
   const navigate = useNavigate();
 
   const navigateToBudgetTracker = () => {

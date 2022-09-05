@@ -2,7 +2,7 @@ import React from 'react'
 import {useNavigate} from 'react-router-dom'
 
 
-export const CustomLogo = (props) => {
+export const CustomLogo = ({ title }) => {
     const navigate = useNavigate();
 
   const navigateToHome = () => {
@@ -10,7 +10,7 @@ export const CustomLogo = (props) => {
   };
   return (
     <>
-        <h1 onClick={navigateToHome}>DASHBOARD</h1>
+        <h1 onClick={navigateToHome}>{title}</h1>
     </>
   )
 }

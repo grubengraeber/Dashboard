@@ -13,6 +13,11 @@ import { StateProvider } from "./state/appState";
 import Login from "./pages/Login/Login";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Registration from "./pages/Registration/Registration";
+import { ErrorMessage } from './components/Error/ErrorMessage'
+import { SuccessMessage } from './components/Success/SuccessMessage'
+import { InformationMessage } from './components/Information/InformationMessage'
+
 
 
 
@@ -24,7 +29,13 @@ const queryClient = new QueryClient();
 function App() {
     // useMediaQuery('(prefers-color-scheme: dark)') CHECKS FOR OS SET UP THEME SETTINGS
     const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'))
-    
+    // for Error-, Information- and Successmessages
+    const [isError, setIsError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("An Error occured!")
+    const [isSuccess, setIsSuccess] = useState(false)
+    const [successMessage, setSuccessMessage] = useState("Success!")
+    const [isInformation, setIsInformation] = useState(false)
+    const [informationMessage, setInformationMessage] = useState("This is an information")
 
     const theme = React.useMemo(
         () =>
@@ -41,6 +52,15 @@ function App() {
                             main: '#8c8a8a',
                             light: '#757575',
                             dark: '#bdbdbd',
+                        },
+                        background: darkMode ? 
+                        {
+                            default: '#303030',
+                            paper: '#424242',
+                        } : 
+                        {
+                            default: '#FAFAFA',
+                            paper: '#FFFFFF',
                         },
                         },
                 }
@@ -59,9 +79,30 @@ function App() {
                                     <Header darkMode={darkMode} setDarkMode={setDarkMode} />
                                     <Routes>
                                         <Route path={"/"} element={<Home />}></Route>
-                                        <Route path={"/ShoppingList"} element={<ShoppingList  />}></Route>
+                                        <Route path={"/ShoppingList"} element={
+                                        <>
+                                        <ShoppingList 
+                                        isError={isError}
+                                        isSuccess={isSuccess}
+                                        setErrorMessage={setErrorMessage}
+                                        setIsError={setIsError}
+                                        setSuccessMessage={setSuccessMessage}
+                                        setIsSuccess={setIsSuccess}
+                                        successMessage={successMessage}
+                                        errorMessage={errorMessage}
+                                        isInformation={isInformation}
+                                        setIsInformation={setIsInformation}
+                                        informationMessage={informationMessage}
+                                        setInformationMessage={setInformationMessage}
+                                        />
+                                        <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
+                                        <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} />
+                                        <InformationMessage open={isInformation} setOpen={setIsInformation} informationMessage={informationMessage} />
+                                        </>
+                                        }></Route>
                                         <Route path={"/BudgetTracker"} element={<BudgetSite />}></Route>
                                         <Route path={"/login"} element={<Login />}></Route>
+                                        <Route path={"/register"} element={<Registration />}></Route> 
                                     </Routes>
                                 </CssBaseline>
                             </Box>
