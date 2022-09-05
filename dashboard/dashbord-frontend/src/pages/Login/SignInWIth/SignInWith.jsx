@@ -6,8 +6,6 @@ import GoogleButton from 'react-google-button'
 
 function SignInWith() {
 
-  const GOOGLE_LOGIN_LINK = "LOGIN WITH GOOGLE LINK";
-  const GOGLE_LOGO = "";
 
   return (
     <>

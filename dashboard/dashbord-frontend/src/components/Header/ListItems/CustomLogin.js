@@ -4,7 +4,7 @@ import LoginSharpIcon from '@mui/icons-material/LoginSharp';
 import { useNavigate } from 'react-router-dom'
 
 
-export const CustomLogin = (props) => {
+export const CustomLogin = () => {
 
   const navigate = useNavigate();
 

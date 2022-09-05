@@ -15,7 +15,7 @@ TODO:
      - DO SOMETHING WITH REMEMBER ME CHECKBOX
 */
 
-function LoginForm(props) {
+function LoginForm({ setLoginData }) {
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -49,7 +49,7 @@ function LoginForm(props) {
             resolver: yupResolver(schema)
         }
       );
-      const onSubmit = (data) => props.setLoginData(data);
+      const onSubmit = (data) => setLoginData(data);
 
   return (
     <>

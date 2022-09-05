@@ -1,5 +1,3 @@
-import { Button } from '@mui/material';
-import React from 'react'
 import { useAppState } from '../state/appState'
 
 
@@ -10,13 +8,13 @@ const StatePlayingAround = () => {
   const appState = useAppState();
   console.log(appState);
 
-  const handleOnClickButton = () => {
+  /* const handleOnClickButton = () => {
     //TODO everytime!!! use callbacks for setState!!!
-    appState.setState((previousState) => ({ ...previousState, dateFilter: "YEAR" }))
+    appState.setState((previousState) => ({ ...previousState, dateFilter: "YEAR" })) 
 
 
 
-  }
+  } */
 /*
   return (
     <>

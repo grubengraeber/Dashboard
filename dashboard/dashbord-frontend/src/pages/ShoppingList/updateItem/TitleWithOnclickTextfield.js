@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
 import { TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import axios from 'axios';
-import { SuccessMessage } from '../../../components/Success/SuccessMessage';
-import { ErrorMessage } from '../../../components/Error/ErrorMessage';
+import { endpoints } from '../../../Fetch/api/shoppingList/shoppingListListItems/endpoints';
 
 
-export const TitleWithOnclickTextfield = (props) => {
+export const TitleWithOnclickTextfield = ({ item, itemName, 
+    listId, itemId, itemUnchecked, setIsError, setIsSuccess,
+    setErrorMessage, setSuccessMessage }) => {
 
     const [textField, setTextField] = useState(false);
-    const [newItemName, setNewItemName] = useState(props.itemName)
-    const [startName, setStartName] = useState(props.itemName)
-    const [isError, setIsError] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("An Error occurred!")
-    const [isSuccess, setIsSuccess] = useState(false)
-    const [successMessage, setSuccessMessage] = useState("It was successful!")
+    const [newItemName, setNewItemName] = useState(itemName)
+    const [startName, setStartName] = useState(itemName)
 
     function toggleTextField(clickAndSubmitEvent) {
         if (textField) {
@@ -23,24 +19,11 @@ export const TitleWithOnclickTextfield = (props) => {
             } else {
                 setNewItemName(clickAndSubmitEvent.target.value)
             }
-            props.item.item.name = newItemName
-            const headers = {
-                headers: {"Access-Control-Allow-Origin": "*"}
-              }
-            axios.put("http://localhost:8080/api/shopping-list/" + props.listId + "/entries/" + props.itemId, props.item, headers)
-            .then(textField ? setTextField(false) : setTextField(true))
-            .then(
-                setIsSuccess(true),
-                // ADDED FOLLOWING LINE BECAUSE OF WARNING THAT 'setStartName' VARIABLE WAS NOT USED
-                setStartName(newItemName)
-            )
-            .then(setSuccessMessage("Changing name to: '" + newItemName + "' was successful!" ))
-            .catch((error) => {
-                if(error.response) {
-                  setIsError(true)
-                  setErrorMessage(error.message)
-                }
-              })
+            item.item.name = newItemName
+            endpoints.updateItemCustomName(listId, itemId, item, 
+                textField, setIsSuccess, setStartName, newItemName, 
+                setSuccessMessage, setIsError, setErrorMessage, 
+                setTextField)
         } else {
             textField ? setTextField(false) : setTextField(true)
         }
@@ -62,9 +45,9 @@ export const TitleWithOnclickTextfield = (props) => {
     }
 
     const textFieldAndHeader = [
-        <TextField id="outlined-basic" key={props.itemName} value={newItemName} onBlur={toggleTextField} onKeyDown={keyDownHandler} onChange={updateItemName} 
+        <TextField id="outlined-basic" key={itemName} value={newItemName} onBlur={toggleTextField} onKeyDown={keyDownHandler} onChange={updateItemName} 
         label="New Item Name" variant="outlined" />, 
-        <h5 key={props.itemName} onClick={toggleTextField} style={{ textDecoration : props.itemUnchecked ? 'none' : 'line-through'}}>{props.itemName}</h5>
+        <h5 key={itemName} onClick={toggleTextField} style={{ textDecoration : itemUnchecked ? 'none' : 'line-through'}}>{itemName}</h5>
     ]
 
   return (
@@ -72,8 +55,6 @@ export const TitleWithOnclickTextfield = (props) => {
         <Box>
             { textField ? textFieldAndHeader[0] : textFieldAndHeader[1]}
         </Box>
-        <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} />
-        <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
     </>
   )
 }

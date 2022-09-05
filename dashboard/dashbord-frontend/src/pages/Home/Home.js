@@ -1,35 +1,19 @@
 import {Badge, Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from "@mui/material";
 import React, { useState } from "react";
-import axios from "axios";
+import { endpoints } from "../../Fetch/api/home/endpoints";
 
 
-export const Home = props => {
+export const Home = () => {
 
     const [shoppingListEntryCount, setShoppingListEntryCount] = useState(0)
     const [budgetTrackerCount, setBudgetTrackerCount] = useState(0)
 
     const badgeContentShoppingList = <h3>{shoppingListEntryCount}</h3>;
     const badgeContentBudgetTracker = <h3>{budgetTrackerCount}</h3>;
-    const requestBody = {}
-    const header = {
-        headers: {"Access-Control-Allow-Origin": "*"}
-      }
 
-    axios.get("http://localhost:8080/api/shopping-list/user/")
-    .then((response) => {
-        const listId = response.data
-        axios.get("http://127.0.0.1:8080/api/shopping-list/" + listId + "/count", requestBody, header)
-        .then((response) => {
-            setShoppingListEntryCount(response.data)
-        })
-    })
-
-    axios.get("http://127.0.0.1:8080/api/v1/budget/expenses/sum", requestBody, header)
-    .then((response) => {
-        setBudgetTrackerCount(response.data.toFixed(2))
-    })
-
-
+    endpoints.setBudgetTrackerAmount(setBudgetTrackerCount)
+    endpoints.setShoppingListItemCount(setShoppingListEntryCount)
+    
     
     return (
         <>

@@ -4,7 +4,7 @@ import HowToRegSharpIcon from '@mui/icons-material/HowToRegSharp';
 import {useNavigate} from 'react-router-dom'
 
 
-export const CustomRegister = (props) => {
+export const CustomRegister = () => {
 
   const navigate = useNavigate();
 

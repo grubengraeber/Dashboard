@@ -4,7 +4,7 @@ import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 import {useNavigate} from 'react-router-dom'
 
 
-export const CustomLogout = (props) => {
+export const CustomLogout = () => {
 
   const navigate = useNavigate();
 

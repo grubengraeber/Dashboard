@@ -11,7 +11,7 @@ import { CustomClose } from './ListItems/CustomClose';
 import { CustomLogout } from './ListItems/CustomLogout';
 
 
-export const CustomList = (props) => {
+export const CustomList = () => {
   return (
     <>
     <List>

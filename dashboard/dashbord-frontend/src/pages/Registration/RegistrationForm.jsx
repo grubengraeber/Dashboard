@@ -12,11 +12,11 @@ import * as yup from "yup";
 TODO:
      - CHECK IF EMAIL IS ALREADY TAKEN
      - IF SO LOAD PAGE AGAIN WITH FIRST NAME, LAST NAME FILLED IN ALREADY 
-      AND ERROR MESSAGE FOR ALREADY USED WMAIL ADDRESS
+      AND ERROR MESSAGE FOR ALREADY USED EMAIL ADDRESS
      - IF NOT REGISTER USER
 */
 
-function RegistrationForm(props) {
+function RegistrationForm({ setRegistrationData }) {
     const [showPassword, setShowPassword] = useState(false);
 
     // NEXT 2 LINES ARE FOR MAKING THE CHECKBOX MANDATORY
@@ -78,7 +78,8 @@ function RegistrationForm(props) {
       }
     );
     // ONSUBMIT FUNCTION WITH THE 'CHECKBOXCHECKED' STATE IS FOR MAKING THE CHECKBOX MANDATORY
-    const onSubmit = (data) => checkboxChecked ? props.setRegistrationData(data) : setCheckMessage(true);
+    // TERMS (CHECKBOX) VALUE IS RETURNED AS FALSE, BUT HAS TO BE CLICKED TO SUBMIT SO IT SHOULD WORK
+    const onSubmit = (data) => checkboxChecked ? setRegistrationData(data) : setCheckMessage(true);
 
   return (
     <>
@@ -189,7 +190,7 @@ function RegistrationForm(props) {
                       
                     )} defaultValue={false}/> 
                     <Typography >I aggree to the Terms & Conditions!</Typography>
-                    <Link href={"/terms"}>Terms&Conditions</Link>
+                    <Link href={"/terms-and-conditions"}>Terms & Conditions</Link>
                   </Stack>
                   {/* NEXT LINE IS DISPLAYING A MESSAGE AFTER SUBMIT IF CHECKBOX IS UNCHECKED*/}
                   {checkMessage ? <Typography color={"error"} >*Check Checkbox first!</Typography> : null}

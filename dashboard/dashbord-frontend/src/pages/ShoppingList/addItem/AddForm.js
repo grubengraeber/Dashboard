@@ -2,56 +2,26 @@ import { FormControl, TextField, Button, Grid, Autocomplete } from '@mui/materia
 import React, { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
-import axios from 'axios'
-import { ErrorMessage } from '../../../components/Error/ErrorMessage'
-import { SuccessMessage } from '../../../components/Success/SuccessMessage'
+import { endpoints as listEndpoints }  from '../../../Fetch/api/shoppingList/shoppingListItems/endpoints';
+import { endpoints as listItemEndpoints } from '../../../Fetch/api/shoppingList/shoppingListListItems/endpoints';
 
 
-export const AddForm = (props) => {
+export const AddForm = ({ listId, onChange, setIsError, 
+    setIsSuccess, setErrorMessage, setSuccessMessage }) => {
     const [itemName, setItemName] = useState("")
     const [itemAmount, setItemAmount] = useState(0)
-    const [isError, setIsError] = useState(false)
-    const [errorText, setErrorText] = useState("An Error occured!")
-    const [isSuccess, setIsSuccess] = useState(false)
-    const [successText, setSuccessText] = useState("Success!")
     const [items, setItems] = useState([])
 
-
-    axios.get("http://localhost:8080/api/shopping-list/items")
-    .then((response) => {
-        setItems(response.data)
-    })
-    .catch((error) => {
-        if (error.response)  {
-            setIsError(true)
-            setErrorText(error.message)
-        }
-    })
+    listEndpoints.getItemNames(setItems, setIsError, setErrorMessage);
 
     function addItem(clickEvent) {
-        const requestBody = 
-        {
-            "name": itemName,
-            "amount": itemAmount
-        }
-
-        const headers = {"Access-Control-Allow-Origin": "*"}
-            
-
-        axios.post("http://localhost:8080/api/shopping-list/" + props.listId + "/entries", requestBody, headers)
-        .then(() => {
-            disregardForm()
-            setIsSuccess(true)
-            setSuccessText("Adding item: '" + itemName + "' was successful!")
-        })
-        .catch((error) => {
-            setIsError(true)
-            setErrorText(error.message)
-        })
+        listItemEndpoints.addItem(itemName, itemAmount, listId, 
+            disregardForm, setIsSuccess, setSuccessMessage, 
+            setIsError, setErrorMessage)
     }
 
     function disregardForm(clickEvent) {
-        props.onChange(false)
+        onChange(false)
     }
 
     function handleItemNameChange(changeEvent) {
@@ -101,8 +71,6 @@ export const AddForm = (props) => {
             </Grid>
         </Grid>
     </FormControl>
-    <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorText} />
-    <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successText} />
     </>
   )
 }

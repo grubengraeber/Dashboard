@@ -2,15 +2,15 @@ import React from 'react'
 import { ListItem, ListItemIcon, ListItemButton, ListItemText } from '@mui/material'
 
 
-export const BasicListItem = (props) => {
+export const BasicListItem = ({ text, onClick, icon }) => {
   return (
     <>
-      <ListItem key={props.text} disablePadding onClick={props.onClick}>
+      <ListItem key={text} disablePadding onClick={onClick}>
         <ListItemButton>
           <ListItemIcon>
-            {props.icon}
+            {icon}
           </ListItemIcon>
-          <ListItemText primary={props.text} />
+          <ListItemText primary={text} />
         </ListItemButton>
       </ListItem>
     </>
