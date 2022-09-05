@@ -25,6 +25,7 @@ public class AppUserController {
      */
     @PostMapping("/signup")
     public void signUp(@RequestBody AppUserSignUpRequest request) {
+        log.info("User created");
         appUserService.registerAppUser(request);
     }
 

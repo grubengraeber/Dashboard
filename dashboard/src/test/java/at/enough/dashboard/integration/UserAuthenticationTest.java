@@ -1,22 +1,20 @@
 package at.enough.dashboard.integration;
 
-import at.enough.dashboard.user.AppUserDetailService;
+import at.enough.dashboard.user.AppUserSignUpRequest;
 import at.enough.dashboard.util.JWTConverter;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureWebTestClient
 public class UserAuthenticationTest {
 
     @Autowired
@@ -26,22 +24,25 @@ public class UserAuthenticationTest {
     JWTConverter jwtConverter;
 
     @Autowired
-    AppUserDetailService appUserDetailService;
+    WebTestClient webTestClient;
 
+    @Autowired
+    ApplicationContext applicationContext;
 
-    private MockMvc mockMvc;
-
-    @BeforeEach
-    public void setup() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
 
     @Test
     void testSignedUpUserReceivesValidAuthToken() throws Exception {
-
+        //WebTestClient webTestClient = WebTestClient.bindToApplicationContext(webApplicationContext).build();
         //setup user information
         String email = "test@email.com";
         String password = "testPassword";
+        AppUserSignUpRequest signUpRequest = new AppUserSignUpRequest(
+                "testFirstName",
+                "testLastName",
+                email,
+                password);
+
+
         String userSignUpInformation = "{\"firstName\": \"testName\"," +
                 "\"lastName\": \"testLastName\"," +
                 "\"email\": \"" + email + "\"," +
@@ -49,21 +50,25 @@ public class UserAuthenticationTest {
         String userAuthority = "testAuthority";
         String expectedAuthToken = jwtConverter.getAuthorizationToken(email, List.of(userAuthority));
 
-        //signUp user
-        mockMvc.perform(
-                        post("/api/auth/signup")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(userSignUpInformation)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+        webTestClient
+                .post()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/auth/signup").build())
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(signUpRequest)
+                .exchange()
+                .expectStatus().is2xxSuccessful();
 
-        //login user
-       /* mockMvc.perform(
-                        post("/api/auth/login")
-                                .param("username", email)
-                                .param("password", password))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
-*/
+
+        webTestClient
+                .post()
+                .uri(uriBuilder -> uriBuilder
+                        .path("api/auth/login")
+                        .queryParam("username", email)
+                        .queryParam("password", password)
+                        .build())
+                .exchange()
+                .expectStatus().is2xxSuccessful();
 
     }
 
