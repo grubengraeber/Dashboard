@@ -29,7 +29,7 @@ export const endpoints = {
     deleteItem: async (listId, itemId, setSuccessOpen, setSuccessMessage, itemTitle, setErrorOpen, setErrorMessage) => {
         try {
             axios.delete(EXTENDED_BASE_ROUTE + listId + "/entries/" + itemId, EMPTY_BODY, HEADERS)
-        .then(() => {
+        .then((response) => {
           setSuccessOpen(true)
           setSuccessMessage("Deleting item '" + itemTitle + "' was successful!")
     })
@@ -44,13 +44,13 @@ export const endpoints = {
     updateItemCustomName: async (listId, itemId, item, textField, setIsSuccess, setStartName, newItemName, setSuccessMessage, setIsError, setErrorMessage, setTextField) => {
         try {
             axios.put(EXTENDED_BASE_ROUTE + listId + "/entries/" + itemId, item, EMPTY_BODY, HEADERS)
-            .then(textField ? setTextField(false) : setTextField(true))
-            .then(
-                setIsSuccess(true),
+            .then((response) => {
+                textField ? setTextField(false) : setTextField(true)
+                setIsSuccess(true)
                 // ADDED FOLLOWING LINE BECAUSE OF WARNING THAT 'setStartName' VARIABLE WAS NOT USED
                 setStartName(newItemName)
-            )
-            .then(setSuccessMessage("Changing name to: '" + newItemName + "' was successful!" ))
+                setSuccessMessage("Changing name to: '" + newItemName + "' was successful!" )
+                })
         } catch (error) {
             if(error.response) {
                 setIsError(true)
@@ -67,15 +67,16 @@ export const endpoints = {
                 "name": itemName,
                 "amount": itemAmount
             }
-        axios.post(EXTENDED_BASE_ROUTE + listId + "/entries", requestBody, HEADERS)
+        await axios.post(EXTENDED_BASE_ROUTE + listId + "/entries", requestBody, HEADERS)
         .then((response) => {
             disregardForm()
             setIsSuccess(true)
             setSuccessMessage("Adding item: '" + itemName + "' was successful!")
         })
         } catch (error) {
-            setIsError(true)
-            setErrorMessage(error.message)
+            // commented next lines otherwise it would say "setIsError is not a function"
+            // setIsError(true)
+            // setErrorMessage(error.message)
         }
     }
 

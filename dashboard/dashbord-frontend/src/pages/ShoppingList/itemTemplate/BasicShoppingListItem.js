@@ -42,7 +42,7 @@ export const BasicShoppingListItem = ({
                     <AmountTextField 
                     itemId={item.id} 
                     item={item} 
-                    amount={item.amount} 
+                    propAmount={item.amount} 
                     listId={listId} 
                     isError={isError}
                     isSuccess={isSuccess}
@@ -58,7 +58,7 @@ export const BasicShoppingListItem = ({
                     setInformationMessage={setInformationMessage}
                     />
                 </Grid>
-                < Grid item mx={2}>
+                < Grid item mx={1}>
                     <DeleteButton 
                     itemId={item.id} 
                     listId={listId} 
