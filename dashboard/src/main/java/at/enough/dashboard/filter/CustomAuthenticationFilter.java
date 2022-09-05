@@ -66,6 +66,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         List<String> userAuthorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
+        log.info("packing roles to token: " + userAuthorities);
         String accessToken = jwtConverter.getAuthorizationToken(userName, userAuthorities);
 
         Map<String, String> tokens = new HashMap<>();

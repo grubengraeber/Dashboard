@@ -1,41 +1,32 @@
 package at.enough.dashboard.integration;
 
+
 import at.enough.dashboard.user.AppUserSignUpRequest;
-import at.enough.dashboard.util.JWTConverter;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.context.WebApplicationContext;
-
-import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-public class UserAuthenticationTest {
-
-    @Autowired
-    WebApplicationContext webApplicationContext;
-
-    @Autowired
-    JWTConverter jwtConverter;
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Slf4j
+public class UserAuthorizationTest {
 
     @Autowired
     WebTestClient webTestClient;
+    String email = "test@email.com";
+    String password = "testPassword";
 
-    @Autowired
-    ApplicationContext applicationContext;
+    //create user via auth endpoint
+    @BeforeAll
+    void setUp() {
 
-
-    @Test
-    void testSignedUpUserReceivesValidAuthToken() throws Exception {
-        //WebTestClient webTestClient = WebTestClient.bindToApplicationContext(webApplicationContext).build();
-        //setup user information
-        String email = "test@email.com";
-        String password = "testPassword";
         AppUserSignUpRequest signUpRequest = new AppUserSignUpRequest(
                 "testFirstName",
                 "testLastName",
@@ -43,7 +34,6 @@ public class UserAuthenticationTest {
                 password);
 
         String userAuthority = "testAuthority";
-        String expectedAuthToken = jwtConverter.getAuthorizationToken(email, List.of(userAuthority));
 
         webTestClient
                 .post()
@@ -51,19 +41,19 @@ public class UserAuthenticationTest {
                         .path("/api/auth/signup").build())
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(signUpRequest)
-                .exchange()
-                .expectStatus().is2xxSuccessful();
+                .exchange();
+    }
 
-
+    @Test
+    void testUserHasAccessToUserDetails() {
         webTestClient
-                .post()
+                .get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("api/auth/login")
-                        .queryParam("username", email)
-                        .queryParam("password", password)
-                        .build())
+                        .path("api/users/" + email).build())
+                .accept(MediaType.APPLICATION_JSON)
                 .exchange()
-                .expectStatus().is2xxSuccessful();
+                .expectStatus().is2xxSuccessful()
+                .expectBody().consumeWith(body -> log.info(body.toString()));
 
     }
 

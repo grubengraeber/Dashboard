@@ -34,8 +34,7 @@ public class SecurityConfiguration {
                 jwtConverter);
         authenticationFilter.setFilterProcessesUrl("/api/auth/login");
 
-        //todo
-        OncePerRequestFilter customAuthorizationFilter = new CustomAuthorizationFilter();
+        OncePerRequestFilter customAuthorizationFilter = new CustomAuthorizationFilter(jwtConverter);
 
 
         http.csrf().disable();
