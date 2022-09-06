@@ -1,31 +1,25 @@
 import { Card, CardContent, Grid, CircularProgress, Button, Switch, FormControlLabel } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {BasicShoppingListItem} from "./itemTemplate/BasicShoppingListItem";
-import axios from "axios";
 import { AddForm } from "./addItem/AddForm";
+import { endpoints } from "../../Fetch/api/shoppingList/shoppingList/endpoints";
 
 
-export const ShoppingList = props => {
+export const ShoppingList = (
+    isError, isSuccess, setIsError, setIsSuccess, errorMessage, 
+    successMessage, setErrorMessage, setSuccessMessage, isInformation, 
+    setIsInformation, informationMessage, setInformationMessage) => {
     const [items, setItems] = useState([])
     const [listName, setListName] = useState("")
     const [loading, setLoading] = useState(true)
     const [listId, setListId] = useState(0)
     const [newItemFormOn, setNewItemFormOn] = useState(false)
     const [activeOnly, setActiveOnly] = useState(true)
+    
 
-    const SHOPPING_LIST_ENDPOINT = "http://localhost:8080/api/shopping-list";
-    const getShoppingList = () => {
-        axios.get(SHOPPING_LIST_ENDPOINT)
-        .then((response) => {
-            const ShoppingListItemsLoaded = response.data[0].items;
-            const ShoppingListNameLoaded = response.data[0].name;
-            const ShoppingListIdLoaded = response.data[0].id;
-            setItems(ShoppingListItemsLoaded);
-            setListName(ShoppingListNameLoaded);
-            setListId(ShoppingListIdLoaded);
-            setLoading(false);
-        })
-        .catch(error => console.log(`Error: ${error}`));
+    const getShoppingList = () => { 
+        endpoints.getFirstShoppingList(setItems, 
+        setListName, setListId, setLoading)
     }
 
     useEffect(() => {
@@ -66,11 +60,24 @@ export const ShoppingList = props => {
                             style={{ margin: "10px" }}>
                         <Grid item>
                             <Card>
-                                { newItemFormOn ? <AddForm items={items} listId={listId} newItemFormOn={newItemFormOn} onChange={handleChange} /> : <Button onClick={toggleNewItem}>New Item</Button> }
+                                { newItemFormOn ? 
+                                <AddForm items={items} 
+                                listId={listId} 
+                                newItemFormOn={newItemFormOn} 
+                                onChange={handleChange} 
+                                isError={isError}
+                                isSuccess={isSuccess}
+                                setErrorMessage={setErrorMessage}
+                                setIsError={setIsError}
+                                setSuccessMessage={setSuccessMessage}
+                                setIsSuccess={setIsSuccess}
+                                successMessage={successMessage}
+                                errorMessage={errorMessage}
+                                /> : <Button onClick={toggleNewItem}>New Item</Button> }
                             </Card>
                         </Grid>
                         <Grid item>
-                            <Card sx={"padding-left: 5px"}>
+                            <Card sx={{ paddingLeft: "5px" }}>
                                 <FormControlLabel control={<Switch checked={!activeOnly} onChange={handleChecked} />} label="show checked items" />
                             </Card>
                         </Grid>
@@ -85,7 +92,24 @@ export const ShoppingList = props => {
                     <Grid item  key={item.id}>
                         <Card>
                             <CardContent sx={{ display: "flex", width: "1200px"}}>
-                                <BasicShoppingListItem key={item.id} item={item} listId={listId} itemUnchecked={item.active}/>
+                            <BasicShoppingListItem 
+                            key={item.id} 
+                            item={item} 
+                            listId={listId} 
+                            itemUnchecked={item.active}
+                            isError={isError}
+                            isSuccess={isSuccess}
+                            setErrorMessage={setErrorMessage}
+                            setIsError={setIsError}
+                            setSuccessMessage={setSuccessMessage}
+                            setIsSuccess={setIsSuccess}
+                            successMessage={successMessage}
+                            errorMessage={errorMessage}
+                            isInformation={isInformation}
+                            setIsInformation={setIsInformation}
+                            informationMessage={informationMessage}
+                            setInformationMessage={setInformationMessage}
+                            />
                             </CardContent>
                         </Card>
                     </Grid>
@@ -94,12 +118,30 @@ export const ShoppingList = props => {
                 <Grid item  key={item.id}>
                     <Card>
                         <CardContent sx={{ display: "flex", width: "1200px"}}>
-                            <BasicShoppingListItem key={item.id} item={item} listId={listId} itemUnchecked={item.active}/>
+                            <BasicShoppingListItem 
+                            key={item.id} 
+                            item={item} 
+                            listId={listId} 
+                            itemUnchecked={item.active}
+                            isError={isError}
+                            isSuccess={isSuccess}
+                            setErrorMessage={setErrorMessage}
+                            setIsError={setIsError}
+                            setSuccessMessage={setSuccessMessage}
+                            setIsSuccess={setIsSuccess}
+                            successMessage={successMessage}
+                            errorMessage={errorMessage}
+                            isInformation={isInformation}
+                            setIsInformation={setIsInformation}
+                            informationMessage={informationMessage}
+                            setInformationMessage={setInformationMessage}
+                            />
                         </CardContent>
                     </Card>
                 </Grid>
-        ))}
+            ))}
             </Grid>
+            
         </>
     );
 };

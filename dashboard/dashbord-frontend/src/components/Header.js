@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 import ThemeSwitch from '../UI/Themes/ThemeSwitch';
 
 
-export const Header = props => {
+export const Header = ({ darkMode, setDarkMode }) => {
   const [state, setState] = React.useState({
     left: false,
   });
@@ -42,10 +42,10 @@ export const Header = props => {
               <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
             </Grid>
             <Grid item xs={5}>
-              <CustomLogo />
+              <CustomLogo title={"Dashboard"}/>
             </Grid>
             <Grid item xs={1}>
-              <ThemeSwitch darkMode={props.darkMode} setDarkMode={props.setDarkMode} />
+              <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
             </Grid>
           </Grid>
           <Drawer

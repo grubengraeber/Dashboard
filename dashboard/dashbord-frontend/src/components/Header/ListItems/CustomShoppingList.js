@@ -4,7 +4,7 @@ import ReceiptLongSharpIcon from '@mui/icons-material/ReceiptLongSharp';
 import {useNavigate} from 'react-router-dom'
 
 
-export const CustomShoppingList = (props) => {
+export const CustomShoppingList = () => {
   const navigate = useNavigate();
 
   const navigateToShoppingList = () => {

@@ -1,44 +1,20 @@
 import { Button } from '@mui/material'
-import axios from 'axios'
-import React, { useState } from 'react'
-import { ErrorMessage } from '../../../components/Error/ErrorMessage'
-import { SuccessMessage } from '../../../components/Success/SuccessMessage'
+import React from 'react'
+import { endpoints } from '../../../Fetch/api/shoppingList/shoppingListListItems/endpoints'
 
 
-export const DeleteButton = (props) => {
-
-  const [errorOpen, setErrorOpen] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("An Error occured!")
-  const [successOpen, setSuccessOpen] = useState(false)
-  const [successMessage, setSuccessMessage] = useState("Deleting worked!")
+export const DeleteButton = ({ listId, itemId, itemTitle, 
+  setIsError, setIsSuccess, setSuccessMessage, setErrorMessage }) => {
 
     function deleteItem(clickEvent) {
-        const configuration = {
-          headers: {"Access-Control-Allow-Origin": "*"}
-        }
-        // Delete HHTP REQUEST WITH ID: props.listId
-        axios.delete("http://localhost:8080/api/shopping-list/" + props.listId + "/entries/" + props.itemId, configuration)
-        .then(() => {
-          setSuccessOpen(true)
-          setSuccessMessage("Deleting item '" + props.itemTitle + "' was successful!")
-    })
-        .catch(function (error) {
-          if(error.response) {
-            setErrorOpen(true)
-            setErrorMessage(error.message)
-          }
-        })
-        // TODO throbber
-
+      endpoints.deleteItem(listId, itemId, setIsSuccess, setSuccessMessage, itemTitle, setIsError, setErrorMessage)
     }
 
     
 
   return (
     <>
-      <Button key={props.itemId} onClick={deleteItem} >Delete</Button>
-      <ErrorMessage open={errorOpen} setOpen={setErrorOpen} errorMessage={errorMessage} />
-      <SuccessMessage open={successOpen} setOpen={setSuccessOpen} successMessage={successMessage} />
+      <Button key={itemId} onClick={deleteItem} >Delete</Button>
     </>
   )
 }

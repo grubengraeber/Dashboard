@@ -5,7 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../../Fetch/endpoints';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const labels = ['section 1', 'section 2', 'section 3', 'section 4', 'section 5', 'section 6'];
+// NEXT LINE UNUSED THEREFOR COMMENTED OUT BECAUSE OF CONSOLE WARNINGS
+// const labels = ['section 1', 'section 2', 'section 3', 'section 4', 'section 5', 'section 6'];
 const borderColors = [
        'rgb(255, 99, 132)',
        'rgb(255, 159, 64)',

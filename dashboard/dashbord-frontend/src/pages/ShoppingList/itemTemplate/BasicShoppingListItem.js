@@ -5,7 +5,11 @@ import { TitleWithOnclickTextfield } from "../updateItem/TitleWithOnclickTextfie
 import { Checkmark } from "../checkmark/Checkmark"
 import DeleteButton from "../deleteItem/DeleteButton";
 
-export const BasicShoppingListItem = (props) => {
+export const BasicShoppingListItem = ({ 
+    item, listId, itemUnchecked, isError, isSuccess, setIsError, 
+    setIsSuccess, errorMessage, successMessage, setErrorMessage, 
+    setSuccessMessage, isInformation, setIsInformation, 
+    informationMessage, setInformationMessage }) => {
 
 
     return (
@@ -15,19 +19,59 @@ export const BasicShoppingListItem = (props) => {
                 alignItems="center"
             >
                 <Grid item mx={2}>
-                    <Checkmark item={props.item} itemId={props.item.id} listId={props.listId} />
+                    <Checkmark item={item} itemId={item.id} listId={listId} />
                 </Grid>
                 <Grid item  style={{width: "400px"}}>
-                    <TitleWithOnclickTextfield item={props.item} itemName={props.item.item.name}
-                        itemId={props.item.id}
-                        listId={props.listId} 
-                        itemUnchecked={props.itemUnchecked} />
+                    <TitleWithOnclickTextfield 
+                    item={item} 
+                    itemName={item.item.name}
+                    itemId={item.id}
+                    listId={listId} 
+                    itemUnchecked={itemUnchecked} 
+                    isError={isError}
+                    isSuccess={isSuccess}
+                    setErrorMessage={setErrorMessage}
+                    setIsError={setIsError}
+                    setSuccessMessage={setSuccessMessage}
+                    setIsSuccess={setIsSuccess}
+                    successMessage={successMessage}
+                    errorMessage={errorMessage}
+                    />
                 </Grid>
                 <Grid item mx={2}>
-                    <AmountTextField itemId={props.item.id} item={props.item} amount={props.item.amount} listId={props.listId} />
+                    <AmountTextField 
+                    itemId={item.id} 
+                    item={item} 
+                    amount={item.amount} 
+                    listId={listId} 
+                    isError={isError}
+                    isSuccess={isSuccess}
+                    setErrorMessage={setErrorMessage}
+                    setIsError={setIsError}
+                    setSuccessMessage={setSuccessMessage}
+                    setIsSuccess={setIsSuccess}
+                    successMessage={successMessage}
+                    errorMessage={errorMessage}
+                    isInformation={isInformation}
+                    setIsInformation={setIsInformation}
+                    informationMessage={informationMessage}
+                    setInformationMessage={setInformationMessage}
+                    />
                 </Grid>
                 < Grid item mx={2}>
-                    <DeleteButton itemId={props.item.id} listId={props.listId} itemTitle={props.item.item.name} />
+                    <DeleteButton 
+                    itemId={item.id} 
+                    listId={listId} 
+                    itemTitle={item.item.name} 
+                    isError={isError}
+                    isSuccess={isSuccess}
+                    setErrorMessage={setErrorMessage}
+                    setIsError={setIsError}
+                    setSuccessMessage={setSuccessMessage}
+                    setIsSuccess={setIsSuccess}
+                    successMessage={successMessage}
+                    errorMessage={errorMessage}
+                    />
                 </Grid>
             </Grid>
         </>

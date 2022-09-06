@@ -20,6 +20,11 @@ const ExpensesList = () => {
 
     if (isLoading) {
         return (<><h1>Is loading...</h1></>)
+    } else if (isError) {
+        // NEXT LINES ARE JUST FOR USING ERROR AND ISERROR VALUES 
+        // TO GET RID OF CONSOLE WARNINGS
+        console.log("Error in ExpenseList.js!")
+        console.log(error)
     }
 
 
