@@ -41,11 +41,10 @@ public class SecurityConfiguration {
         authenticationFilter.setFilterProcessesUrl("/api/auth/login");
 
         OncePerRequestFilter customAuthorizationFilter = new CustomAuthorizationFilter(jwtConverter);
-
-//todo set up antmatchers and secure endpoints
         http.csrf().disable();
         http.cors();
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(authenticationFilter);
         http.addFilterBefore(customAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -67,16 +66,5 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-/*
-    public AuthenticationManager authManager(HttpSecurity http)
-            throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder())
-                .and()
-                .build();
-    }
-*/
 
 }
