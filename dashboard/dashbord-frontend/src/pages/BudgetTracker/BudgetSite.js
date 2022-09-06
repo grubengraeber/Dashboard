@@ -12,7 +12,6 @@ const BudgetSite = () => {
   const [force, setForce] = useState(0);
 
   const forceUpdate = () => {
-    console.log(force)
     setForce(force => force + 1);
   }
 
