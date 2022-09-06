@@ -16,6 +16,7 @@ data:
     time-span: 100
     creation: false
 security:
+  set-authorization: true
   cors:
     origin: "http://localhost:3000"
   jwt:

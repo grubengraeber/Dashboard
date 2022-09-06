@@ -34,18 +34,20 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http, @Value("${security.set-authorization}") Boolean setAuthorization) throws Exception {
         CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(
                 authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)),
                 jwtConverter);
         authenticationFilter.setFilterProcessesUrl("/api/auth/login");
 
         OncePerRequestFilter customAuthorizationFilter = new CustomAuthorizationFilter(jwtConverter);
-
-//todo set up antmatchers and secure endpoints
         http.csrf().disable();
         http.cors();
-        http.authorizeRequests().anyRequest().permitAll();
+        if (setAuthorization) {
+            http.authorizeRequests().anyRequest().permitAll();
+        }
+        http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(authenticationFilter);
         http.addFilterBefore(customAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -62,21 +64,10 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource(@Value("${security.cors.origin}") String origin) {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(origin));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-/*
-    public AuthenticationManager authManager(HttpSecurity http)
-            throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder())
-                .and()
-                .build();
-    }
-*/
 
 }
