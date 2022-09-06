@@ -1,6 +1,8 @@
-import { Button, Grid, Paper, TextField, Link, Stack, Checkbox, Typography, InputAdornment, IconButton } from '@mui/material';
+import { Button, Grid, Paper, TextField, Link, Stack, Typography, InputAdornment, IconButton } from '@mui/material';
+// import { Checkbox } from "@mui/material";
+// import { Controller } from "react-hook-form";
 import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
@@ -41,7 +43,7 @@ function LoginForm({ setLoginData }) {
       })
 
       // NEXT LINE FOR FORM VALIDATION
-      const { register, formState: { errors }, handleSubmit, control } = useForm(
+      const { register, formState: { errors }, handleSubmit /*, control */ } = useForm(
         {
             // MODE DEFINES WHEN THE VALIDATION IS CHECKED
             mode: "onBlur",
@@ -116,19 +118,19 @@ function LoginForm({ setLoginData }) {
                 {...register("password", {required: "Required"})}
                 />
                 <Link href={"/forgotPassword"}>Forgot your password?</Link>
-                <Stack direction={"row"} spacing={1} display={"flex"} alignItems={"center"}>
+                {/* <Stack direction={"row"} spacing={1} display={"flex"} alignItems={"center"}>
                   <Controller as={Checkbox} control={control} name="remember" render={({field}) => (
                     
                     <Checkbox name="remember" {...field}/> 
                     
                   )} defaultValue={false}/> 
                   <Typography >Remember me</Typography>
-                </Stack>
+                  </Stack> */}
                 <Button 
                 variant="contained" 
                 type={'submit'}
                 >
-                    sign up
+                    sign in
                 </Button>
                 <Stack direction={"row"} spacing={1} justifyContent={"center"}>
                     <Typography>No account yet?</Typography>

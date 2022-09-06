@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Grid, Stack } from "@mui/material"
 import LoginForm from './LoginForm'
 import SignInWith from './SignInWIth/SignInWith'
 import { SuccessMessage } from "../../components/Success/SuccessMessage"
 import { ErrorMessage } from "../../components/Error/ErrorMessage"
+import { endpoints } from '../../Fetch/api/login/endpoints';
+import { AuthContext } from "../../context/AuthProvider";
+
+
 
 function Login({isErrorFromOutside, 
                 errorMessageFromOutside, 
                 isSuccessFromOutside, 
                 successMessageFromOutside
             }) {
+    const { setAuthentication } = useContext(AuthContext);
     const [loginData, setLoginData] = useState(null)
     const [isSuccess, setIsSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState("Success")
@@ -31,6 +36,9 @@ function Login({isErrorFromOutside,
             console.log(loginData)
             //TODO use Data for login process
             // post
+            endpoints.logUserIn(setIsError, setErrorMessage, 
+                setIsSuccess, setSuccessMessage, loginData.userName, 
+                loginData.password, setAuthentication)
             //ERROR:
             // - set isErrror true 
             // - errorMessage to custom errortext
@@ -44,7 +52,7 @@ function Login({isErrorFromOutside,
 
   return (
     <>
-    {isError ? <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} /> : null}
+    <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
     {isSuccess ? <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage}/> :
         <Stack direction="row" spacing={2} >
             <Grid container display={"flex"} justifyContent={"center"} alignItems={"center"}>
