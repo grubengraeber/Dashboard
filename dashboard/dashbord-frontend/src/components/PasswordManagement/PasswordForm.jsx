@@ -6,7 +6,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup";
 
-export const PasswordForm = (changePassword) => {
+export const PasswordForm = ({ changePassword }) => {
     const [showOldPassword, setShowOldPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showRepeatNewPassword, setShowRepeatNewPassword] = useState(false);
@@ -42,6 +42,7 @@ export const PasswordForm = (changePassword) => {
 
 
   return (
+    
     <Paper 
       sx={{margin: "20px", 
       padding: "10px", 
@@ -63,7 +64,7 @@ export const PasswordForm = (changePassword) => {
             spacing={2}
             margin={"10px"}>
                 <Stack direction={"column"} spacing={2}>
-                {changePassword ? <TextField 
+    {changePassword ? <TextField 
                 label="Old password" 
                 required 
                 type={showOldPassword ? "text" : "password"}
@@ -85,13 +86,13 @@ export const PasswordForm = (changePassword) => {
                 helperText={errors && errors.oldPassword && errors.oldPassword.message ? errors.oldPassword.message : null}
                 autoComplete={"new-password"}
                 {...register("oldPassword", {required: "Required"})}
-                /> : null }
+                /> : <></>}
 
                 <TextField 
                 label="New password" 
                 required 
                 type={showNewPassword ? "text" : "password"}
-                onKeyUp={(changeEvent) => {setNewWrittenPassword(changeEvent.target.value); console.log(changeEvent.target.value)}}
+                onKeyUp={(changeEvent) => {setNewWrittenPassword(changeEvent.target.value)}}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
