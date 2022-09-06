@@ -17,6 +17,8 @@ import Registration from "./pages/Registration/Registration";
 import { ErrorMessage } from './components/Error/ErrorMessage'
 import { SuccessMessage } from './components/Success/SuccessMessage'
 import { InformationMessage } from './components/Information/InformationMessage'
+import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
+import { NewPassword } from "./pages/NewPasword/NewPassword";
 
 
 
@@ -102,7 +104,9 @@ function App() {
                                         }></Route>
                                         <Route path={"/BudgetTracker"} element={<BudgetSite />}></Route>
                                         <Route path={"/login"} element={<Login />}></Route>
-                                        <Route path={"/register"} element={<Registration />}></Route> 
+                                        <Route path={"/register"} element={<Registration />}></Route>
+                                        <Route path={"/changePassword"} element={<ChangePassword />}></Route>
+                                        <Route path={"/forgotPassword"} element={<NewPassword />}></Route>
                                     </Routes>
                                 </CssBaseline>
                             </Box>
