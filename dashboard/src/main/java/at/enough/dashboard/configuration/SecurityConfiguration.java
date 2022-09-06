@@ -47,9 +47,10 @@ public class SecurityConfiguration {
         http.cors();
         if (setAuthorization) {
             http.authorizeRequests().anyRequest().permitAll();
+        } else {
+            http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
+            http.authorizeRequests().anyRequest().authenticated();
         }
-        http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
-        http.authorizeRequests().anyRequest().authenticated();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(authenticationFilter);
         http.addFilterBefore(customAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
