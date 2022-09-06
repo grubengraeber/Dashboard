@@ -41,6 +41,8 @@ public class SecurityConfiguration {
         authenticationFilter.setFilterProcessesUrl("/api/auth/login");
 
         OncePerRequestFilter customAuthorizationFilter = new CustomAuthorizationFilter(jwtConverter);
+
+//todo set up antmatchers and secure endpoints
         http.csrf().disable();
         http.cors();
         if (setAuthorization) {
