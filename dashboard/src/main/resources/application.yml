@@ -16,6 +16,8 @@ data:
     time-span: 100
     creation: false
 security:
+  cors:
+    origin: "http://localhost:3000"
   jwt:
     expiration-time: 1000
     secret: "changeThisTokenInProductionVeryImportant"

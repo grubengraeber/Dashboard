@@ -12,25 +12,23 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
     const { data, isLoading, isError } = useQuery(["categories"], endpoints.getExpenseCategories);
     const [expenseValue, setExpenseValue] = useState("");
     const [expenseName, setExpenseName] = useState("");
-    const [expenseCategory, setExpenseCategory] = useState();
+    const [expenseCategory, setExpenseCategory] = useState("");
     const [dateValue, setDateValue] = useState(new Date());
 
 
+    //mutution for post/put request using React-query
     const mutation = useMutation(payload => {
         return endpoints.postExpense(payload)
     })
 
 
     const handleAdd = (e) => {
-        console.log(dateValue);
-
         const payload = {
             name: expenseName,
             value: parseFloat(expenseValue),
             date: dateValue.toISOString().split("", 10).join(""),
             categoryName: expenseCategory
         };
-        console.log(payload);
         mutation.mutate(payload);
         onNewExpense();
         onClose()
@@ -52,40 +50,39 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
     if (isLoading) {
 
         return (<h2>loading...</h2>)
-    } else if (isError) { 
+    } else if (isError) {
         // NEXT LINE JUST FOR USING THE ISERROR VALUE TO GET RID OF CONSOLE WARNINGS
         console.log("Error in AddExpenseFormDialog.js!")
     } else {
 
         return (
 
-            <Dialog open={show} onClose={onClose} title="Add expense" >
+            <Dialog open={show} onClose={onClose} title="Add expense" maxWidth="xs">
                 <DialogTitle>Add expense</DialogTitle>
                 <DialogContent
                     sx={{
                         padding: 1
 
                     }}>
-                    <Grid container xs={5}>
-                        <Grid item margin={1}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} margin={1}>
                             <TextField label="expenses" onChange={handleExpenseTextChange} error={expenseName === ""} />
                         </Grid>
-                        <Grid item margin={1}>
+                        <Grid item xs={12} margin={1}>
                             <TextField type="number" label="€" onChange={handleValueTextChange} />
                         </Grid>
-                        <Grid item margin={1}>
-                            <Select label="category" fullWidth onChange={handleCategorySelectChange}>
+                        <Grid item xs={12} margin={1}>
+                            <Select label="category" value={expenseCategory} onChange={handleCategorySelectChange}>
                                 {data.map((categoryName) => (<MenuItem key={categoryName} value={categoryName}>{categoryName}</MenuItem>))}
                             </Select>
                         </Grid>
 
-                        <Grid item margin={1}>
+                        <Grid item xs={12} margin={1}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
                                     label="Date"
                                     value={dateValue}
                                     onChange={(newValue) => {
-                                        console.log(typeof newValue);
                                         setDateValue(newValue);
                                     }}
                                     renderInput={(params) => <TextField {...params} />}
@@ -93,8 +90,9 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
                             </LocalizationProvider>
                         </Grid>
 
-
-                        <Button onClick={handleAdd} variant='contained'>add</Button>
+                        <Grid item xs={12} margin={1}>
+                            <Button onClick={handleAdd} variant='contained'>add</Button>
+                        </Grid>
                     </Grid>
 
                 </DialogContent>

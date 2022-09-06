@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/shopping-list")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ShoppingListController {
     private final ShoppingListService shoppingListService;
     private final ShoppingListDTOConverter shoppingListDTOConverter;

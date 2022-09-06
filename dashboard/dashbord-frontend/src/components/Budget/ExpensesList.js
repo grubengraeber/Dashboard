@@ -13,7 +13,6 @@ const ExpensesList = () => {
             refetch();
         }
         refetchData();
-        console.log("expense List refetch after mount")
     })
 
 

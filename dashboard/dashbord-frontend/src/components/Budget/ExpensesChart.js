@@ -48,7 +48,6 @@ const ExpensesChart = () => {
                      refetch();
               }
               refetchData();
-              console.log("refetched on remount exepnsechart")
        })
 
 
@@ -57,7 +56,6 @@ const ExpensesChart = () => {
 
 
 
-       console.log("remount expensesChart")
 
        const chartData = {
               labels: Object.keys(data),
