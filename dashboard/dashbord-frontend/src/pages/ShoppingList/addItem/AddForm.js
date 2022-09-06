@@ -14,8 +14,8 @@ export const AddForm = ({ listId, onChange, setIsError,
 
     listEndpoints.getItemNames(setItems, setIsError, setErrorMessage);
 
-    function addItem(clickEvent) {
-        listItemEndpoints.addItem(itemName, itemAmount, listId, 
+    async function addItem(clickEvent) {
+        await listItemEndpoints.addItem(itemName, itemAmount, listId, 
             disregardForm, setIsSuccess, setSuccessMessage, 
             setIsError, setErrorMessage)
     }

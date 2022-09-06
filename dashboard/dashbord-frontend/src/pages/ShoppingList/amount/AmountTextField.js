@@ -9,8 +9,6 @@ export const AmountTextField = ({ propAmount, item, itemId, listId,
     const [amount, setAmount] = useState(propAmount)
     const [startAmount, setStartAmount] = useState(propAmount)
 
-
-
     function updateAmount(changeEvent) {
         if (changeEvent.target.value === "") {
             setAmount(startAmount)

@@ -4,7 +4,7 @@ const requestBody = {}
 // FETCHING HOME BADGE DATA
 const LIST_ID_OF_LOGGED_IN_USER_GET = "/api/shopping-list/user"
 const BUDGET_TRACKER_AMOUNT_GET = "/api/v1/budget/expenses/sum";
-const SHOPPING_LIST_AMOUNT_GET = "/api/shopping-list/user/"
+const SHOPPING_LIST_AMOUNT_GET = "/api/shopping-list/"
 
 // DEFAULT HEADER
 const header = {
