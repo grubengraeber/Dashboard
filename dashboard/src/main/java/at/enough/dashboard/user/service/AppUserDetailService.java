@@ -1,4 +1,4 @@
-package at.enough.dashboard.user;
+package at.enough.dashboard.user.service;
 
 import at.enough.dashboard.user.repository.AppUserRepository;
 import lombok.RequiredArgsConstructor;
