@@ -1,4 +1,4 @@
-package at.enough.dashboard;
+package at.enough.dashboard.creators;
 
 import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.persistence.model.ExpenseCategory;

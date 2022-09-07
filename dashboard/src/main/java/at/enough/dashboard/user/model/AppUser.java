@@ -1,6 +1,6 @@
 package at.enough.dashboard.user.model;
 
-import at.enough.dashboard.shoppinglist.model.Household;
+import at.enough.dashboard.household.persistence.Household;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +30,9 @@ public class AppUser implements UserDetails {
     private LocalDate birthdate;
     private String password;
 
+    @ManyToOne
+    private Household household;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
@@ -39,6 +42,8 @@ public class AppUser implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
+
+
 
     @Override
     public String getPassword() {

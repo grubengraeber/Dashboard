@@ -1,4 +1,4 @@
-package at.enough.dashboard.user;
+package at.enough.dashboard.user.controller;
 
 import at.enough.dashboard.user.model.AppUser;
 import at.enough.dashboard.user.service.AppUserService;

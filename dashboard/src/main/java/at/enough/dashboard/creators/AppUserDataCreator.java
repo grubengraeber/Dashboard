@@ -1,4 +1,4 @@
-package at.enough.dashboard;
+package at.enough.dashboard.creators;
 
 import at.enough.dashboard.user.model.AppUser;
 import at.enough.dashboard.user.repository.AppUserRepository;
@@ -14,11 +14,10 @@ public class AppUserDataCreator {
 
     public AppUserDataCreator(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
-        createData();
 
     }
 
-    private void createData() {
+    public List<AppUser> createUserList() {
         List<AppUser> userList = List.of(
                 AppUser.builder()
                         .appUserName("tester1")
@@ -31,8 +30,21 @@ public class AppUserDataCreator {
                         .firstName("testFirstName2")
                         .lastName("testLastName2")
                         .email("test2@test.com")
+                        .build(),
+                AppUser.builder()
+                        .appUserName("tester3")
+                        .firstName("testFirstName3")
+                        .lastName("testLastName3")
+                        .email("test3@test.com")
+                        .build(),
+                AppUser.builder()
+                        .appUserName("tester4")
+                        .firstName("testFirstName4")
+                        .lastName("testLastName4")
+                        .email("test4@test.com")
                         .build()
-                );
+        );
+       return appUserRepository.saveAll(userList);
 
 
     }
