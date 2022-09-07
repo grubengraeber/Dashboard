@@ -1,4 +1,4 @@
-package at.enough.dashboard.configuration;
+package at.enough.dashboard.security.configuration;
 
 import at.enough.dashboard.filter.CustomAuthenticationFilter;
 import at.enough.dashboard.filter.CustomAuthorizationFilter;

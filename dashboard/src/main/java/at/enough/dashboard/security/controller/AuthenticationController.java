@@ -1,5 +1,6 @@
-package at.enough.dashboard.user;
+package at.enough.dashboard.security.controller;
 
+import at.enough.dashboard.user.AppUserSignUpRequest;
 import at.enough.dashboard.user.model.AppUser;
 import at.enough.dashboard.user.repository.AppUserRepository;
 import at.enough.dashboard.user.service.AppUserService;

@@ -15,12 +15,15 @@ public class HouseholdController {
 
     private final HouseHoldService houseHoldService;
 
-    @GetMapping
+    @GetMapping("/me")
     public Household getAppUserHouseHold(Authentication authentication) {
         String userIdentifier = authentication.getName();
         return houseHoldService.getHouseHoldBy(userIdentifier);
 
-
     }
+
+
+
+
 
 }
