@@ -7,6 +7,8 @@ import at.enough.dashboard.user.service.AppUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class HouseHoldService {
@@ -17,7 +19,9 @@ public class HouseHoldService {
     public Household getHouseHoldBy(String userIdentifier) {
         AppUser appUser = appUserService.getAppUserBy(userIdentifier);
         return householdRepository.findHouseholdByAppUsersContaining(appUser);
+    }
 
-
+    public List<Household> getAll() {
+        return householdRepository.findAll();
     }
 }
