@@ -14,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/shopping-list/items")
-@CrossOrigin
 public class ItemController {
     private final ItemService itemService;
 
@@ -25,3 +24,4 @@ public class ItemController {
 
 
 }
+

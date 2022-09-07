@@ -1,4 +1,4 @@
-package at.enough.dashboard.budget.service;
+package at.enough.dashboard;
 
 import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.persistence.model.ExpenseCategory;

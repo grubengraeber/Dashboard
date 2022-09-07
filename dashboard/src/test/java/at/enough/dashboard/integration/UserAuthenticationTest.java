@@ -1,7 +1,7 @@
 package at.enough.dashboard.integration;
 
 import at.enough.dashboard.user.AppUserSignUpRequest;
-import at.enough.dashboard.util.JWTConverter;
+import at.enough.dashboard.security.util.JWTConverter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;

@@ -1,5 +1,6 @@
 package at.enough.dashboard.util;
 
+import at.enough.dashboard.security.util.JWTConverter;
 import com.nimbusds.jwt.JWTClaimsSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

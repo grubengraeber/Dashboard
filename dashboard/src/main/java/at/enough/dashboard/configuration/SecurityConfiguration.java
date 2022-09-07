@@ -2,9 +2,11 @@ package at.enough.dashboard.configuration;
 
 import at.enough.dashboard.filter.CustomAuthenticationFilter;
 import at.enough.dashboard.filter.CustomAuthorizationFilter;
-import at.enough.dashboard.util.JWTConverter;
+import at.enough.dashboard.security.util.JWTConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -17,12 +19,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Arrays;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
+@EnableWebMvc
 public class SecurityConfiguration {
 
     private final JWTConverter jwtConverter;
@@ -63,7 +68,7 @@ public class SecurityConfiguration {
         return authConfig.getAuthenticationManager();
     }
 
-    @Bean
+    //@Bean
     CorsConfigurationSource corsConfigurationSource(@Value("${security.cors.origin}") String origin) {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(origin));
@@ -72,5 +77,6 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 
 }

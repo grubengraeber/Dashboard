@@ -1,4 +1,4 @@
-package at.enough.dashboard.util;
+package at.enough.dashboard.security.util;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;

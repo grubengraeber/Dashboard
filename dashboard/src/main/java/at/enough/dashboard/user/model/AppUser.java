@@ -1,5 +1,6 @@
 package at.enough.dashboard.user.model;
 
+import at.enough.dashboard.shoppinglist.model.Household;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,6 +29,7 @@ public class AppUser implements UserDetails {
     private String lastName;
     private LocalDate birthdate;
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
