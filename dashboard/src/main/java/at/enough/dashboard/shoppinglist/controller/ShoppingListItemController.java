@@ -15,7 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("api/shopping-list")
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class ShoppingListItemController {
 
     private final ShoppingListEntryService shoppingListEntryService;

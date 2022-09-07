@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping(("/api/user"))
+@RequestMapping(("/api/users"))
 @Slf4j
 public class AppUserController {
 
     private final AppUserService appUserService;
 
-    @GetMapping("/details")
+    @GetMapping("/details/me")
     public AppUser getAppUserDetails(Authentication authentication) {
         String userIdentifier = authentication.getName();
         return appUserService.getAppUserBy(userIdentifier);

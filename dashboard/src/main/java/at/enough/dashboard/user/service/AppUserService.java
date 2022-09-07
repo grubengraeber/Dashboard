@@ -43,6 +43,11 @@ public class AppUserService {
 
     }
 
+    /**
+     *
+     * @param email none null string representing an email
+     * @return
+     */
     public AppUser getAppUserBy(String email) {
         return appUserRepository.findAppUserByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException("User not found by email "+ email ));
