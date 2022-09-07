@@ -9,6 +9,7 @@ import { CustomShoppingList } from './ListItems/CustomShoppingList';
 import { CustomBudgetTracker } from './ListItems/CustomBudgetTracker';
 import { CustomClose } from './ListItems/CustomClose';
 import { CustomLogout } from './ListItems/CustomLogout';
+import { CustomHousehold } from './ListItems/CustomHousehold';
 
 
 export const CustomList = () => {
@@ -31,6 +32,8 @@ export const CustomList = () => {
         <CustomShoppingList />
         <CustomBudgetTracker />
       </List>
+      <Divider sx={{border: "solid"}}/>
+      <CustomHousehold />
       <Divider sx={{border: "solid"}}/>
       <List>
         <CustomClose />
