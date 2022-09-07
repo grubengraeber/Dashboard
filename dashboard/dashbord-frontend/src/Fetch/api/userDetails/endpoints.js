@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "../../axiosConfiguration"
 
-const LOGIN_ROUTE = "/api/auth/login"
+const USER_DETAILS_PATH = "/api/auth/login"
 
 const CONFIGURATION = {
     headers: {
@@ -10,12 +10,11 @@ const CONFIGURATION = {
 }
 
 export const endpoints = {
-    logUserIn: async (setIsError, setErrorMessage,
+    getUserDetails: async (setIsError, setErrorMessage,
         setIsSuccess, setSuccessMessage, user, password, setAuthentication) => {
         const DATA = JSON.stringify({ user, password })
-        console.log("trying login with user " + user + " and password " + password);
         try {
-            const response = await axios.post(LOGIN_ROUTE, null, { params: { "username": user, "password": password } });
+            const response = await axios.get(USER_DETAILS_PATH, DATA);
             if (response.data) {
                 console.log(response.data)
 
