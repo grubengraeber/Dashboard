@@ -34,7 +34,6 @@ public class DataCreator {
     }
 
     private void initialize() {
-        List<User> users = createUsers();
         List<Item> items = createItems();
 
         ShoppingList testShoppingList = ShoppingList.builder()
@@ -45,7 +44,6 @@ public class DataCreator {
                 ShoppingListEntry.builder()
                         .item(items.get(0))
                         .amount(2)
-                        .user(users.get(0))
                         .active(true)
                         .shoppingList(testShoppingList)
                         .build(),
@@ -80,19 +78,6 @@ public class DataCreator {
 
         shoppingListRepository.save(testShoppingList);
 
-    }
-
-    private List<User> createUsers() {
-        List<User> users = new ArrayList<>();
-        users.add(User.builder()
-                .userName("loremIp")
-                .firstName("Peter")
-                .lastName("Classic")
-                .email("peter@classic.com")
-                .build());
-
-        userRepository.saveAll(users);
-        return users;
     }
 
 
