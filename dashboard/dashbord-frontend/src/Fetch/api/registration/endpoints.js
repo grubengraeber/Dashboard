@@ -4,17 +4,13 @@ import axios from "../../axiosConfiguration"
 const REGISTRATION_POST = "/api/auth/signup";
 
 // DEFAULT HEADER
-const defaultConfiguratuion = {
-    headers: { 'Content-Type': 'application/json' },
-    withCredentials: true
-}
 
 export const endpoints = {
 
     postRegistration: async (payload, onSuccess, onError, setSuccessMessage, setErrorMessage) => {
         let response = null;
         try {
-        response = await axios.post(REGISTRATION_POST, payload/*, defaultConfiguratuion*/);
+        response = await axios.post(REGISTRATION_POST, payload);
         onSuccess()
         setSuccessMessage("Registration successful! You can log in now.")
     }   catch(error) {

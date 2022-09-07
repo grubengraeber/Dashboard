@@ -6,11 +6,10 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup";
 
-export const PasswordForm = ({ changePassword }) => {
+export const PasswordForm = ({ changePassword, setNewPasswordData }) => {
     const [showOldPassword, setShowOldPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showRepeatNewPassword, setShowRepeatNewPassword] = useState(false);
-    const [newWrittenPassword, setNewWrittenPassword] = useState("");
 
     const schema = yup.object().shape({
         oldPassword: yup
@@ -26,7 +25,7 @@ export const PasswordForm = ({ changePassword }) => {
             .required("Password is required."),
         repeatNewPassword: yup
             .string()
-            .matches(`^${newWrittenPassword}$`, "Should be the same as your prewritten password.")
+            .oneOf([yup.ref('newPassword'), null], "Should be the same as your prewritten password.")
             .required("Password is required."),
       })
 
@@ -38,7 +37,7 @@ export const PasswordForm = ({ changePassword }) => {
             resolver: yupResolver(schema)
         }
       );
-      const onSubmit = (data) => console.log(data);
+      const onSubmit = (data) => {console.log(data); setNewPasswordData(data)};
 
 
   return (
@@ -92,7 +91,6 @@ export const PasswordForm = ({ changePassword }) => {
                 label="New password" 
                 required 
                 type={showNewPassword ? "text" : "password"}
-                onKeyUp={(changeEvent) => {setNewWrittenPassword(changeEvent.target.value)}}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">

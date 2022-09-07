@@ -19,6 +19,7 @@ import { SuccessMessage } from './components/Success/SuccessMessage'
 import { InformationMessage } from './components/Information/InformationMessage'
 import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
 import { NewPassword } from "./pages/NewPasword/NewPassword";
+import { Household } from "./pages/Household/ManageHousehold/Household";
 
 
 
@@ -105,6 +106,7 @@ function App() {
                                         <Route path={"/BudgetTracker"} element={<BudgetSite />}></Route>
                                         <Route path={"/login"} element={<Login />}></Route>
                                         <Route path={"/register"} element={<Registration />}></Route>
+                                        <Route path={"/myHousehold"} element={<Household />}></Route>
                                         <Route path={"/changePassword"} element={<ChangePassword />}></Route>
                                         <Route path={"/forgotPassword"} element={<NewPassword />}></Route>
                                     </Routes>
