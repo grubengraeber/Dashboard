@@ -39,8 +39,6 @@ function Registration({ isErrorFromOutside,
       }
 
       if(registrationData) {
-        console.log(registrationData)
-        //TODO use Data for registration process
         // post
         async function getServerResponse() {
           const response = await endpoints.postRegistration(
