@@ -23,6 +23,7 @@ function LoginForm({ setLoginData }) {
 
     function togglePassword(clickEvent) {
       clickEvent.preventDefault();
+      // TRYING TO SET THE CURSOR BACK TO THE END OF THR INPUT FIELD
       setShowPassword(!showPassword);
     }
 

@@ -12,12 +12,14 @@ export const AmountTextField = ({ propAmount, item, itemId, listId,
     function updateAmount(changeEvent) {
         if (changeEvent.target.value === "") {
             setAmount(startAmount)
-            setIsError(true)
-            setErrorMessage("The amount can't be empty!")
+            // setIsError(true)
+            // setErrorMessage("The amount can't be empty!")
+            console.log("Amount can't be empty!")
         } else if (changeEvent.target.value === "0") {
             setAmount(startAmount)
-            setIsInformation(true)
-            setInformationMessage("Because the amount can't be 0, it was updated to the original amount.")
+            //setIsInformation(true)
+            //setInformationMessage("Because the amount can't be 0, it was updated to the original amount.")
+            console.log("Amount can't be zero!")
         } else {
             const newAmount = parseInt(changeEvent.target.value)
             setAmount(newAmount)
