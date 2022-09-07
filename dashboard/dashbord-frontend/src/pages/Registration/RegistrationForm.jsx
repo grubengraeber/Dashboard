@@ -50,7 +50,7 @@ function RegistrationForm({ setRegistrationData }) {
         .matches(/^([^0-9]*)$/, "Last name should not contain numbers.")
         .matches(/^[a-zA-Z0-9_.-]*$/, "No special characters.")
         .required("Last name is required."),
-        emailAddress: yup
+        email: yup
           .string()
           .matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Enter a valid email address.")
           .required("Email address is required."),
@@ -151,9 +151,9 @@ function RegistrationForm({ setRegistrationData }) {
                       ),
                     }}
                   autoComplete={"email"}
-                  {...register("emailAddress", {required: "Required"})}
-                  error={!!errors.emailAddress}
-                  helperText={errors && errors.emailAddress && errors.emailAddress.message ? errors.emailAddress.message : null}
+                  {...register("email", {required: "Required"})}
+                  error={!!errors.email}
+                  helperText={errors && errors.email && errors.email.message ? errors.email.message : null}
                   />
                   {/* <TextField label="Username" required type={"text"}/> */}
                   <TextField 

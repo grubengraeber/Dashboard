@@ -73,13 +73,11 @@ function Registration({ isErrorFromOutside,
   return (
     <>
     {isError ? <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} /> : null}
-    {isSuccess ? <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage}/> :
-    <RegistrationForm setRegistrationData={setRegistrationData}/> 
-    }
+    <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage}/>
     {wasSuccess ? 
     <><Typography>Signing up was successful! You can sign in now.</Typography> 
     <Link href='/login'>Sign in</Link> </>:
-    null}
+    <RegistrationForm setRegistrationData={setRegistrationData}/>}
     </>
   )
 }
