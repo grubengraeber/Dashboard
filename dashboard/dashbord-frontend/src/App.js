@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
 import { ShoppingList } from "./pages/ShoppingList/ShoppingList";
 import React, { useState } from "react";
@@ -20,6 +20,8 @@ import { InformationMessage } from './components/Information/InformationMessage'
 import { ChangePassword } from "./pages/ChangePassword/ChangePassword";
 import { NewPassword } from "./pages/NewPasword/NewPassword";
 import { Household } from "./pages/Household/ManageHousehold/Household";
+import { Admin } from "./pages/Admin/Admin";
+import RequireAuth from "./components/Authentication/RequireAuth";
 
 
 
@@ -76,43 +78,53 @@ function App() {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <QueryClientProvider client={queryClient}>
                     <StateProvider value={initialState}>
-                        <Router>
+                        {/* <Rounter> */}
                             <Box sx={{ margin: "50px", padding: "10px" }}>
                                 <CssBaseline>
                                     <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-                                    <Routes>
-                                        <Route path={"/"} element={<Home />}></Route>
-                                        <Route path={"/ShoppingList"} element={
-                                        <>
-                                        <ShoppingList 
-                                        isError={isError}
-                                        isSuccess={isSuccess}
-                                        setErrorMessage={setErrorMessage}
-                                        setIsError={setIsError}
-                                        setSuccessMessage={setSuccessMessage}
-                                        setIsSuccess={setIsSuccess}
-                                        successMessage={successMessage}
-                                        errorMessage={errorMessage}
-                                        isInformation={isInformation}
-                                        setIsInformation={setIsInformation}
-                                        informationMessage={informationMessage}
-                                        setInformationMessage={setInformationMessage}
-                                        />
-                                        <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
-                                        <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} />
-                                        <InformationMessage open={isInformation} setOpen={setIsInformation} informationMessage={informationMessage} />
-                                        </>
-                                        }></Route>
-                                        <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />}></Route>
-                                        <Route path={"/login"} element={<Login />}></Route>
-                                        <Route path={"/register"} element={<Registration />}></Route>
-                                        <Route path={"/myHousehold"} element={<Household />}></Route>
-                                        <Route path={"/changePassword"} element={<ChangePassword />}></Route>
-                                        <Route path={"/forgotPassword"} element={<NewPassword />}></Route>
+                                    <Routes>                  
+
+                                        {/* OPEN ACCESSIBLE ROUTES */}
+                                        <Route path={"/register"} element={<Registration />} />
+                                        <Route path={"/login"} element={<Login />} />
+                                        <Route path={"/forgotPassword"} element={<NewPassword />} />
+
+                                        {/* RESTRICTED ROUTES FOR LOGGED IN USERS */}
+                                        <Route element={<RequireAuth />}> 
+                                            <Route path={"/"} element={<Home />} />
+                                            <Route path={"/changePassword"} element={<ChangePassword />} />
+                                            <Route path={"/myHousehold"} element={<Household />} />
+                                            <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />} />
+                                            <Route path={"/ShoppingList"} element={
+                                            <>
+                                            <ShoppingList 
+                                            isError={isError}
+                                            isSuccess={isSuccess}
+                                            setErrorMessage={setErrorMessage}
+                                            setIsError={setIsError}
+                                            setSuccessMessage={setSuccessMessage}
+                                            setIsSuccess={setIsSuccess}
+                                            successMessage={successMessage}
+                                            errorMessage={errorMessage}
+                                            isInformation={isInformation}
+                                            setIsInformation={setIsInformation}
+                                            informationMessage={informationMessage}
+                                            setInformationMessage={setInformationMessage}
+                                            />
+                                            <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
+                                            <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} />
+                                            <InformationMessage open={isInformation} setOpen={setIsInformation} informationMessage={informationMessage} />
+                                            </>
+                                            }/>
+                                        </Route>
+
+                                        {/* RESTRICTED ROUTES FOR LOGGED IN ADMINS */}
+                                        <Route path={"/admin"} element={<Admin />} />
+
                                     </Routes>
                                 </CssBaseline>
                             </Box>
-                        </Router>
+                        
                     </StateProvider>
                 </QueryClientProvider>
             </LocalizationProvider>

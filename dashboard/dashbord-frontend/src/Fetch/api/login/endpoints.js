@@ -1,11 +1,12 @@
 import axios from "../../axiosConfiguration"
 
-const LOGIN_ROUTE = "/api/auth/login"
-
+const LOGIN_ROUTE = "/api/auth/login";
+const USER_DETAILS = "/api/users/details/me";
 
 export const endpoints = {
     logUserIn: async (setIsError, setErrorMessage,
-        setIsSuccess, setSuccessMessage, user, password, setAuthentication) => {
+        setIsSuccess, setSuccessMessage, user, password, setAuthentication,
+        navigate, from) => {
         console.log("trying login with user " + user + " and password " + password);
         try {
             const response = await axios.post(LOGIN_ROUTE,
@@ -18,16 +19,23 @@ export const endpoints = {
                 },
             );
             if (response.data) {
-                console.log(response.data)
-
+                const access_token = response.data.access_token
+                console.log("ACCESS TOKEN: " + access_token)
+                let userDetails = await axios.get(USER_DETAILS, null,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + access_token
+                        }
+                    })
+                console.log(userDetails);
                 const user = response.data.user
                 const password = response.data.password
                 const roles = response.data.roles
-                const accessToken = response.data.accessToken
-                console.log("accessToken = " + accessToken)
-                setAuthentication({ user, password, roles, accessToken })
-                setIsSuccess(true)
-                setSuccessMessage("You were logged in successfully.")
+                
+                setAuthentication({ user, password, roles, access_token })
+                /* setIsSuccess(true)
+                setSuccessMessage("You were logged in successfully.") */
+                navigate(from, { replace: true });
             }
         } catch (error) {
             setIsError(true);
@@ -37,6 +45,8 @@ export const endpoints = {
                 setErrorMessage("Missing Username or Password.")
             } else if (error.response.status === 401) {
                 setErrorMessage("Unauthorized.")
+            } else if (error.response.status === 403) {
+                setErrorMessage("Wrong Password.")
             } else {
                 setErrorMessage(error.message)
             }

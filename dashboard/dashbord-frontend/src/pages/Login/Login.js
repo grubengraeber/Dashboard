@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import useAuth from "../../hooks/useAuth";
 import { Grid, Stack } from "@mui/material"
 import LoginForm from './LoginForm'
 import SignInWith from './SignInWIth/SignInWith'
 import { SuccessMessage } from "../../components/Success/SuccessMessage"
 import { ErrorMessage } from "../../components/Error/ErrorMessage"
 import { endpoints } from '../../Fetch/api/login/endpoints';
-import { AuthContext } from "../../context/AuthProvider";
-// import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
 
@@ -15,7 +15,15 @@ function Login({ isErrorFromOutside,
     isSuccessFromOutside,
     successMessageFromOutside
 }) {
-    const { setAuthentication } = useContext(AuthContext);
+    const { setAuthentication } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location && location.state && location.state.from ? 
+                            location.state.from.pathname : "/";  
+    
+    
+
     const [loginData, setLoginData] = useState(null)
     const [isSuccess, setIsSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState("Success")
@@ -41,7 +49,7 @@ function Login({ isErrorFromOutside,
             // post
             endpoints.logUserIn(setIsError, setErrorMessage,
                 setIsSuccess, setSuccessMessage, loginData.emailAddress,
-                loginData.password, setAuthentication)
+                loginData.password, setAuthentication, navigate, from)
             //ERROR:
             // - set isErrror true 
             // - errorMessage to custom errortext
