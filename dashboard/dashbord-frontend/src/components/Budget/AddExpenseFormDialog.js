@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Dialog, DialogContent, DialogTitle, Grid, MenuItem, Select, TextField } from '@mui/material'
-import { endpoints } from '../../Fetch/endpoints';
+import { endpoints } from '../../Fetch/reactQueryEndpoints';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from "@mui/x-date-pickers";

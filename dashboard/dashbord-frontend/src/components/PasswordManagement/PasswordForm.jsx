@@ -41,15 +41,16 @@ export const PasswordForm = ({ changePassword, setNewPasswordData }) => {
 
 
   return (
-    
-    <Paper 
-      sx={{margin: "20px", 
-      padding: "10px", 
-      alignItems: "center",
-      justifyContent: "center",
-      display: "flex",
+
+    <Paper
+      sx={{
+        margin: "20px",
+        padding: "10px",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
       }}>
-        <Stack
+      <Stack
         component="form"
         onSubmit={handleSubmit(onSubmit)}
         spacing={2}
@@ -96,23 +97,23 @@ export const PasswordForm = ({ changePassword, setNewPasswordData }) => {
                     <InputAdornment position="end">
                       <IconButton
                       aria-label="toggle password visibility"
-                      onClick={() => {setShowNewPassword(!showNewPassword)}}
-                      onMouseDown={(mouseDownEvent) => {mouseDownEvent.preventDefault()}}
+                      onClick={() => { setShowNewPassword(!showNewPassword) }}
+                      onMouseDown={(mouseDownEvent) => { mouseDownEvent.preventDefault() }}
                       edge="end"
-                      >
-                          {showNewPassword ? <VisibilityIcon/> : <VisibilityOffIcon/> }
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                error={!!errors.newPassword}
-                helperText={errors && errors.newPassword && errors.newPassword.message ? errors.newPassword.message : null}
-                autoComplete={"new-password"}
-                {...register("newPassword", {required: "Required"})}
-                />
+                    >
+                      {showNewPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              error={!!errors.newPassword}
+              helperText={errors && errors.newPassword && errors.newPassword.message ? errors.newPassword.message : null}
+              autoComplete={"new-password"}
+              {...register("newPassword", { required: "Required" })}
+            />
 
                 <TextField 
-                label="Repeat new passsword" 
+                label="Repeat new password"
                 required 
                 type={showRepeatNewPassword ? "text" : "password"}
                 InputProps={{

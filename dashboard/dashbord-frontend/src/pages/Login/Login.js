@@ -9,11 +9,11 @@ import { AuthContext } from "../../context/AuthProvider";
 
 
 
-function Login({isErrorFromOutside, 
-                errorMessageFromOutside, 
-                isSuccessFromOutside, 
-                successMessageFromOutside
-            }) {
+function Login({ isErrorFromOutside,
+    errorMessageFromOutside,
+    isSuccessFromOutside,
+    successMessageFromOutside
+}) {
     const { setAuthentication } = useContext(AuthContext);
     const [loginData, setLoginData] = useState(null)
     const [isSuccess, setIsSuccess] = useState(false)
@@ -32,12 +32,12 @@ function Login({isErrorFromOutside,
 
 
     useEffect(() => {
-        if(loginData) {
+        if (loginData) {
             console.log(loginData)
             //TODO use Data for login process
             // post
-            endpoints.logUserIn(setIsError, setErrorMessage, 
-                setIsSuccess, setSuccessMessage, loginData.userName, 
+            endpoints.logUserIn(setIsError, setErrorMessage,
+                setIsSuccess, setSuccessMessage, loginData.emailAddress,
                 loginData.password, setAuthentication)
             //ERROR:
             // - set isErrror true 
@@ -46,27 +46,27 @@ function Login({isErrorFromOutside,
             // - set is success true 
             // - SuccessMessage to custom successtext
             // - redirect to '/login' route
-            
-          }
+
+        }
     }, [loginData])
 
-  return (
-    <>
-    <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
-    {isSuccess ? <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage}/> :
-        <Stack direction="row" spacing={2} >
-            <Grid container display={"flex"} justifyContent={"center"} alignItems={"center"}>
-                <Grid item xs={4}>
-                    <LoginForm setLoginData={setLoginData}/>
-                </Grid>
-                <Grid item xs={4}>
-                    <SignInWith />
-                </Grid>
-            </Grid>
-        </Stack>
-    }
-    </>
-  )
+    return (
+        <>
+            <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
+            {isSuccess ? <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} /> :
+                <Stack direction="row" spacing={2} >
+                    <Grid container display={"flex"} justifyContent={"center"} alignItems={"center"}>
+                        <Grid item xs={4}>
+                            <LoginForm setLoginData={setLoginData} />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <SignInWith />
+                        </Grid>
+                    </Grid>
+                </Stack>
+            }
+        </>
+    )
 }
 
 export default Login

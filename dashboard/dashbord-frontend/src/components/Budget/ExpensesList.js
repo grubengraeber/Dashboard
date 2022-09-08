@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import { endpoints } from '../../Fetch/endpoints';
+import { endpoints } from '../../Fetch/reactQueryEndpoints';
 import ExpensesListItem from '../../components/Budget/ExpensesListItem';
 import { List } from '@mui/material';
 import StatePlayingAround from '../StatePlayingAround';

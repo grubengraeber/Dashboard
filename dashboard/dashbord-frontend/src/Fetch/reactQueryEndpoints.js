@@ -1,7 +1,11 @@
-// Budget Endpoints
+
+const BASE_URI = "http://localhost:8080/";
+//Budget Endpoints
 const EXPENSES_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses";
 const CHARTDATA_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses/chart";
 
+//User Endpoints
+const USER_DETAILS_ENDPOINT = BASE_URI + "/api/users/me";
 
 // Expense Enpoints
 const EXPENSE_CATEGORIES_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses/categories";
@@ -34,7 +38,15 @@ export const endpoints = {
             body: JSON.stringify(payload)
         });
         return await response.json();
+    },
+    getUserDetails: async function (authToken) {
+        const bearerToken = 'Bearer ' + authToken
+        const response = await fetch(USER_DETAILS_ENDPOINT, {
+            headers: { 'Authentication': authToken }
+        })
+
     }
+
 
 
 }

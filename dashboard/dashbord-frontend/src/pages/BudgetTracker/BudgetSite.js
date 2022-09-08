@@ -4,7 +4,7 @@ import { Card, Grid } from '@mui/material';
 import ExpenseNav from '../../components/Budget/ExpenseNav';
 import ExpensesList from '../../components/Budget/ExpensesList';
 import { useQuery } from '@tanstack/react-query';
-import { endpoints } from '../../Fetch/endpoints';
+import { endpoints } from '../../Fetch/reactQueryEndpoints';
 import { useState } from 'react';
 
 
