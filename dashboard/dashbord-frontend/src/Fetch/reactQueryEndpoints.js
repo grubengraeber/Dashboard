@@ -39,6 +39,15 @@ export const endpoints = {
         });
         return await response.json();
     },
+    deleteExpense: async function (expenseId) {
+        await fetch(EXPENSES_ENDPOINT + "/" + expenseId, {
+            method: 'DELETE'
+        })
+    }
+
+    ,
+
+
     getUserDetails: async function (authToken) {
         // const bearerToken = 'Bearer ' + authToken
         // const response = await fetch(USER_DETAILS_ENDPOINT, {
