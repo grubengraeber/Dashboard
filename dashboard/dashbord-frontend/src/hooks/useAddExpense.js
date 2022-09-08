@@ -6,7 +6,7 @@ function useAddExpense(expenseData) {
 
     const { isSuccess, isLoading, isError } = useMutation(() => addExpense(expenseData))
 
-    const addExpense = async (expenseData) => {
+    const addExpense = (expenseData) => {
         endpoints.postExpense(expenseData)
     }
 

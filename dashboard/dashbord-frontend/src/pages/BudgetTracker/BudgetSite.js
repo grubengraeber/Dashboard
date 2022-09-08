@@ -8,16 +8,24 @@ import { endpoints } from '../../Fetch/reactQueryEndpoints';
 import { useState } from 'react';
 
 
+
+export const ExpenseContext = React.createContext()
+
+
 const BudgetSite = ({ theme }) => {
   const [force, setForce] = useState(0);
-
   const forceUpdate = () => {
+
     setForce(force => force + 1);
   }
   if (false) {
     console.log(force)
   }
-  const { data, isLoading, error, isError } = useQuery(["expenses"], endpoints.getExpenses, { refetchOnMount: "always" });
+  const { data, isLoading, error, isError } = useQuery(["expenses"], endpoints.getExpenses,
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false
+    });
 
 
   if (isLoading) {
@@ -28,32 +36,33 @@ const BudgetSite = ({ theme }) => {
   } else {
 
     return (
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        margin={5}
-      >
-        <Grid item xs={12}>
-          <Card >
-            <ExpensesChart theme={theme}/>
-          </Card>
-        </Grid>
-        <Grid item xs={12} margin={2} alignItems={"flex-start"}>
-          <Card>
-            <ExpenseNav forceUpdate={forceUpdate} />
-          </Card>
-        </Grid>
-        <Grid item xs={12} margin={2}>
-          <Card>
-            <ExpensesList data={data} />
+      <ExpenseContext.Provider value={{ 'forceUpdate': forceUpdate }}>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          margin={5}
+        >
+          <Grid item xs={12}>
+            <Card >
+              <ExpensesChart theme={theme} />
+            </Card>
+          </Grid>
+          <Grid item xs={12} margin={2} alignItems={"flex-start"}>
+            <Card>
+              <ExpenseNav forceUpdate={forceUpdate} />
+            </Card>
+          </Grid>
+          <Grid item xs={12} margin={2}>
+            <Card>
+              <ExpensesList data={data} />
 
-          </Card>
-        </Grid>
-      </Grid >
-
+            </Card>
+          </Grid>
+        </Grid >
+      </ExpenseContext.Provider>
 
     )
   }

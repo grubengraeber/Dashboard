@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../../Fetch/reactQueryEndpoints';
-import ExpensesListItem from '../../components/Budget/ExpensesListItem';
 import { List } from '@mui/material';
 import StatePlayingAround from '../StatePlayingAround';
+import { Delete } from '@mui/icons-material';
+import ExpensesListItem from './ExpensesListItem';
+
 
 const ExpensesList = () => {
-    const { data, isLoading, error, isError, refetch } = useQuery(["expenses"], endpoints.getExpenses, { refetchOnMount: "always" });
+    const { data, isLoading, error, isError, refetch } = useQuery(["expenses"], endpoints.getExpenses, { refetchOnMount: "always", refetchOnWindowFocus: false });
 
     useEffect(() => {
         async function refetchData() {

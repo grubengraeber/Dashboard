@@ -36,7 +36,7 @@ public class HouseHoldCreator {
         Household testHousehold = Household.builder()
                 .name("test Household")
                 .appUsers(new HashSet<>(userList))
-                .expenses(expenseRepository.findAll())
+                //.expenses(expenseRepository.findAll())
                 .shoppingLists(new HashSet<>(shoppingListRepository.findAll()))
                 .build();
 
