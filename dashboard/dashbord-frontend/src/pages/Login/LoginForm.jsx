@@ -52,8 +52,7 @@ function LoginForm({ setLoginData }) {
       //resolver: yupResolver(schema)
     }
   );
-  const onSubmit = (data) => setLoginData(data);
-
+  const onSubmit = (data) => { setLoginData(data); console.log(data) };
   return (
     <>
       <Paper

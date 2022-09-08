@@ -12,10 +12,17 @@ const CONFIGURATION = {
 export const endpoints = {
     logUserIn: async (setIsError, setErrorMessage,
         setIsSuccess, setSuccessMessage, user, password, setAuthentication) => {
-        const DATA = JSON.stringify({ user, password })
         console.log("trying login with user " + user + " and password " + password);
         try {
-            const response = await axios.post(LOGIN_ROUTE, null, { params: { "username": user, "password": password } });
+            const response = await axios.post(LOGIN_ROUTE,
+                null,
+                {
+                    params: { "username": user, "password": password },
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://localhost:8080"
+                    }
+                },
+            );
             if (response.data) {
                 console.log(response.data)
 
