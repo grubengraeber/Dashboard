@@ -103,7 +103,7 @@ function App() {
                                         <InformationMessage open={isInformation} setOpen={setIsInformation} informationMessage={informationMessage} />
                                         </>
                                         }></Route>
-                                        <Route path={"/BudgetTracker"} element={<BudgetSite />}></Route>
+                                        <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />}></Route>
                                         <Route path={"/login"} element={<Login />}></Route>
                                         <Route path={"/register"} element={<Registration />}></Route>
                                         <Route path={"/myHousehold"} element={<Household />}></Route>
