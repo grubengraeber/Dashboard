@@ -24,13 +24,14 @@ export const endpoints = {
                 let userDetails = await axios.get(USER_DETAILS, null,
                     {
                         headers: {
-                            "Authorization": "Bearer " + access_token
-                        }
-                    })
+                            "Authorization": `Bearer ${access_token}`
+                        } 
+                    },
+                );
                 console.log(userDetails);
-                const user = response.data.user
-                const password = response.data.password
-                const roles = response.data.roles
+                const user = userDetails.data.user
+                const password = userDetails.data.password
+                const roles = userDetails.data.roles
                 
                 setAuthentication({ user, password, roles, access_token })
                 /* setIsSuccess(true)
