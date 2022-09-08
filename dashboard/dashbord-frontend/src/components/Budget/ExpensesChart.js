@@ -42,7 +42,12 @@ const backgroundColors = [
 
 const ExpensesChart = ({ theme }) => {
 
-       const { data, isLoading, isError, refetch } = useQuery(["chartData"], endpoints.getChartData, { refetchOnMount: "always" });
+       const { data, isLoading, isError, refetch } = useQuery(["chartData"],
+              endpoints.getChartData,
+              {
+                     refetchOnMount: "always",
+                     refetchOnWindowFocus: false
+              });
 
        useEffect(() => {
               async function refetchData() {

@@ -24,8 +24,8 @@ public class Household {
     private Set<ShoppingList> shoppingLists;
     @OneToMany
     private Set<AppUser> appUsers;
-    @OneToMany
-    private List<Expense> expenses;
+    /*@OneToMany
+    private List<Expense> expenses;*/
 
 
 

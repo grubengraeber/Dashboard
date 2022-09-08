@@ -1,5 +1,5 @@
 import { List, ListItemButton } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import AddExpenseForm from './AddExpenseFormDialog';
 
@@ -11,6 +11,7 @@ const flexContainer = {
 
 
 const ExpenseNav = ({ forceUpdate }) => {
+
     const TIMESPAN_MONTH = 30;
     const TIMESPAN_WEEK = 7;
     // NEXT LINE UNUSED AND THEREFOR COMMENTED OUT BECAUSE OF CONSOLE WARNING
@@ -21,7 +22,6 @@ const ExpenseNav = ({ forceUpdate }) => {
 
 
     const onAddExpense = (e) => {
-        console.log("handle expenses")
         setShowAddDialog(true);
     }
 
@@ -51,8 +51,7 @@ const ExpenseNav = ({ forceUpdate }) => {
 function handleTimeSpanClick(e, timeSpan) {
     alert("wooow");
     // NEXT LINES USED FOR GETTING RID OF CONSOLE WARNINGS
-    console.log(e)
-    console.log(timeSpan)
+
 }
 
 

@@ -9,7 +9,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
 
-    const { data, isLoading, isError } = useQuery(["categories"], endpoints.getExpenseCategories);
+    const { data, isLoading, isError } = useQuery(["categories"], endpoints.getExpenseCategories, { refetchOnWindowFocus: false });
     const [expenseValue, setExpenseValue] = useState("");
     const [expenseName, setExpenseName] = useState("");
     const [expenseCategory, setExpenseCategory] = useState("");
