@@ -94,28 +94,31 @@ Row.propTypes = {
 
 
 
-export const HouseholdTable = ({ householdData }) => {
+export const HouseholdTable = ({ householdData, tableHeader }) => {
     
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>username</TableCell>
-            <TableCell >first name</TableCell>
-            <TableCell >last name</TableCell>
-            <TableCell >email</TableCell>
-            <TableCell >birthdate</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {householdData.appUsers.map((row) => (
-            <Row key={row.id} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <Typography variant='h4' align='center'>{tableHeader}</Typography>
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>username</TableCell>
+              <TableCell >first name</TableCell>
+              <TableCell >last name</TableCell>
+              <TableCell >email</TableCell>
+              <TableCell >birthdate</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {householdData.appUsers.map((row) => (
+              <Row key={row.id} row={row} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
 

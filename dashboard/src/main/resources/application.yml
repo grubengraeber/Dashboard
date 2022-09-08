@@ -12,13 +12,13 @@ spring:
     driver-class-name: org.h2.Driver
 data:
   budget-entries:
-    count: 100
+    count: 20
     time-span: 100
-    creation: false
+    creation: true
 security:
   set-authorization: true
   cors:
     origin: "http://localhost:3000"
   jwt:
-    expiration-time: 1000
+    expiration-time: 1000000000000
     secret: "changeThisTokenInProductionVeryImportant"
