@@ -20,5 +20,5 @@ security:
   cors:
     origin: "http://localhost:3000"
   jwt:
-    expiration-time: 1000000000000
+    expiration-time: 1000000
     secret: "changeThisTokenInProductionVeryImportant"
