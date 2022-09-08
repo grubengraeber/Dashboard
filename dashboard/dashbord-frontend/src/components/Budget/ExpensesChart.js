@@ -3,6 +3,9 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../../Fetch/endpoints';
+import { colors } from '@mui/material';
+import { color } from '@mui/system';
+import { Theme } from '../../UI/Themes/Theme'
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 // NEXT LINE UNUSED THEREFOR COMMENTED OUT BECAUSE OF CONSOLE WARNINGS
@@ -39,7 +42,7 @@ const backgroundColors = [
 
 
 
-const ExpensesChart = () => {
+const ExpensesChart = ({ theme }) => {
 
        const { data, isLoading, isError, refetch } = useQuery(["chartData"], endpoints.getChartData, { refetchOnMount: "always" });
 
@@ -67,16 +70,23 @@ const ExpensesChart = () => {
                      borderWidth: 1,
                      hoverBorderWidth: 1,
                      hoverBorderColor: hoverBorderColors,
-              }]
+              }
+       ],
        };
-
-
-
+       const darkMode = theme.palette.mode === "dark";
        return (
               <div style={{ margin: "auto" }}>
                      <Doughnut data={chartData}
                             options={{
                                    maintainAspectRatio: true,
+                                   plugins: {
+                                          legend: {
+                                                 labels: {
+                                                        color: darkMode ? theme.palette.primary.dark : "black"
+                                                 }
+                                          }
+                                   }
+                                   
                             }} />
               </div>
        )

@@ -8,7 +8,7 @@ import { endpoints } from '../../Fetch/endpoints';
 import { useState } from 'react';
 
 
-const BudgetSite = () => {
+const BudgetSite = ({ theme }) => {
   const [force, setForce] = useState(0);
 
   const forceUpdate = () => {
@@ -36,7 +36,7 @@ const BudgetSite = () => {
       >
         <Grid item xs={12}>
           <Card >
-            <ExpensesChart />
+            <ExpensesChart theme={theme}/>
           </Card>
         </Grid>
         <Grid item xs={12} margin={2} alignItems={"flex-start"}>
