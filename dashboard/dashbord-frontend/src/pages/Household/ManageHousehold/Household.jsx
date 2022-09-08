@@ -3,6 +3,9 @@ import { PaperStructure } from '../../../components/Structure/PaperStructure'
 import { endpoints } from '../../../Fetch/api/household/endpoints'
 import HouseholdTable from './HouseholdTable'
 import { Typography } from '@mui/material'
+import { Throbber } from '../../../components/Loading/Throbber'
+import { Widgets } from './Widgets/Widgets'
+
 
 export const Household = () => {
   const [householdData, setHouseholdData] = useState(null)
@@ -22,10 +25,11 @@ export const Household = () => {
   const houseHoldPresented = householdData !== null ? 
   <>
     <Typography variant='h2' align='center'>My Household</Typography>
-    <HouseholdTable householdData={householdData} />
+    <Widgets />
+    <HouseholdTable householdData={householdData} tableHeader={"Household Users"} />
   </>
   : 
-  <><p>No data fetched yet</p></>;
+  <><Throbber /></>;
   return (
     <>
       <PaperStructure children={houseHoldPresented} />
