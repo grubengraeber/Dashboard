@@ -48,7 +48,7 @@ public class SecurityConfiguration {
         http.csrf().disable();
         http.cors();
 
-        if (setAuthorization) {
+        if (!setAuthorization) {
             http.authorizeRequests().anyRequest().permitAll();
         } else {
             http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
