@@ -74,7 +74,7 @@ function RegistrationForm({ setRegistrationData }) {
       // MODE DEFINES WHEN THE VALIDATION IS CHECKED
       mode: "onBlur",
       // RESOLVER TAKES A RESOLVER WITH A SPECIFIED SCHEMA
-      //resolver: yupResolver(schema)
+      resolver: yupResolver(schema)
     }
   );
   // ONSUBMIT FUNCTION WITH THE 'CHECKBOXCHECKED' STATE IS FOR MAKING THE CHECKBOX MANDATORY

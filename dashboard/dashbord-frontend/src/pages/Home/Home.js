@@ -1,11 +1,11 @@
 import React from "react";
 
 
-export const Home = () => {
+export const Home = ({ username }) => {
 
     return (
         <>
-            WELCOME, USERNAME!
+            <h1>Weclome, {username}</h1>
         </>
     );
 };

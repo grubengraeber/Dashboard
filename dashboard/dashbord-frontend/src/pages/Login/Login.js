@@ -6,6 +6,7 @@ import { SuccessMessage } from "../../components/Success/SuccessMessage"
 import { ErrorMessage } from "../../components/Error/ErrorMessage"
 import { endpoints } from '../../Fetch/api/login/endpoints';
 import { AuthContext } from "../../context/AuthProvider";
+// import { useNavigate } from 'react-router-dom'
 
 
 
@@ -20,6 +21,8 @@ function Login({ isErrorFromOutside,
     const [successMessage, setSuccessMessage] = useState("Success")
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("Error")
+    // const [wasSuccess, setWasSuccess] = useState(false)
+
 
     if (isErrorFromOutside) {
         setIsError(true);
@@ -50,21 +53,25 @@ function Login({ isErrorFromOutside,
         }
     }, [loginData])
 
+
+    if (isSuccess) {
+        // redirect to home page
+    }
+
     return (
         <>
             <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
-            {isSuccess ? <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} /> :
-                <Stack direction="row" spacing={2} >
-                    <Grid container display={"flex"} justifyContent={"center"} alignItems={"center"}>
-                        <Grid item xs={4}>
-                            <LoginForm setLoginData={setLoginData} />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <SignInWith />
-                        </Grid>
+            <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} /> 
+            <Stack direction="row" spacing={2} >
+                <Grid container display={"flex"} justifyContent={"center"} alignItems={"center"}>
+                    <Grid item xs={4}>
+                        <LoginForm setLoginData={setLoginData} />
                     </Grid>
-                </Stack>
-            }
+                    <Grid item xs={4}>
+                        <SignInWith />
+                    </Grid>
+                </Grid>
+            </Stack>
         </>
     )
 }

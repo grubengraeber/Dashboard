@@ -49,7 +49,7 @@ function LoginForm({ setLoginData }) {
       // MODE DEFINES WHEN THE VALIDATION IS CHECKED
       mode: "onBlur",
       // RESOLVER TAKES A RESOLVER WITH A SPECIFIED SCHEMA
-      //resolver: yupResolver(schema)
+      resolver: yupResolver(schema)
     }
   );
   const onSubmit = (data) => { setLoginData(data); console.log(data) };

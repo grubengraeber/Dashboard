@@ -3,9 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../../Fetch/reactQueryEndpoints';
-import { colors } from '@mui/material';
-import { color } from '@mui/system';
-import { Theme } from '../../UI/Themes/Theme'
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 // NEXT LINE UNUSED THEREFOR COMMENTED OUT BECAUSE OF CONSOLE WARNINGS

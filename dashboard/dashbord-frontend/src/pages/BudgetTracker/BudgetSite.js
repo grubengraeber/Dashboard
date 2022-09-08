@@ -14,7 +14,9 @@ const BudgetSite = ({ theme }) => {
   const forceUpdate = () => {
     setForce(force => force + 1);
   }
-
+  if (false) {
+    console.log(force)
+  }
   const { data, isLoading, error, isError } = useQuery(["expenses"], endpoints.getExpenses, { refetchOnMount: "always" });
 
 

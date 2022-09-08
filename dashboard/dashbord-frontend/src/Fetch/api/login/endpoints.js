@@ -1,13 +1,7 @@
-import { useQuery } from "@tanstack/react-query"
 import axios from "../../axiosConfiguration"
 
 const LOGIN_ROUTE = "/api/auth/login"
 
-const CONFIGURATION = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}
 
 export const endpoints = {
     logUserIn: async (setIsError, setErrorMessage,
