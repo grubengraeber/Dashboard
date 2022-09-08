@@ -22,6 +22,8 @@ import { NewPassword } from "./pages/NewPasword/NewPassword";
 import { Household } from "./pages/Household/ManageHousehold/Household";
 import { Admin } from "./pages/Admin/Admin";
 import RequireAuth from "./components/Authentication/RequireAuth";
+import useAuth from "./hooks/useAuth";
+import { Unauthorized } from "./pages/Unauthorized/Unauthorized";
 
 
 
@@ -41,6 +43,8 @@ function App() {
     const [successMessage, setSuccessMessage] = useState("Success!")
     const [isInformation, setIsInformation] = useState(false)
     const [informationMessage, setInformationMessage] = useState("This is an information")
+
+    const { auth } = useAuth();
 
     const theme = React.useMemo(
         () =>
@@ -88,10 +92,11 @@ function App() {
                                         <Route path={"/register"} element={<Registration />} />
                                         <Route path={"/login"} element={<Login />} />
                                         <Route path={"/forgotPassword"} element={<NewPassword />} />
+                                        <Route path={"/unauthorized"} element={<Unauthorized />} />
 
                                         {/* RESTRICTED ROUTES FOR LOGGED IN USERS */}
-                                        <Route element={<RequireAuth />}> 
-                                            <Route path={"/"} element={<Home />} />
+                                        <Route element={<RequireAuth allowedRoles={['User', 'Admin']} />}> 
+                                            <Route path={"/"} element={<Home username={auth.firstName}/>} />
                                             <Route path={"/changePassword"} element={<ChangePassword />} />
                                             <Route path={"/myHousehold"} element={<Household />} />
                                             <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />} />
@@ -119,7 +124,9 @@ function App() {
                                         </Route>
 
                                         {/* RESTRICTED ROUTES FOR LOGGED IN ADMINS */}
-                                        <Route path={"/admin"} element={<Admin />} />
+                                        <Route element={<RequireAuth allowedRoles={['Admin']} />}> 
+                                            <Route path={"/admin"} element={<Admin />} />
+                                        </Route>
 
                                     </Routes>
                                 </CssBaseline>

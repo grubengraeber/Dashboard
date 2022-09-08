@@ -15,7 +15,7 @@ function Login({ isErrorFromOutside,
     isSuccessFromOutside,
     successMessageFromOutside
 }) {
-    const { setAuthentication } = useAuth();
+    const { setAuth } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -49,7 +49,7 @@ function Login({ isErrorFromOutside,
             // post
             endpoints.logUserIn(setIsError, setErrorMessage,
                 setIsSuccess, setSuccessMessage, loginData.emailAddress,
-                loginData.password, setAuthentication, navigate, from)
+                loginData.password, setAuth, navigate, from)
             //ERROR:
             // - set isErrror true 
             // - errorMessage to custom errortext
