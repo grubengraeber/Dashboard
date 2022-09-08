@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
-import { endpoints } from '../../Fetch/endpoints';
+import { endpoints } from '../../Fetch/reactQueryEndpoints';
 import { colors } from '@mui/material';
 import { color } from '@mui/system';
 import { Theme } from '../../UI/Themes/Theme'
@@ -71,7 +71,7 @@ const ExpensesChart = ({ theme }) => {
                      hoverBorderWidth: 1,
                      hoverBorderColor: hoverBorderColors,
               }
-       ],
+              ],
        };
        const darkMode = theme.palette.mode === "dark";
        return (
