@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import {BasicShoppingListItem} from "./itemTemplate/BasicShoppingListItem";
 import { AddForm } from "./addItem/AddForm";
 import { endpoints } from "../../Fetch/api/shoppingList/shoppingList/endpoints";
+import useAuth from "../../hooks/useAuth"
 
 
 export const ShoppingList = (
@@ -15,11 +16,11 @@ export const ShoppingList = (
     const [listId, setListId] = useState(0)
     const [newItemFormOn, setNewItemFormOn] = useState(false)
     const [activeOnly, setActiveOnly] = useState(true)
+    const { auth } = useAuth();
     
-
     const getShoppingList = () => { 
         endpoints.getFirstShoppingList(setItems, 
-        setListName, setListId, setLoading)
+        setListName, setListId, setLoading, auth.accessToken)
     }
 
     useEffect(() => {

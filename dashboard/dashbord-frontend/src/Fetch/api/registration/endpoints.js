@@ -15,14 +15,14 @@ export const endpoints = {
         setSuccessMessage("Registration successful! You can log in now.")
     }   catch(error) {
             if (error.response) {
-            } else if(error.respone.status) {
+                if (error.response.status) {
                 if(error.respone.status === 409) {
                     console.log("Email Address Already Taken!")
                 }
-                console.log(error.response.status)   
             }
-            else {
-                console.log("No Server Response")
+                console.log(error.response.status)   
+            }   else {
+                console.log(error.message)
             }
             onError()
             setErrorMessage(error.message)

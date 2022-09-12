@@ -3,9 +3,14 @@ import axios from "../../../axiosConfiguration";
 const SHOPPING_LIST_ENDPOINT = "http://localhost:8080/api/shopping-list";
     
 export const endpoints = {
-    getFirstShoppingList: async (setItems, setListName, setListId, setLoading) => {
+    getFirstShoppingList: async (setItems, setListName, setListId, setLoading, accessToken) => {
         try {
-            await axios.get(SHOPPING_LIST_ENDPOINT)
+            await axios.get(SHOPPING_LIST_ENDPOINT, 
+                {
+                    headers: {
+                        "Authorization": "Bearer " + accessToken
+                    }
+                })
             .then((response) => {
             const ShoppingListItemsLoaded = response.data[0].items;
             const ShoppingListNameLoaded = response.data[0].name;

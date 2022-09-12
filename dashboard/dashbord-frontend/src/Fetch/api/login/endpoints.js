@@ -19,6 +19,7 @@ export const endpoints = {
             );
             if (response.data) {
                 const accessToken = response.data.access_token
+                console.log()
                 let userDetails = await axios.get(USER_DETAILS,
                     {
                         headers: {
