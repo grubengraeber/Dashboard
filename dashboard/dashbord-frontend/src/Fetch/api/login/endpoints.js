@@ -31,6 +31,7 @@ export const endpoints = {
                 const roles = userDetails.data.roles
                 const firstName = userDetails.data.firstName
                 const lastName = userDetails.data.lastName
+
                 const authenticationObject = { user, password, roles, accessToken, firstName, lastName };
                 console.log(authenticationObject)
                 setAuthentication(authenticationObject)

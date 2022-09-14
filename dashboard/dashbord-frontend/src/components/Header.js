@@ -44,7 +44,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
             <Grid item xs={5}>
               <CustomLogo title={"Dashboard"}/>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1}> 
               <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
             </Grid>
           </Grid>
