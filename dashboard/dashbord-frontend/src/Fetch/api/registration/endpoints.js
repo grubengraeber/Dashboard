@@ -10,18 +10,18 @@ export const endpoints = {
     postRegistration: async (payload, onSuccess, onError, setSuccessMessage, setErrorMessage) => {
         let response = null;
         try {
-        response = await axios.post(REGISTRATION_POST, payload);
-        onSuccess()
-        setSuccessMessage("Registration successful! You can log in now.")
-    }   catch(error) {
+            response = await axios.post(REGISTRATION_POST, payload);
+            onSuccess()
+            setSuccessMessage("Registration successful! You can log in now.")
+        } catch (error) {
             if (error.response) {
                 if (error.response.status) {
-                if(error.respone.status === 409) {
-                    console.log("Email Address Already Taken!")
+                    if (error.response.status === 409) {
+                        console.log("Email Address Already Taken!")
+                    }
                 }
-            }
-                console.log(error.response.status)   
-            }   else {
+                console.log(error.response.status)
+            } else {
                 console.log(error.message)
             }
             onError()

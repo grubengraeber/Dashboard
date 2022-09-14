@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../../Fetch/reactQueryEndpoints';
+import useAuth from '../../hooks/useAuth';
 
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -41,9 +42,9 @@ const backgroundColors = [
 
 
 const ExpensesChart = ({ theme }) => {
-
+       const auth = useAuth();
        const { data, isLoading, isError, refetch } = useQuery(["chartData"],
-              endpoints.getChartData,
+              () => endpoints.getChartData(auth),
               {
                      refetchOnMount: "always",
                      refetchOnWindowFocus: false

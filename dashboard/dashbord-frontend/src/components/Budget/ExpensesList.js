@@ -5,10 +5,12 @@ import { List } from '@mui/material';
 import StatePlayingAround from '../StatePlayingAround';
 import { Delete } from '@mui/icons-material';
 import ExpensesListItem from './ExpensesListItem';
+import useAuth from '../../hooks/useAuth';
 
 
 const ExpensesList = () => {
-    const { data, isLoading, error, isError, refetch } = useQuery(["expenses"], endpoints.getExpenses, { refetchOnMount: "always", refetchOnWindowFocus: false });
+    const auth = useAuth();
+    const { data, isLoading, error, isError, refetch } = useQuery(["expenses"], () => endpoints.getExpenses(auth), { refetchOnMount: "always", refetchOnWindowFocus: false });
 
     useEffect(() => {
         async function refetchData() {

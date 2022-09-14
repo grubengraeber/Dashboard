@@ -6,6 +6,7 @@ import ExpensesList from '../../components/Budget/ExpensesList';
 import { useQuery } from '@tanstack/react-query';
 import { endpoints } from '../../Fetch/reactQueryEndpoints';
 import { useState } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 
 
@@ -14,6 +15,7 @@ export const ExpenseContext = React.createContext()
 
 const BudgetSite = ({ theme }) => {
   const [force, setForce] = useState(0);
+  const auth = useAuth();
   const forceUpdate = () => {
 
     setForce(force => force + 1);
@@ -21,7 +23,9 @@ const BudgetSite = ({ theme }) => {
   if (false) {
     console.log(force)
   }
-  const { data, isLoading, error, isError } = useQuery(["expenses"], endpoints.getExpenses,
+
+
+  const { data, isLoading, error, isError } = useQuery(["expenses"], () => endpoints.getExpenses(auth),
     {
       refetchOnMount: false,
       refetchOnWindowFocus: false

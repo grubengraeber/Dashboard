@@ -62,16 +62,16 @@ function App() {
                             light: '#757575',
                             dark: '#bdbdbd',
                         },
-                        background: darkMode ? 
-                        {
-                            default: '#303030',
-                            paper: '#424242',
-                        } : 
-                        {
-                            default: '#FAFAFA',
-                            paper: '#FFFFFF',
-                        },
-                        },
+                        background: darkMode ?
+                            {
+                                default: '#303030',
+                                paper: '#424242',
+                            } :
+                            {
+                                default: '#FAFAFA',
+                                paper: '#FFFFFF',
+                            },
+                    },
                 }
             ), [darkMode],
     )
@@ -83,55 +83,55 @@ function App() {
                 <QueryClientProvider client={queryClient}>
                     <StateProvider value={initialState}>
                         {/* <Rounter> */}
-                            <Box sx={{ margin: "50px", padding: "10px" }}>
-                                <CssBaseline>
-                                    <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-                                    <Routes>                  
+                        <Box sx={{ margin: "50px", padding: "10px" }}>
+                            <CssBaseline>
+                                <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+                                <Routes>
 
-                                        {/* OPEN ACCESSIBLE ROUTES */}
-                                        <Route path={"/register"} element={<Registration />} />
-                                        <Route path={"/login"} element={<Login />} />
-                                        <Route path={"/forgotPassword"} element={<NewPassword />} />
-                                        <Route path={"/unauthorized"} element={<Unauthorized />} />
+                                    {/* OPEN ACCESSIBLE ROUTES */}
+                                    <Route path={"/register"} element={<Registration />} />
+                                    <Route path={"/login"} element={<Login />} />
+                                    <Route path={"/forgotPassword"} element={<NewPassword />} />
+                                    <Route path={"/unauthorized"} element={<Unauthorized />} />
 
-                                        {/* RESTRICTED ROUTES FOR LOGGED IN USERS */}
-                                        <Route element={<RequireAuth allowedRoles={['User', 'Admin']} />}> 
-                                            <Route path={"/"} element={<Home username={auth.firstName}/>} />
-                                            <Route path={"/changePassword"} element={<ChangePassword />} />
-                                            <Route path={"/myHousehold"} element={<Household />} />
-                                            <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />} />
-                                            <Route path={"/ShoppingList"} element={
+                                    {/* RESTRICTED ROUTES FOR LOGGED IN USERS */}
+                                    <Route element={<RequireAuth allowedRoles={['User', 'Admin']} />}>
+                                        <Route path={"/"} element={<Home username={auth.firstName} />} />
+                                        <Route path={"/changePassword"} element={<ChangePassword />} />
+                                        <Route path={"/myHousehold"} element={<Household />} />
+                                        <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />} />
+                                        <Route path={"/ShoppingList"} element={
                                             <>
-                                            <ShoppingList 
-                                            isError={isError}
-                                            isSuccess={isSuccess}
-                                            setErrorMessage={setErrorMessage}
-                                            setIsError={setIsError}
-                                            setSuccessMessage={setSuccessMessage}
-                                            setIsSuccess={setIsSuccess}
-                                            successMessage={successMessage}
-                                            errorMessage={errorMessage}
-                                            isInformation={isInformation}
-                                            setIsInformation={setIsInformation}
-                                            informationMessage={informationMessage}
-                                            setInformationMessage={setInformationMessage}
-                                            />
-                                            <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
-                                            <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} />
-                                            <InformationMessage open={isInformation} setOpen={setIsInformation} informationMessage={informationMessage} />
+                                                <ShoppingList
+                                                    isError={isError}
+                                                    isSuccess={isSuccess}
+                                                    setErrorMessage={setErrorMessage}
+                                                    setIsError={setIsError}
+                                                    setSuccessMessage={setSuccessMessage}
+                                                    setIsSuccess={setIsSuccess}
+                                                    successMessage={successMessage}
+                                                    errorMessage={errorMessage}
+                                                    isInformation={isInformation}
+                                                    setIsInformation={setIsInformation}
+                                                    informationMessage={informationMessage}
+                                                    setInformationMessage={setInformationMessage}
+                                                />
+                                                <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
+                                                <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} />
+                                                <InformationMessage open={isInformation} setOpen={setIsInformation} informationMessage={informationMessage} />
                                             </>
-                                            }/>
-                                        </Route>
+                                        } />
+                                    </Route>
 
-                                        {/* RESTRICTED ROUTES FOR LOGGED IN ADMINS */}
-                                        <Route element={<RequireAuth allowedRoles={['Admin']} />}> 
-                                            <Route path={"/admin"} element={<Admin />} />
-                                        </Route>
+                                    {/* RESTRICTED ROUTES FOR LOGGED IN ADMINS */}
+                                    <Route element={<RequireAuth allowedRoles={['Admin']} />}>
+                                        <Route path={"/admin"} element={<Admin />} />
+                                    </Route>
 
-                                    </Routes>
-                                </CssBaseline>
-                            </Box>
-                        
+                                </Routes>
+                            </CssBaseline>
+                        </Box>
+
                     </StateProvider>
                 </QueryClientProvider>
             </LocalizationProvider>

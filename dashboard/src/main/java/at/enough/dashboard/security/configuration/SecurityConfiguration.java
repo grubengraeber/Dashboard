@@ -44,20 +44,15 @@ public class SecurityConfiguration {
 
         OncePerRequestFilter customAuthorizationFilter = new CustomAuthorizationFilter(jwtConverter);
 
-//todo set up antmatchers and secure endpoints
         http.csrf().disable();
         http.cors();
-
-
         if (!setAuthorization) {
             http.authorizeRequests().anyRequest().permitAll();
         } else {
-            http.authorizeRequests().antMatchers("/api/v1/budget/**").permitAll();
-            http.authorizeRequests().antMatchers("/api/shopping-list/**").permitAll();
+/*            http.authorizeRequests().antMatchers("/api/v1/budget/**").permitAll();
+            http.authorizeRequests().antMatchers("/api/shopping-list/**").permitAll();*/
             http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
             http.authorizeRequests().anyRequest().authenticated();
-
-
         }
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(authenticationFilter);
