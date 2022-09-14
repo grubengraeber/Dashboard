@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.Set;
 
@@ -27,9 +28,12 @@ public class AppUserService {
     private final AppUserRepository appUserRepository;
     private final RoleRepository roleRepository;
 
+
     public AppUser registerAppUser(AppUserSignUpRequest request) {
         Role defaultRole = roleRepository.findByName(RoleValues.User.name()).orElseThrow(EntityNotFoundException::new);
-
+        /*if (emailExist(request.email())) {
+            throw new EntityExistsException();
+        }*/
         AppUser appUser = AppUser.builder()
                 .email(request.email())
                 .firstName(request.firstName())

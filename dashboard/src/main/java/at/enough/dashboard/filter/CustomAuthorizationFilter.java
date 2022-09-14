@@ -35,8 +35,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     private final JWTConverter jwtConverter;
 
 
-    //todo Post request, mapping every request execpt of login and registration
-    //todo checking for authorization: BEARER + TOKEN
     @SneakyThrows
     @Override
     protected void doFilterInternal(HttpServletRequest request,
