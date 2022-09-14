@@ -12,12 +12,9 @@ export const AuthProvider = ({ children }) => {
     //TODO remember me functionallity comes here?
     //wrapping the auth call and checking for persisted user data in the local storage
     const getAuth = () => {
-        console.log("from the authprovider", authStateData)
         const storedUserData = JSON.parse(localStorage.getItem("userData"));
-        console.log("this is parsed data from storage", storedUserData)
         if (authStateData === null && storedUserData !== null) {
             setAuthStateData({ ...storedUserData });
-            console.log("get stored Userdata", storedUserData)
             return storedUserData;
         }
         return authStateData;
@@ -28,7 +25,6 @@ export const AuthProvider = ({ children }) => {
 
     //setting userData in local storage
     const setAuth = (data) => {
-        console.log("this is data to store in local storage", data)
         if (localStorage.getItem("userData") === null) {
             localStorage.setItem("userData", JSON.stringify(data))
         }

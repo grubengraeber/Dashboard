@@ -17,7 +17,6 @@ const SHOPPING_LIST_ENDPOINT = "http://localhost:8080/api/shopping-list";
 
 
 const buildAuthHeader = (auth) => {
-    console.log("build header" + auth.auth.accessToken)
     return { 'Authorization': 'Bearer ' + auth.auth.accessToken }
 }
 
@@ -26,8 +25,6 @@ export const endpoints = {
 
 
     getExpenses: async function (auth) {
-        console.log("here is the auth");
-        console.log(auth);
         const response = await fetch(EXPENSES_ENDPOINT,
             {
                 headers: buildAuthHeader(auth)
@@ -38,7 +35,6 @@ export const endpoints = {
         const response = await fetch(CHARTDATA_ENDPOINT, {
             headers: buildAuthHeader(auth)
         });
-        console.log(auth)
 
         return response.json();
     },
@@ -46,7 +42,6 @@ export const endpoints = {
         const response = await fetch(SHOPPING_LIST_ENDPOINT, {
             headers: buildAuthHeader(auth)
         });
-        console.log(auth)
 
         return response.json();
     },
@@ -55,12 +50,10 @@ export const endpoints = {
             {
                 headers: buildAuthHeader(auth)
             });
-        console.log(auth)
 
         return response.json();
     },
     postExpense: async function (auth, payload) {
-        console.log(auth)
 
         const response = await fetch(EXPENSES_ENDPOINT, {
             method: 'POST',
