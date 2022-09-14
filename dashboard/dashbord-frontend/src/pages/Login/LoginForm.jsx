@@ -8,6 +8,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 /* 
 TODO:
@@ -20,6 +21,12 @@ TODO:
 function LoginForm({ setLoginData }) {
 
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateToRegistration = () => {
+    // 👇️ navigate to /
+    navigate('/register');
+  };
 
   function togglePassword(clickEvent) {
     clickEvent.preventDefault();
@@ -136,7 +143,7 @@ function LoginForm({ setLoginData }) {
             <Stack direction={"row"} spacing={1} justifyContent={"center"}>
               <Typography>No account yet?</Typography>
               <Link
-                href={"/register"}
+                onClick={navigateToRegistration}
               >
                 Sign up
               </Link>
