@@ -9,12 +9,12 @@ const ExpensesListItem = ({ data }) => {
     const { forceUpdate } = useContext(ExpenseContext);
     const [expenseId, setExpenseId] = useState(data.id)
     // const [isMouseOver, setIsMouseOver] = useState(false);
-
+    // THE NEXT LINE IS GETTING RID OF CONSOLE WARNINGS BECAUSE 'setExpenseId' is never used
+    if (false) {
+        setExpenseId(data.id)
+    }
     const mutation = useMutation((id) => endpoints.deleteExpense(id));
 
-    if (false) {
-        setExpenseId(data.id);
-    }
     const handleOnClickDelete = () => {
         forceUpdate();
         mutation.mutate(expenseId)
