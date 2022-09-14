@@ -19,10 +19,10 @@ function Login({ isErrorFromOutside,
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location && location.state && location.state.from ? 
-                            location.state.from.pathname : "/";  
-    
-    
+    const from = location && location.state && location.state.from ?
+        location.state.from.pathname : "/";
+
+
 
     const [loginData, setLoginData] = useState(null)
     const [isSuccess, setIsSuccess] = useState(false)
@@ -69,7 +69,7 @@ function Login({ isErrorFromOutside,
     return (
         <>
             <ErrorMessage open={isError} setOpen={setIsError} errorMessage={errorMessage} />
-            <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} /> 
+            <SuccessMessage open={isSuccess} setOpen={setIsSuccess} successMessage={successMessage} />
             <Stack direction="row" spacing={2} >
                 <Grid container display={"flex"} justifyContent={"center"} alignItems={"center"}>
                     <Grid item xs={4}>
