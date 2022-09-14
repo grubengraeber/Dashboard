@@ -5,11 +5,14 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from '@mui/x-date-pickers';
+import useAuth from '../../hooks/useAuth';
 
 
 const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
-
-    const { data, isLoading, isError } = useQuery(["categories"], endpoints.getExpenseCategories, { refetchOnWindowFocus: false });
+    const auth = useAuth();
+    const { data, isLoading, isError } = useQuery(["categories"],
+        () => endpoints.getExpenseCategories(auth),
+        { refetchOnWindowFocus: false });
     const [expenseValue, setExpenseValue] = useState("");
     const [expenseName, setExpenseName] = useState("");
     const [expenseCategory, setExpenseCategory] = useState("");
@@ -18,7 +21,7 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
 
     //mutution for post/put request using React-query
     const mutation = useMutation(payload => {
-        return endpoints.postExpense(payload)
+        return endpoints.postExpense(auth, payload)
     })
 
 

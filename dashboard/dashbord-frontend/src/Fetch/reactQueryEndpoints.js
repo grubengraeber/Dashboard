@@ -1,5 +1,7 @@
 
 // const BASE_URI = "http://localhost:8080/";
+
+
 //Budget Endpoints
 const EXPENSES_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses";
 const CHARTDATA_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses/chart";
@@ -13,40 +15,70 @@ const EXPENSE_CATEGORIES_ENDPOINT = "http://localhost:8080/api/v1/budget/expense
 // ShoppingList Endpoints
 const SHOPPING_LIST_ENDPOINT = "http://localhost:8080/api/shopping-list";
 
+
+const buildAuthHeader = (auth) => {
+    console.log("build header" + auth.auth.accessToken)
+    return { 'Authorization': 'Bearer ' + auth.auth.accessToken }
+}
+
+
 export const endpoints = {
 
-    getExpenses: async function () {
-        const respone = await fetch(EXPENSES_ENDPOINT);
-        return respone.json();
-    },
-    getChartData: async function () {
-        const respone = await fetch(CHARTDATA_ENDPOINT);
-        return respone.json();
-    },
-    getShoppingList: async function () {
-        const respone = await fetch(SHOPPING_LIST_ENDPOINT);
-        return respone.json();
-    },
-    getExpenseCategories: async function () {
-        const response = await fetch(EXPENSE_CATEGORIES_ENDPOINT);
+
+    getExpenses: async function (auth) {
+        console.log("here is the auth");
+        console.log(auth);
+        const response = await fetch(EXPENSES_ENDPOINT,
+            {
+                headers: buildAuthHeader(auth)
+            });
         return response.json();
     },
-    postExpense: async function (payload) {
+    getChartData: async function (auth) {
+        const response = await fetch(CHARTDATA_ENDPOINT, {
+            headers: buildAuthHeader(auth)
+        });
+        console.log(auth)
+
+        return response.json();
+    },
+    getShoppingList: async function (auth) {
+        const response = await fetch(SHOPPING_LIST_ENDPOINT, {
+            headers: buildAuthHeader(auth)
+        });
+        console.log(auth)
+
+        return response.json();
+    },
+    getExpenseCategories: async function (auth) {
+        const response = await fetch(EXPENSE_CATEGORIES_ENDPOINT,
+            {
+                headers: buildAuthHeader(auth)
+            });
+        console.log(auth)
+
+        return response.json();
+    },
+    postExpense: async function (auth, payload) {
+        console.log(auth)
+
         const response = await fetch(EXPENSES_ENDPOINT, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                ...{ 'Content-Type': 'application/json' },
+                ...auth
+            },
             body: JSON.stringify(payload)
         });
         return await response.json();
     },
-    deleteExpense: async function (expenseId) {
+    deleteExpense: async function (auth, expenseId) {
         await fetch(EXPENSES_ENDPOINT + "/" + expenseId, {
-            method: 'DELETE'
-        })
-    }
+            method: 'DELETE',
+            headers: buildAuthHeader(auth)
+        });
 
-    ,
-
+    },
 
     getUserDetails: async function (authToken) {
         // const bearerToken = 'Bearer ' + authToken

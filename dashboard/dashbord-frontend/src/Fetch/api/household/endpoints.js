@@ -8,7 +8,7 @@ export const endpoints = {
         const response = await axios.get(HOUSEHOLD_ENDPOINT, {
             headers: {
                 "Authorization": `Bearer ${bearerToken}`
-            } 
+            }
         })
         return response;
     },
