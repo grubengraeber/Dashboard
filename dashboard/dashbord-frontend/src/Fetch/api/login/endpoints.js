@@ -23,7 +23,7 @@ export const endpoints = {
                     {
                         headers: {
                             "Authorization": `Bearer ${accessToken}`
-                        } 
+                        }
                     },
                 );
                 const user = userDetails.data.username
@@ -31,13 +31,13 @@ export const endpoints = {
                 const roles = userDetails.data.roles
                 const firstName = userDetails.data.firstName
                 const lastName = userDetails.data.lastName
-                const authenticationObject = { user, password, roles, accessToken , firstName, lastName };
-                console.info("AUTHENTICATION OBJECT:")
+
+                const authenticationObject = { user, password, roles, accessToken, firstName, lastName };
                 console.log(authenticationObject)
                 setAuthentication(authenticationObject)
 
-                /* setIsSuccess(true)
-                setSuccessMessage("You were logged in successfully.") */
+                setIsSuccess(true)
+                setSuccessMessage("You were logged in successfully.")
                 navigate(from, { replace: true });
             }
         } catch (error) {
