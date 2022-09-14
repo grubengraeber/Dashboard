@@ -47,8 +47,6 @@ public class SecurityConfiguration {
 //todo set up antmatchers and secure endpoints
         http.csrf().disable();
         http.cors();
-
-
         if (!setAuthorization) {
             http.authorizeRequests().anyRequest().permitAll();
         } else {
@@ -56,8 +54,6 @@ public class SecurityConfiguration {
             http.authorizeRequests().antMatchers("/api/shopping-list/**").permitAll();
             http.authorizeRequests().antMatchers("/api/auth/**").permitAll();
             http.authorizeRequests().anyRequest().authenticated();
-
-
         }
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilter(authenticationFilter);
