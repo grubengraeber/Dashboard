@@ -1,4 +1,4 @@
-import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { ListItem, ListItemText } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 import React, { useContext, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
@@ -8,8 +8,11 @@ import { ExpenseContext } from '../../pages/BudgetTracker/BudgetSite';
 const ExpensesListItem = ({ data }) => {
     const { forceUpdate } = useContext(ExpenseContext);
     const [expenseId, setExpenseId] = useState(data.id)
-    const [isMouseOver, setIsMouseOver] = useState(false);
-
+    // const [isMouseOver, setIsMouseOver] = useState(false);
+    // THE NEXT LINE IS GETTING RID OF CONSOLE WARNINGS BECAUSE 'setExpenseId' is never used
+    if (false) {
+        setExpenseId(data.id)
+    }
     const mutation = useMutation((id) => endpoints.deleteExpense(id));
 
     const handleOnClickDelete = () => {

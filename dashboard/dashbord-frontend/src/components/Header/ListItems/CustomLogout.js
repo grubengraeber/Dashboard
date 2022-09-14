@@ -1,21 +1,23 @@
 import React from 'react';
 import {BasicListItem} from './BasicListItem'
 import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
-import {useNavigate} from 'react-router-dom'
+// import {useNavigate} from 'react-router-dom'
+import useAuth from '../../../hooks/useAuth';
 
 
 export const CustomLogout = () => {
+  const { setAuth } = useAuth();
+  // const navigate = useNavigate();
 
-  const navigate = useNavigate();
-
-  const navigateToLogout = () => {
+  const logOut = () => {
+    setAuth({});
     // 👇️ navigate to /
-    navigate('/logout');
+    //navigate('/logout');
   };
 
   return (
     <>
-    <BasicListItem text={'Logout'} onClick={navigateToLogout} icon={<LogoutSharpIcon />}/>
+    <BasicListItem text={'Logout'} onClick={logOut} icon={<LogoutSharpIcon />}/>
     </>
   )
 }

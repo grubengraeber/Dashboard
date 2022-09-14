@@ -35,15 +35,17 @@ const initialState = {
 const queryClient = new QueryClient();
 function App() {
     // useMediaQuery('(prefers-color-scheme: dark)') CHECKS FOR OS SET UP THEME SETTINGS
-    const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'))
-    // for Error-, Information- and Successmessages
+    const localStorageHasDarkMode =  localStorage.getItem("darkMode") ? true : false;
+    const localDarkMode = localStorageHasDarkMode && localStorage.getItem("darkMode") === "true" ? true : false;
+    const [darkMode, setDarkMode] = localStorageHasDarkMode ? useState(localDarkMode) : useState(useMediaQuery('(prefers-color-scheme: dark)'));
+    // for Error-, Information- and SuccessMessages
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("An Error occured!")
     const [isSuccess, setIsSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState("Success!")
     const [isInformation, setIsInformation] = useState(false)
     const [informationMessage, setInformationMessage] = useState("This is an information")
-
+    // to get the users first name on the homepage
     const { auth } = useAuth();
 
     const theme = React.useMemo(
@@ -71,7 +73,7 @@ function App() {
                                 default: '#FAFAFA',
                                 paper: '#FFFFFF',
                             },
-                    },
+                    }, 
                 }
             ), [darkMode],
     )

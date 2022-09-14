@@ -19,7 +19,6 @@ export const endpoints = {
             );
             if (response.data) {
                 const accessToken = response.data.access_token
-                console.log()
                 let userDetails = await axios.get(USER_DETAILS,
                     {
                         headers: {
@@ -33,6 +32,7 @@ export const endpoints = {
                 const firstName = userDetails.data.firstName
                 const lastName = userDetails.data.lastName
                 const authenticationObject = { user, password, roles, accessToken , firstName, lastName };
+                console.info("AUTHENTICATION OBJECT:")
                 console.log(authenticationObject)
                 setAuthentication(authenticationObject)
 

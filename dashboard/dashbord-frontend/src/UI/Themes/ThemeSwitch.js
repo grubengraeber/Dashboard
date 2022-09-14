@@ -5,7 +5,8 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 const ThemeSwitch = (props) => {
 
     function handleClick(clickEvent) {
-        props.setDarkMode(!props.darkMode)
+      !props.darkMode === true ? localStorage.setItem("darkMode", "true") : localStorage.setItem("darkMode", "false")
+      props.setDarkMode(!props.darkMode)
     }
 
   return (
