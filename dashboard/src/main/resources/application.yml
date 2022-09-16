@@ -22,3 +22,6 @@ security:
   jwt:
     expiration-time: 10000000
     secret: "changeThisTokenInProductionVeryImportant"
+logging:
+  level:
+    root: off

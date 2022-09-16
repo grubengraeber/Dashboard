@@ -6,14 +6,12 @@ import at.enough.dashboard.budget.service.BudgetService;
 import at.enough.dashboard.budget.util.AddExpenseRequestDTOConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequestMapping("api/v1/budget")
 @RestController
@@ -26,11 +24,11 @@ public class BudgetController {
 
 
     @GetMapping("/expenses")
-    public List<Expense> getAll() {
-
+    public List<Expense> getAll(@RequestParam(value = "time-span") Optional<Integer> timeSpan) {
         log.info("Requesting all expenses");
         return budgetService.getAll();
     }
+
 
     @GetMapping("/expenses/categories")
     public List<String> getCategories() {
@@ -70,9 +68,9 @@ public class BudgetController {
         return ResponseEntity.status(204).body(null);
 
 
-
     }
-//todo move to service (sum)
+
+    //todo move to service (sum)
     @GetMapping("/expenses/sum")
     double getSumOfExpenses() {
         return budgetService.getAll().stream()

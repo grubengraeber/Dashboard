@@ -1,5 +1,6 @@
 package at.enough.dashboard.household.service;
 
+import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.household.persistence.Household;
 import at.enough.dashboard.household.persistence.HouseholdRepository;
 import at.enough.dashboard.user.model.AppUser;
@@ -24,4 +25,12 @@ public class HouseHoldService {
     public List<Household> getAll() {
         return householdRepository.findAll();
     }
+
+
+    public List<Expense> getUsersHouseHoldExpenses(String userName, int timeSpan) {
+        return List.of();
+
+    }
+
+
 }
