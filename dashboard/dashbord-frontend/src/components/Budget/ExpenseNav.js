@@ -29,6 +29,7 @@ const ExpenseNav = ({ forceUpdate }) => {
         setShowAddDialog(false);
     }
 
+    console.log("rendered expenses nav")
 
 
 

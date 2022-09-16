@@ -24,6 +24,7 @@ import { Admin } from "./pages/Admin/Admin";
 import RequireAuth from "./components/Authentication/RequireAuth";
 import useAuth from "./hooks/useAuth";
 import { Unauthorized } from "./pages/Unauthorized/Unauthorized";
+import ExpensesSite from "./pages/Expenses/ExpensesSite";
 
 
 
@@ -32,8 +33,9 @@ const initialState = {
     dateFilter: "month"
 }
 
-const queryClient = new QueryClient();
+
 function App() {
+    const queryClient = new QueryClient();
     // useMediaQuery('(prefers-color-scheme: dark)') CHECKS FOR OS SET UP THEME SETTINGS
     const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'))
     // for Error-, Information- and Successmessages
@@ -99,7 +101,9 @@ function App() {
                                         <Route path={"/"} element={<Home username={auth.firstName} />} />
                                         <Route path={"/changePassword"} element={<ChangePassword />} />
                                         <Route path={"/myHousehold"} element={<Household />} />
-                                        <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />} />
+                                        <Route path={"/BudgetTracker"} element={<ExpensesSite />} />
+
+                                        {/*<Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />>*/}
                                         <Route path={"/ShoppingList"} element={
                                             <>
                                                 <ShoppingList

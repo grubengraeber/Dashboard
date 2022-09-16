@@ -16,9 +16,10 @@ export const ExpenseContext = React.createContext()
 const BudgetSite = ({ theme }) => {
   const [force, setForce] = useState(0);
   const auth = useAuth();
+
   const forceUpdate = () => {
 
-    setForce(force => force + 1);
+    //setForce(force => force + 1);
   }
   if (false) {
     console.log(force)

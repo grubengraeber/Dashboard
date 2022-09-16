@@ -46,19 +46,23 @@ const ExpensesChart = ({ theme }) => {
        const { data, isLoading, isError, refetch } = useQuery(["chartData"],
               () => endpoints.getChartData(auth),
               {
-                     refetchOnMount: "always",
+                     // refetchOnMount: "always",
                      refetchOnWindowFocus: false
-              });
+              }); //auth
 
        useEffect(() => {
-              async function refetchData() {
-                     refetch();
-              }
-              refetchData();
+              // async function refetchData() {
+              //        refetch();
+              // }
+              //refetchData();
+              console.log("rerendered expensesChart!")
        })
 
+       if (isLoading) {
 
-       if (isLoading) return (<h1>loading...</h1>)
+              console.log("while loading expensesChart!")
+              return (<h1>loading...</h1>)
+       }
        if (isError) return (<h1>error on loading</h1>)
 
 
@@ -77,6 +81,7 @@ const ExpensesChart = ({ theme }) => {
               }
               ],
        };
+
        const darkMode = theme.palette.mode === "dark";
        return (
               <div style={{ margin: "auto" }}>

@@ -23,6 +23,9 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
     const mutation = useMutation(payload => {
         return endpoints.postExpense(auth, payload)
     })
+    if (isError) {
+        console.log("There is a error posting data")
+    }
 
 
     const handleAdd = (e) => {
@@ -32,6 +35,7 @@ const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
             date: dateValue.toISOString().split("", 10).join(""),
             categoryName: expenseCategory
         };
+        console.log("")
         mutation.mutate(payload);
         onNewExpense();
         onClose()

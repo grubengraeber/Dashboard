@@ -55,21 +55,28 @@ export const endpoints = {
     },
     postExpense: async function (auth, payload) {
 
+
+
+
+
+        console.log("posting new expense")
         const response = await fetch(EXPENSES_ENDPOINT, {
             method: 'POST',
             headers: {
                 ...{ 'Content-Type': 'application/json' },
-                ...auth
+                ...buildAuthHeader(auth)
             },
             body: JSON.stringify(payload)
         });
+        console.log("finished posting")
         return await response.json();
     },
     deleteExpense: async function (auth, expenseId) {
-        await fetch(EXPENSES_ENDPOINT + "/" + expenseId, {
+        const response = await fetch(EXPENSES_ENDPOINT + "/" + expenseId, {
             method: 'DELETE',
             headers: buildAuthHeader(auth)
         });
+        return await response.text();
 
     },
 

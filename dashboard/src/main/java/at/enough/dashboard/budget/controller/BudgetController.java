@@ -5,8 +5,11 @@ import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.service.BudgetService;
 import at.enough.dashboard.budget.util.AddExpenseRequestDTOConverter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +18,8 @@ import java.util.Map;
 @RequestMapping("api/v1/budget")
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class BudgetController {
-     Logger logger = LoggerFactory.getLogger(BudgetController.class);
 
     private final BudgetService budgetService;
     private final AddExpenseRequestDTOConverter addExpenseRequestDTOConverter;
@@ -24,17 +27,24 @@ public class BudgetController {
 
     @GetMapping("/expenses")
     public List<Expense> getAll() {
+
+        log.info("Requesting all expenses");
         return budgetService.getAll();
     }
 
     @GetMapping("/expenses/categories")
     public List<String> getCategories() {
+        log.info("Requesting Expense Categories");
+
         return budgetService.getExpenseCategoryNames();
     }
 
 
     @GetMapping("/expenses/chart")
     public Map<String, Double> getChartData() {
+
+        log.info("Requesting chartData");
+
         return budgetService.getChartData();
     }
 
@@ -42,6 +52,7 @@ public class BudgetController {
     @PostMapping("/expenses")
     public Expense add(@RequestBody AddExpenseRequestDTO addExpenseRequestDTO) {
         Expense expense = addExpenseRequestDTOConverter.convert(addExpenseRequestDTO);
+        log.info("expense added");
         return budgetService.add(expense);
     }
 
@@ -49,13 +60,14 @@ public class BudgetController {
     @PutMapping("/expenses/{expenseId}")
     public void edit(@PathVariable long expenseId, @RequestBody Expense expense) {
         budgetService.edit(expenseId, expense);
-
+        log.info("expense edited");
     }
 
     @DeleteMapping("/expenses/{expenseId}")
-    public void delete(@PathVariable long expenseId) {
-        logger.info("Deleting for expense Id" + expenseId + " Works");
+    public ResponseEntity<Void> delete(@PathVariable long expenseId) {
+        log.info("Deleting for expense Id" + expenseId + " Works");
         budgetService.deleteExpense(expenseId);
+        return ResponseEntity.status(204).body(null);
 
 
 
