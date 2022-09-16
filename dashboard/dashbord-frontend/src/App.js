@@ -37,7 +37,11 @@ function App() {
     // useMediaQuery('(prefers-color-scheme: dark)') CHECKS FOR OS SET UP THEME SETTINGS
     const isDarkModeStored = localStorage.getItem("darkMode") ? true : false;
     const storedDarkMode = isDarkModeStored && localStorage.getItem("darkMode") === "true" ? true : false;
-    const [darkMode, setDarkMode] = isDarkModeStored ? useState(storedDarkMode) : useState(useMediaQuery('(prefers-color-scheme: dark)'))
+    const darkModeTheme = useMediaQuery('(prefers-color-scheme: dark)')
+    const initalThemeMode = isDarkModeStored ? storedDarkMode : darkModeTheme
+
+    const [darkMode, setDarkMode] = useState(initalThemeMode)//
+
     // for Error-, Information- and Successmessages
     const [isError, setIsError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("An Error occured!")
