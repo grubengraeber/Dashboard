@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 import ExpenseNav from '../../components/Expenses/ExpenseNav'
 import ExpensesChart from '../../components/Expenses/ExpensesChart'
@@ -18,19 +18,14 @@ const ExpensesSite = () => {
 
     const {
         data: expensesData,
-        isFetching: isFetchingExpenses,
         error: errorExpenses,
         isError: isErrorExpenses,
-        refetch: refetchExpenseData,
         isFetched: isExpensesFetched } = useQuery(["expenses"], () => endpoints.getExpenses(auth),
             { refetchOnWindowFocus: false });
     const {
         data: chartData,
-        isFetching:
-        isFetchingChart,
         error: errorChart,
         isError: isErrorChart,
-        refetch: refetchChartData,
         isFetched: isChartFetched } = useQuery(["chart"], () => endpoints.getChartData(auth),
             { refetchOnWindowFocus: false });
 
@@ -39,7 +34,6 @@ const ExpensesSite = () => {
         {
             onSuccess: () => {
                 refetchBudgetSite();
-                console.log("success and refetch after delete");
             }
         });
     const mutationAddExpense = useMutation((payload) => endpoints.postExpense(auth, payload), { onSuccess: () => refetchBudgetSite() })
@@ -50,7 +44,6 @@ const ExpensesSite = () => {
     }
 
     const onDeleteExpense = (expenseId) => {
-        console.log("delete expense with id = ", expenseId);
         mutationDeleteExpense.mutate(expenseId);
         refetchBudgetSite();
     }
@@ -65,7 +58,6 @@ const ExpensesSite = () => {
            * @param {*} newExpense 
            */
     const onAddExpense = (newExpense) => {
-        console.log(newExpense);
         mutationAddExpense.mutate(newExpense);
         setShowAddDialog(false);
         //refetchBudgetSite();
@@ -73,10 +65,8 @@ const ExpensesSite = () => {
 
 
 
-    console.log("set up expensesSite")
 
     // if (isFetchingExpenses && isFetchingChart) {
-    //     console.log("loading fetch")
     //     return (<>Loading ....</>)
     // }
 

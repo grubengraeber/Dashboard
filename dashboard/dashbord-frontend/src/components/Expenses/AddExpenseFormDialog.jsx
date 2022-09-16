@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { Button, Dialog, DialogContent, DialogTitle, Grid, MenuItem, Select, TextField } from '@mui/material'
 import { endpoints } from '../../Fetch/reactQueryEndpoints';
 import { useQuery } from '@tanstack/react-query';
@@ -9,7 +9,7 @@ import useAuth from '../../hooks/useAuth';
 
 
 const AddExpenseForm = ({ show, onClose, onNewExpense }) => {
-    const { data: categories, isLoading, isError, isFetched } = useQuery(["categories"],
+    const { data: categories, isFetched } = useQuery(["categories"],
         () => endpoints.getExpenseCategories(auth),
         { refetchOnWindowFocus: false });
 

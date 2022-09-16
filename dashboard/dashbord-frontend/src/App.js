@@ -4,7 +4,6 @@ import { ShoppingList } from "./pages/ShoppingList/ShoppingList";
 import React, { useState } from "react";
 import { Header } from "./components/Header";
 import { Box } from "@mui/system";
-import BudgetSite from "./pages/BudgetTracker/BudgetSite";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'

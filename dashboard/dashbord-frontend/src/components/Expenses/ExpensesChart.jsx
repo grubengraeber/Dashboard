@@ -1,9 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { useQuery } from '@tanstack/react-query';
-import { endpoints } from '../../Fetch/reactQueryEndpoints';
-import useAuth from '../../hooks/useAuth';
 import { ThemeContext } from '@emotion/react';
 import { Card } from '@mui/material';
 
@@ -45,13 +42,7 @@ const backgroundColors = [
 
 const ExpensesChart = ({ data }) => {
     const theme = useContext(ThemeContext)
-    useEffect(() => {
-        // async function refetchData() {
-        //        refetch();
-        // }
-        //refetchData();
-        console.log("rerendered expensesChart!")
-    })
+
 
     const chartData = {
         labels: Object.keys(data),
