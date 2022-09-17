@@ -1,5 +1,7 @@
 package at.enough.dashboard.user.service;
 
+import at.enough.dashboard.household.persistence.Household;
+import at.enough.dashboard.household.persistence.HouseholdRepository;
 import at.enough.dashboard.user.AppUserSignUpRequest;
 import at.enough.dashboard.user.model.AppUser;
 import at.enough.dashboard.user.model.Role;
@@ -27,22 +29,24 @@ public class AppUserService {
     private final PasswordEncoder passwordEncoder;
     private final AppUserRepository appUserRepository;
     private final RoleRepository roleRepository;
-
+    private final HouseholdRepository householdRepository;
 
     public AppUser registerAppUser(AppUserSignUpRequest request) {
         Role defaultRole = roleRepository.findByName(RoleValues.User.name()).orElseThrow(EntityNotFoundException::new);
-        /*if (emailExist(request.email())) {
-            throw new EntityExistsException();
-        }*/
+        Household defaultHousehold = Household.builder()
+                .name("my household")
+                .build();
+
         AppUser appUser = AppUser.builder()
                 .email(request.email())
                 .firstName(request.firstName())
                 .lastName(request.lastName())
                 .password(passwordEncoder.encode(request.password()))
                 .roles(Set.of(defaultRole))
+                .household(defaultHousehold)
                 .build();
-        log.debug("new User Registration complete for username = {}", appUser.getUsername());
-        //todo email already exist 409!
+
+        householdRepository.save(defaultHousehold);
         return appUserRepository.save(appUser);
 
     }

@@ -24,4 +24,4 @@ security:
     secret: "changeThisTokenInProductionVeryImportant"
 logging:
   level:
-    root: off
+    root: info

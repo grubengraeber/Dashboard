@@ -22,8 +22,6 @@ public class BudgetService {
 
     public List<Expense> getAll() {
         return expenseRepository.findAll();
-
-
     }
 
     public Expense findExpenseById(long id) {
@@ -36,16 +34,11 @@ public class BudgetService {
         return getAll().stream()
                 .collect(Collectors.groupingBy(element -> element.getCategory().getName(),
                         Collectors.summingDouble(Expense::getCost)));
-
-
     }
 
     public Expense add(Expense expense) {
         return expenseRepository.save(expense);
     }
-
-
-
 
 
     public void edit(long expenseId, Expense expense) {

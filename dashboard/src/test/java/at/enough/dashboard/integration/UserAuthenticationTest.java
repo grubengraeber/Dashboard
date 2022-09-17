@@ -32,7 +32,6 @@ public class UserAuthenticationTest {
 
     @Test
     void testSignedUpUserReceivesValidAuthToken() throws Exception {
-        //WebTestClient webTestClient = WebTestClient.bindToApplicationContext(webApplicationContext).build();
         //setup user information
         String email = "test@email.com";
         String password = "testPassword";
