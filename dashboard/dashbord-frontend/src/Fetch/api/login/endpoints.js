@@ -47,9 +47,9 @@ export const endpoints = {
             } else if (error.response.status === 400) {
                 setErrorMessage("Missing Username or Password.")
             } else if (error.response.status === 401) {
-                setErrorMessage("Unauthorized.")
+                setErrorMessage("No user under this username signed up.")
             } else if (error.response.status === 403) {
-                setErrorMessage("Wrong Password.")
+                setErrorMessage("Wrong username or password.")
             } else {
                 setErrorMessage(error.message)
             }

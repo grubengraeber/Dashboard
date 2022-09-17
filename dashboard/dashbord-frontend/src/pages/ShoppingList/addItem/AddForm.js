@@ -39,6 +39,12 @@ export const AddForm = ({ listId, onChange, setIsError,
         setItemAmount(changeEvent.target.value)
     }
 
+    function handleChosenItemNameFromAutocomplete(changeEvent, selectedOption) {
+        changeEvent.value && changeEvent.value !== "" 
+        ? setItemName(changeEvent.value) 
+        : setItemName(selectedOption);
+    }
+
   return (
     <>
     <FormControl>
@@ -47,6 +53,7 @@ export const AddForm = ({ listId, onChange, setIsError,
                 <Autocomplete
                     freeSolo
                     options={items.map((option) => option.name)}
+                    onChange={handleChosenItemNameFromAutocomplete}
                     renderInput={(params) => <TextField {...params} 
                                                 label="Item Name" 
                                                 variant='outlined'
