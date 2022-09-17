@@ -10,22 +10,35 @@ import { CustomBudgetTracker } from './ListItems/CustomBudgetTracker';
 import { CustomClose } from './ListItems/CustomClose';
 import { CustomLogout } from './ListItems/CustomLogout';
 import { CustomHousehold } from './ListItems/CustomHousehold';
+import PersonIcon from '@mui/icons-material/Person';
+import useAuth from '../../hooks/useAuth';
 
 
 export const CustomList = () => {
+  const { auth } = useAuth();
+
   return (
     <>
     <List>
-    <ListSubheader component="div" id="nested-list-subheader">
+        <ListSubheader component="div" id="nested-list-subheader" style={{ "alignItems": "center", "justifyContent": "center", "display": "flex"}}>
+          <PersonIcon />
           User
         </ListSubheader>
-        <CustomLogin />
-        <CustomRegister />
-        <CustomLogout />
+
+        {auth.user 
+        ? <>
+            <CustomLogout />
+          </>
+        : <>
+            <CustomLogin />
+            <CustomRegister />
+          </>
+          }
+        
       </List>
       <Divider sx={{border: "solid"}}/>
       <List>
-      <ListSubheader component="div" id="nested-list-subheader">
+      <ListSubheader component="div" id="nested-list-subheader" style={{ "alignItems": "center", "justifyContent": "center", "display": "flex"}}>
         <StarPurple500SharpIcon />
           Favorites
         </ListSubheader>

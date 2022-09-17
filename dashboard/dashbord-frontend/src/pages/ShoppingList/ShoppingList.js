@@ -1,4 +1,5 @@
 import { Card, CardContent, Grid, CircularProgress, Button, Switch, FormControlLabel } from "@mui/material";
+import { RefreshOutlined } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { BasicShoppingListItem } from "./itemTemplate/BasicShoppingListItem";
 import { AddForm } from "./addItem/AddForm";
@@ -23,9 +24,13 @@ export const ShoppingList = (
             setListName, setListId, setLoading, auth.accessToken)
     }
 
+    function refresh() {
+        getShoppingList();
+    }
+
     useEffect(() => {
         getShoppingList();
-    }, [items]);
+    }, []);
 
     function toggleNewItem(clickEvent) {
         newItemFormOn ? setNewItemFormOn(false) : setNewItemFormOn(true);
@@ -80,6 +85,11 @@ export const ShoppingList = (
                         <Grid item>
                             <Card sx={{ paddingLeft: "5px" }}>
                                 <FormControlLabel control={<Switch checked={!activeOnly} onChange={handleChecked} />} label="show checked items" />
+                            </Card>
+                        </Grid>
+                        <Grid item>
+                            <Card>
+                                <RefreshOutlined onClick={refresh} />
                             </Card>
                         </Grid>
                     </Grid>

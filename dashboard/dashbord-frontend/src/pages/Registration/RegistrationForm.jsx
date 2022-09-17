@@ -7,6 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 /* 
 TODO:
@@ -18,6 +19,12 @@ TODO:
 
 function RegistrationForm({ setRegistrationData }) {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateToLogin = () => {
+    // 👇️ navigate to /
+    navigate('/login');
+  };
 
   // NEXT 2 LINES ARE FOR MAKING THE CHECKBOX MANDATORY
   const [checkboxChecked, setCheckboxChecked] = useState(false)
@@ -203,7 +210,7 @@ function RegistrationForm({ setRegistrationData }) {
             <Stack direction={"row"} spacing={1} justifyContent={"center"}>
               <Typography>Already have an account?</Typography>
               <Link
-                href={"/login"}
+                onClick={navigateToLogin}
               >
                 Sign in
               </Link>

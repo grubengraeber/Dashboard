@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import { endpoints as listEndpoints }  from '../../../Fetch/api/shoppingList/shoppingListItems/endpoints';
 import { endpoints as listItemEndpoints } from '../../../Fetch/api/shoppingList/shoppingListListItems/endpoints';
+import useAuth from "../../../hooks/useAuth";
 
 
 export const AddForm = ({ listId, onChange, setIsError, 
@@ -11,13 +12,19 @@ export const AddForm = ({ listId, onChange, setIsError,
     const [itemName, setItemName] = useState("")
     const [itemAmount, setItemAmount] = useState(0)
     const [items, setItems] = useState([])
+    const { auth } = useAuth();
 
-    listEndpoints.getItemNames(setItems, setIsError, setErrorMessage);
+    const accessToken = auth.accessToken;
+
+    if (items.length === 0) {
+        listEndpoints.getItemNames(setItems, setIsError, setErrorMessage, accessToken);
+    }
+    
 
     async function addItem(clickEvent) {
         await listItemEndpoints.addItem(itemName, itemAmount, listId, 
             disregardForm, setIsSuccess, setSuccessMessage, 
-            setIsError, setErrorMessage)
+            setIsError, setErrorMessage, accessToken)
     }
 
     function disregardForm(clickEvent) {
@@ -32,6 +39,12 @@ export const AddForm = ({ listId, onChange, setIsError,
         setItemAmount(changeEvent.target.value)
     }
 
+    function handleChosenItemNameFromAutocomplete(changeEvent, selectedOption) {
+        changeEvent.value && changeEvent.value !== "" 
+        ? setItemName(changeEvent.value) 
+        : setItemName(selectedOption);
+    }
+
   return (
     <>
     <FormControl>
@@ -40,6 +53,7 @@ export const AddForm = ({ listId, onChange, setIsError,
                 <Autocomplete
                     freeSolo
                     options={items.map((option) => option.name)}
+                    onChange={handleChosenItemNameFromAutocomplete}
                     renderInput={(params) => <TextField {...params} 
                                                 label="Item Name" 
                                                 variant='outlined'

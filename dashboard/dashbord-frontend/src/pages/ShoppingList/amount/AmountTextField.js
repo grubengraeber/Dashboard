@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { TextField } from '@mui/material'
 import { endpoints } from '../../../Fetch/api/shoppingList/shoppingListListItems/endpoints'
+import useAuth from "../../../hooks/useAuth"
 
 
 export const AmountTextField = ({ propAmount, item, itemId, listId, 
@@ -8,6 +9,8 @@ export const AmountTextField = ({ propAmount, item, itemId, listId,
     setIsInformation, setInformationMessage }) => {
     const [amount, setAmount] = useState(propAmount)
     const [startAmount, setStartAmount] = useState(propAmount)
+    const { auth } = useAuth();
+    const accessToken = auth.accessToken;
 
     function updateAmount(changeEvent) {
         if (changeEvent.target.value === "") {
@@ -27,7 +30,7 @@ export const AmountTextField = ({ propAmount, item, itemId, listId,
             item.amount = parseInt(changeEvent.target.value)
             console.log(item)
             console.log(amount)
-            endpoints.updateItemCustom(listId, itemId, item, setSuccessMessage, setIsSuccess, setIsError, setErrorMessage, setStartAmount, changeEvent.target.value)
+            endpoints.updateItemCustom(listId, itemId, item, setSuccessMessage, setIsSuccess, setIsError, setErrorMessage, setStartAmount, changeEvent.target.value, accessToken)
 
         }
     }

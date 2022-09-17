@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import { endpoints } from '../../../Fetch/api/shoppingList/shoppingListListItems/endpoints';
+import useAuth from "../../../hooks/useAuth"
 
 
 export const TitleWithOnclickTextfield = ({ item, itemName, 
@@ -11,6 +12,8 @@ export const TitleWithOnclickTextfield = ({ item, itemName,
     const [textField, setTextField] = useState(false);
     const [newItemName, setNewItemName] = useState(itemName)
     const [startName, setStartName] = useState(itemName)
+    const { auth } = useAuth();
+    const accessToken = auth.accessToken;
 
     function toggleTextField(clickAndSubmitEvent) {
         if (textField) {
@@ -23,7 +26,7 @@ export const TitleWithOnclickTextfield = ({ item, itemName,
             endpoints.updateItemCustomName(listId, itemId, item, 
                 textField, setIsSuccess, setStartName, newItemName, 
                 setSuccessMessage, setIsError, setErrorMessage, 
-                setTextField)
+                setTextField, accessToken)
         } else {
             textField ? setTextField(false) : setTextField(true)
         }
