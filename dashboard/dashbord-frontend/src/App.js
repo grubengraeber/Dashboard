@@ -4,7 +4,6 @@ import { ShoppingList } from "./pages/ShoppingList/ShoppingList";
 import React, { useState } from "react";
 import { Header } from "./components/Header";
 import { Box } from "@mui/system";
-import BudgetSite from "./pages/BudgetTracker/BudgetSite";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -24,6 +23,7 @@ import { Admin } from "./pages/Admin/Admin";
 import RequireAuth from "./components/Authentication/RequireAuth";
 import useAuth from "./hooks/useAuth";
 import { Unauthorized } from "./pages/Unauthorized/Unauthorized";
+import ExpensesSite from "./pages/Expenses/ExpensesSite";
 
 
 
@@ -32,8 +32,9 @@ const initialState = {
     dateFilter: "month"
 }
 
-const queryClient = new QueryClient();
+
 function App() {
+    const queryClient = new QueryClient();
     // useMediaQuery('(prefers-color-scheme: dark)') CHECKS FOR OS SET UP THEME SETTINGS
     const isDarkModeStored = localStorage.getItem("darkMode") ? true : false;
     const storedDarkMode = isDarkModeStored && localStorage.getItem("darkMode") === "true" ? true : false;
@@ -105,7 +106,9 @@ function App() {
                                         <Route path={"/"} element={<Home username={auth.firstName} />} />
                                         <Route path={"/changePassword"} element={<ChangePassword />} />
                                         <Route path={"/myHousehold"} element={<Household />} />
-                                        <Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />} />
+                                        <Route path={"/BudgetTracker"} element={<ExpensesSite />} />
+
+                                        {/*<Route path={"/BudgetTracker"} element={<BudgetSite theme={theme} />>*/}
                                         <Route path={"/ShoppingList"} element={
                                             <>
                                                 <ShoppingList
