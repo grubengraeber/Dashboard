@@ -37,7 +37,7 @@ public class BudgetService {
                 .collect(Collectors.groupingBy(element -> element.getCategory().getName(),
                         Collectors.summingDouble(Expense::getCost)));
     }
-
+@Deprecated
     public Expense add(Expense expense) {
         return expenseRepository.save(expense);
     }

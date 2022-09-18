@@ -107,7 +107,6 @@ public class BudgetDataCreator {
 
         return Expense.builder()
                 .name(expandNames.get(random.nextInt(expandNames.size())))
-                .member(members.get(random.nextInt(members.size())))
                 .cost(random.nextDouble(50.0) * random.nextDouble(3.5))
                 .category(categories.get(random.nextInt(categories.size())))
                 .date(date)

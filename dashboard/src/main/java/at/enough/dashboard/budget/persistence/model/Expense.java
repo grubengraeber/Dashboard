@@ -1,5 +1,6 @@
 package at.enough.dashboard.budget.persistence.model;
 
+import at.enough.dashboard.household.persistence.Household;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -22,8 +23,8 @@ public class Expense {
     LocalDate date;
     @ManyToOne
     private ExpenseCategory category;
-    @ManyToOne
-    private Member member;
 
+    @ManyToOne
+    private Household household;
 
 }

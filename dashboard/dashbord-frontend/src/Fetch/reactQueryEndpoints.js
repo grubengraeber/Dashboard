@@ -4,7 +4,7 @@
 
 //Budget Endpoints
 const EXPENSES_ENDPOINT = "http://localhost:8080/api/my/household/expenses";
-const CHARTDATA_ENDPOINT = "http://localhost:8080/api/v1/budget/expenses/chart";
+const CHARTDATA_ENDPOINT = "http://localhost:8080/api/my/household/expenses/chart";
 
 //User Endpoints
 // const USER_DETAILS_ENDPOINT = BASE_URI + "/api/users/me";

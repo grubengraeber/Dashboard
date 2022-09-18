@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -44,9 +45,22 @@ public class ExpensesController {
                                                              @PathVariable Long expenseId) {
         String userName = authentication.getName();
         houseHoldService.deleteExpenseFromUsersHouseHold(userName, expenseId);
-        log.info("deleted expense id "+expenseId +" user "+userName);
         return ResponseEntity.status(204).build();
     }
 
+    @GetMapping("/chart")
+    public Map<String, Double> getMyHouseHoldChart(Authentication authentication,
+                                                   @RequestParam("time-span") Optional<Integer> oTimeSpan) {
+        String userName = authentication.getName();
+        Integer timeSpan = oTimeSpan.orElse(0);
+        return houseHoldService.getUsersHouseHoldChart(userName, timeSpan);
+
+    }
+    @GetMapping("/categories")
+    public List<String> getMyHouseHoldExpenseCategories(Authentication authentication) {
+        String userName = authentication.getName();
+        return houseHoldService.getUsersHouseHoldExpenseCategories(userName);
+
+    }
 
 }
