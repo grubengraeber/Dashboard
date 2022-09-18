@@ -5,6 +5,7 @@ import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.persistence.repository.ExpenseCategoryRepository;
 import at.enough.dashboard.budget.persistence.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BudgetService {
 
     private final ExpenseRepository expenseRepository;
@@ -54,6 +56,7 @@ public class BudgetService {
 
     public void deleteExpense(long expenseId) {
         Expense expense = findExpenseById(expenseId);
+
         expenseRepository.delete(expense);
 
     }

@@ -47,12 +47,13 @@ public class HouseHoldService {
         return persistedExpense;
     }
 //todo Add exception to Controller Advice
-    //todo delete not working
     //todo add fetch for user chartdata route
     public void deleteExpenseFromUsersHouseHold(String userName, Long expenseId) {
         Household userHousehold = getHouseHoldBy(userName);
         Expense expenseToRemove = expenseRepository.findById(expenseId).orElseThrow();
+        log.info("deleted expense: "+ expenseToRemove);
         userHousehold.getExpenses().remove(expenseToRemove);
+        householdRepository.save(userHousehold);
     }
 
 

@@ -6,6 +6,7 @@ import at.enough.dashboard.budget.persistence.model.Expense;
 import at.enough.dashboard.budget.util.AddExpenseRequestDTOConverter;
 import at.enough.dashboard.household.service.HouseHoldService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/my/household/expenses")
+@Slf4j
 public class ExpensesController {
 
     private final HouseHoldService houseHoldService;
@@ -42,6 +44,7 @@ public class ExpensesController {
                                                              @PathVariable Long expenseId) {
         String userName = authentication.getName();
         houseHoldService.deleteExpenseFromUsersHouseHold(userName, expenseId);
+        log.info("deleted expense id "+expenseId +" user "+userName);
         return ResponseEntity.status(204).build();
     }
 
